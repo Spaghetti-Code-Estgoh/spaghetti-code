@@ -15,7 +15,7 @@ class Consulta extends Migration
     {
         Schema::create('consulta',function (Blueprint $table){
             $table->id()->autoIncrement();
-            $table->boolean('estado');
+            $table->String('estado');
             $table->timestamp('DataHora')->default(\DB::raw('current_timestamp'));
             $table->timestamp('DataHoraFim')->default(\DB::raw('current_timestamp'));
             $table->String('observacoesmedicas');
