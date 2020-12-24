@@ -1,0 +1,51 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    line-height: 20px;
+    color: #999999;
+    font-size: 300px;
+    font-size: 16px;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+h1, h2, h3, h4, h5, h6
+{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    color: #222222;
+}
+a, a:hover, a:focus, a:active{
+    outline: none;
+}
+
+.section-padding{
+    padding: 60px 0px;
+
+}
+h2 {
+    line-height: 20px;
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+hr.botm-line {
+    height: 3px;
+    width: 60px;
+    background: #ffb737;
+    position: relative;
+    border: 0;
+    margin: 20px 0 20px 0;
+}
