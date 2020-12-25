@@ -612,15 +612,16 @@ main {
   margin-top: 1.5rem;
 }
 
-.section-registo .section-registo .btn-registo {
+.btn-registo {
   background-color: #F09C86;
   border-color: #F09C86;
   border-radius: 2rem;
   margin-top: 2rem;
   margin-bottom: 10rem;
+    width: 100%;
 }
 
-.section-registo .btn-registo:hover {
+.btn-registo:hover {
   background-color: white;
   color: #F09C86;
 }

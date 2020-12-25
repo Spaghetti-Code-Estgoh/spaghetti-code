@@ -6,13 +6,13 @@
 
 <?php $__env->startSection('content'); ?>
 <section class="section-registo" >
-    <div class="container">
+    <div class="container" style="height: 100vh;">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="card card-registo">
-                    <div class="card-header mx-auto"><?php echo e(__('Registo')); ?></div>
+                <div class="card card-registo middle">
+                    <div class="card-header mx-auto" style="padding-top: 5rem"><?php echo e(__('Registo')); ?></div>
 
-                    <div class="card-body">
+                    <div class="card-body" style="padding-top: 10rem">
                         <form method="POST" action="<?php echo e(route('register')); ?>">
                             <?php echo csrf_field(); ?>
 
@@ -204,7 +204,7 @@ unset($__errorArgs, $__bag); ?>
 
 
                             <div class="form-group row mb-0">
-                                <div class="col-md-12 mx-auto text-center">
+                                <div class="col-md-12 mx-auto text-center" style="padding-top: 10rem">
                                     <button type="submit" class="btn btn-primary btn-registo">
                                         <?php echo e(__('Registar')); ?>
 
