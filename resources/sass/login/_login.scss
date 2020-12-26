@@ -1,0 +1,111 @@
+.cont-log {
+    height: 100vh;
+}
+
+main {
+    background: url('../img/banner-2.png') no-repeat fixed;
+    background-size: cover;
+    position: relative;
+}
+
+.bg-log {
+    background-color: rgba(0,0,0,.5);
+}
+
+.box-log {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.text-header {
+    width: 100%;
+    font-size: 30px;
+    color: #F09C86;
+    justify-content: center;
+}
+
+.formInput {
+    border-radius: 25px;
+    background: transparent;
+    border-color: #F09C86;
+    color: white;
+}
+
+.submitInput {
+    border-radius: 25px;
+    background-color: #F09C86;
+    color: white;
+    width: 100%;
+}
+
+.submitInput:hover {
+    border-radius: 25px;
+    background-color: transparent;
+    border-color: #F09C86;
+    color: #F09C86;
+}
+
+
+.formInput:focus {
+    border-radius: 25px;
+    background: transparent;
+    border-color: #F09C86;
+    color: white;
+}
+
+.formInput::placeholder {
+    color: white;
+}
+
+
+.linkForm {
+    color: #F09C86;
+}
+
+.linkForm:hover {
+    color: white;
+}
+
+.formLabel {
+    color: #F09C86;
+    padding-right:10px;
+}
+
+.checkbox-round {
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: white;
+    border-radius: 50%;
+    vertical-align: middle;
+    border: 1px solid #ddd;
+    -webkit-appearance: none;
+    outline: none;
+    cursor: pointer;
+
+}
+
+.checkbox-round:checked {
+    background-color: #F09C86;
+}
+
+.logNav {
+    width: 150px;
+    height: 50px;
+    margin: 0 auto;
+    padding: 0;
+    display: inline-block;
+    line-height: 50px;
+    text-align: center;
+    border-radius: 25px;
+    background-color: white;
+    color: #F09C86;
+}
+
+.logNav:hover {
+    background-color: rgba(0,0,0,.5) !important;
+    color: white;
+}
