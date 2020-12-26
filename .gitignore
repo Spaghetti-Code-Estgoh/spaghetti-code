@@ -14,4 +14,4 @@ yarn-error.log
 # Extra Files (by afonsovitorio)
 /storage/framework/sessions
 /storage/framework/views
-/storage/logs/laravel.log
+/storage/logs
