@@ -131,4 +131,4 @@
     <script src="js/custom.js"></script>
 </body>
 </html>
-<?php /**PATH C:\xampp\htdocs\test2\resources\views/layouts/auth_layout.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\test2\resources\views/layouts/conf_layout.blade.php ENDPATH**/ ?>

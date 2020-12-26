@@ -132,4 +132,4 @@
     <script src="js/custom.js"></script>
 </body>
 </html>
-<?php /**PATH C:\xampp\htdocs\spaghetti-code\resources\views/auth/layouts/auth_layout.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\spaghetti-code\resources\views/auth/layouts/conf_layout.blade.php ENDPATH**/ ?>
