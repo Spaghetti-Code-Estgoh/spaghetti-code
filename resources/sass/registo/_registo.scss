@@ -3,6 +3,7 @@
 .section-registo{
     background-color: white;
 
+
     .card-registo{
         border: none;
     }
@@ -20,6 +21,23 @@
         margin-top: 1.5rem;
     }
 
+
+    .imagem{
+        height: 10rem;
+        width: 10rem;
+        border-radius: 50%;
+        margin: auto;
+        display: block;
+    }
+
+    .custom-file-label{
+        top: 13.3rem;
+    }
+
+    .custom-select{
+        height: 34px;
+        font-size: 1.5rem;
+    }
 }
 
 .section-registo .btn-registo {
@@ -27,7 +45,7 @@
     border-color: #F09C86;
     border-radius: 2rem;
     margin-top: 2rem;
-    margin-bottom: 10rem;
+
 }
 
 .btn-registo:hover {

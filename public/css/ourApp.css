@@ -612,12 +612,28 @@ main {
   margin-top: 1.5rem;
 }
 
+.section-registo .imagem {
+  height: 10rem;
+  width: 10rem;
+  border-radius: 50%;
+  margin: auto;
+  display: block;
+}
+
+.section-registo .custom-file-label {
+  top: 13.3rem;
+}
+
+.section-registo .custom-select {
+  height: 34px;
+  font-size: 1.5rem;
+}
+
 .section-registo .btn-registo {
   background-color: #F09C86;
   border-color: #F09C86;
   border-radius: 2rem;
   margin-top: 2rem;
-  margin-bottom: 10rem;
 }
 
 .btn-registo:hover {
