@@ -162,7 +162,7 @@ hr.botm-line {
 }
 
 #banner {
-  background: url(/images/bg-banner.jpg?0643ffb7a7698c5f64600280bb246934) no-repeat fixed;
+  background: url("/img/bg-banner.jpg") no-repeat fixed;
   background-size: cover;
   min-height: 650px;
   position: relative;
@@ -450,7 +450,7 @@ hr.botm-line {
 }
 
 main {
-  background: url(/images/banner-2.png?5ceb54287fea031cf7b46d9c750409e9) no-repeat fixed;
+  background: url("/img/banner-2.png") no-repeat fixed;
   background-size: cover;
   position: relative;
 }
@@ -612,13 +612,12 @@ main {
   margin-top: 1.5rem;
 }
 
-.btn-registo {
+.section-registo .btn-registo {
   background-color: #F09C86;
   border-color: #F09C86;
   border-radius: 2rem;
   margin-top: 2rem;
   margin-bottom: 10rem;
-    width: 100%;
 }
 
 .btn-registo:hover {
