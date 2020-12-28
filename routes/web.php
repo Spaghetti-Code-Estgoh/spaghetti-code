@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controller\RegistoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,3 +48,6 @@ Route::view('/loginWorker', 'auth.loginWorker');
 
 //Route para testes
 Route::view('/testView', 'confirmation.register');
+
+//Routes do Registo #Autor: Afonso Vitório
+Route::resource('/registo', 'App\Http\Controllers\RegistoController')->only('store', 'create');

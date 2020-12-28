@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\StoreRegisto;
+use App\Models\Registo;
 
 class RegisterController extends Controller
 {
@@ -43,18 +45,18 @@ class RegisterController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Store a newly created resource in storage.
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    protected function validator(array $data)
+    public function store(StoreRegisto $request)
     {
-        return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+        $validatedData = $request->validated();
+        
+        $blogPost = Registo::create($validatedData);
+
+        return redirect()->route('posts.show', ['post' => $blogPost->id]);
     }
 
     /**

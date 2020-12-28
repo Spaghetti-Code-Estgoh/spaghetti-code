@@ -15,7 +15,7 @@
                     <div class="card-header mx-auto" style="padding-top: 5rem">{{ __('Registo') }}</div>
 
                     <div class="card-body" style="padding-top: 2rem">
-                        <form method="POST" action="{{ route('register') }}">
+                        <form method="POST" action="{{ route('registo.store') }}" enctype="multipart/form-data">
                             @csrf
 
                             <div class="form-group row">
@@ -32,9 +32,9 @@
                                     @enderror
 
                                     {{-- Nome--}}<br>
-                                    <label for="name" class="col-form-label text-md-right" style="margin-top: 2.9rem">{{ __('Nome Completo') }}</label>
-                                    <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
-                                    @error('name')
+                                    <label for="nome" class="col-form-label text-md-right" style="margin-top: 2.9rem">{{ __('Nome Completo') }}</label>
+                                    <input id="nome" type="text" class="form-control @error('nome') is-invalid @enderror" name="nome" value="{{ old('nome') }}" required autocomplete="nome" autofocus>
+                                    @error('nome')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -65,7 +65,7 @@
 
                                     {{-- Contacto--}}
                                     <label for="contacto" class=" col-form-label text-md-right">{{ __('Contacto') }}</label>
-                                    <input id="contacto" type="tel" class="form-control @error('contacto') is-invalid @enderror" name="contacto" required autocomplete="contacto">
+                                    <input id="contacto" type="tel" class="form-control @error('contacto') is-invalid @enderror" name="contacto" required autocomplete="contacto" value="{{ old('contacto') }}">
 
                                     @error('contacto')
                                     <span class="invalid-feedback" role="alert">
@@ -97,11 +97,11 @@
                                     <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
 
 
-                                    {{-- NSNS--}}
-                                    <label for="nsns" class=" col-form-label text-md-right">{{ __('NSNS') }}</label>
-                                    <input id="nsns" type="text" class="form-control @error('nsns') is-invalid @enderror" name="nsns" value="{{ old('nsns') }}" required autocomplete="nsns">
+                                    {{-- NSS--}}
+                                    <label for="nss" class=" col-form-label text-md-right">{{ __('NSS') }}</label>
+                                    <input id="nss" type="text" class="form-control @error('nss') is-invalid @enderror" name="nss" value="{{ old('nss') }}" required autocomplete="nss">
 
-                                    @error('nsns')
+                                    @error('nss')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -110,7 +110,7 @@
 
                                     {{-- NIF--}}
                                     <label for="nif" class=" col-form-label text-md-right">{{ __('NIF') }}</label>
-                                    <input id="nif" type="text" pattern="[0-9]{9}" class="form-control @error('nif') is-invalid @enderror" name="nif" required autocomplete="nif">
+                                    <input id="nif" type="text" pattern="[0-9]{9}" class="form-control @error('nif') is-invalid @enderror" name="nif" required autocomplete="nif" value="{{ old('nif') }}">
 
                                     @error('nif')
                                     <span class="invalid-feedback" role="alert">
@@ -120,7 +120,7 @@
 
                                     {{-- Morada--}}
                                     <label for="morada" class=" col-form-label text-md-right">{{ __('Morada') }}</label>
-                                    <input id="morada" type="text" class="form-control @error('morada') is-invalid @enderror" name="morada" required autocomplete="morada">
+                                    <input id="morada" type="text" class="form-control @error('morada') is-invalid @enderror" name="morada" required autocomplete="morada" value="{{ old('morada') }}">
 
                                     @error('morada')
                                     <span class="invalid-feedback" role="alert">
@@ -132,7 +132,7 @@
 
                                     {{-- Gênero--}}
                                     <label for="genero" class=" col-form-label text-md-right">{{ __('Gênero') }}</label><br>
-                                    <select name="genero" class="custom-select" id="genero">
+                                    <select name="genero" class="custom-select" id="genero" value="{{ old('genero') }}">
                                         <option>{{ __('Escolher') }}</option>
                                         <option value="masculino">{{ __('Masculino') }}</option>
                                         <option value="feminino">{{ __('Feminino') }}</option>
@@ -169,6 +169,20 @@
         </div>
     </div>
 </div>
+
+<!-- DEBUG ONLY 
+    TODO: remove this
+    #Author: Afonso Vitório -->
+@if ($errors->any())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    
+@endif
 
 <script>
 
