@@ -1,5 +1,7 @@
 <?php
 
+use App\Mail\WelcomeMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 
@@ -47,3 +49,9 @@ Route::view('/loginWorker', 'auth.loginWorker');
 
 //Route para testes
 Route::view('/testView', 'confirmation.register');
+
+//testar mail
+Route::get('/email', function () {
+    Mail::to('lima.ed2@gmail.com')->send(new WelcomeMail());
+    return new WelcomeMail();
+});
