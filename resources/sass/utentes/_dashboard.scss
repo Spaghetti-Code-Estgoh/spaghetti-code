@@ -1,0 +1,40 @@
+ //Author: Guilherme Jafar
+
+.dashboard{
+    margin-top: 5rem;
+    margin-left: 3rem;
+    .titulo{
+        color: #F09C86;
+        text-transform: capitalize;
+    }
+}
+
+.card-dashboard{
+    margin-top: 2rem;
+    margin-bottom: 3rem;
+    //border: none;
+    border-radius: 3rem;
+   // padding: 2rem;
+    table{
+
+        //border: 1px solid rgba(0, 0, 0, 0.125);
+
+    }
+
+    tr{
+        margin-bottom: 2rem;
+        border-bottom: none;
+
+        &:not(:last-child){
+
+            border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+        }
+
+        td{
+            padding: 2rem;
+
+
+        }
+    }
+
+}

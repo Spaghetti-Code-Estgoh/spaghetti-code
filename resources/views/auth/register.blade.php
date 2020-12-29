@@ -186,6 +186,7 @@
 
 <script>
 
+    //Author: Guilherme Jafar
     function mudarFotografia(event) {
 
             let imagem = document.getElementById("imagem");

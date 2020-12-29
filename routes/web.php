@@ -58,3 +58,10 @@ Route::get('/email', function () {
 });
 //Routes do Registo #Autor: Afonso Vitório
 Route::resource('/registo', 'App\Http\Controllers\RegistoController')->only('store', 'create');
+
+//Rota teste para dashboard utente
+//Author: Guilherme Jafar
+Route::view('/dashboardutente', 'utentes.dashboard');
+Route::view('/novaconsulta', 'utentes.marcarconsulta');
+Route::view('/historicoconsulta', 'utentes.historicoconsultas');
+Route::view('/desmarcarconsulta', 'utentes.desmarcarconsulta');

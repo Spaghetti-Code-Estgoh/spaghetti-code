@@ -68,6 +68,17 @@ hr.botm-line {
   margin: 20px 0 20px 0;
 }
 
+.btn {
+  background-color: #F09C86;
+  border-color: #F09C86;
+  border-radius: 2rem;
+}
+
+.btn:hover {
+  background-color: white;
+  color: #F09C86;
+}
+
 .navbar {
   margin-bottom: 0px;
   border: 0px;
@@ -639,5 +650,88 @@ main {
 .btn-registo:hover {
   background-color: white;
   color: #F09C86;
+}
+
+.right-nav img {
+  height: 5rem;
+  width: 5rem;
+}
+
+.right-nav .nav-link:hover,
+.right-nav .nav-link :active,
+.right-nav .nav-link :focus {
+  background-color: transparent;
+}
+
+.main {
+  background-image: none;
+  background-color: white;
+}
+
+.main .menu {
+  min-height: 70vh;
+}
+
+.main .menu ul {
+  margin-top: 5rem;
+}
+
+.main .menu ul li {
+  padding-bottom: 4rem;
+}
+
+.main .menu ul li a {
+  font-size: 2rem;
+  color: black;
+}
+
+.main .menu ul li a:hover {
+  text-decoration: none;
+  color: #F09C86;
+}
+
+.main .menu ul li .active {
+  color: #F09C86;
+}
+
+.main .menu ul .logout {
+  margin-top: 15rem;
+  position: absolute;
+  bottom: 0;
+}
+
+.main .menu ul .logout a {
+  border: 1px solid black;
+  padding: 1rem 2rem;
+  border-radius: 2rem;
+}
+
+.dashboard {
+  margin-top: 5rem;
+  margin-left: 3rem;
+}
+
+.dashboard .titulo {
+  color: #F09C86;
+  text-transform: capitalize;
+}
+
+.card-dashboard {
+  margin-top: 2rem;
+  margin-bottom: 3rem;
+  border-radius: 3rem;
+}
+
+.card-dashboard tr {
+  margin-bottom: 2rem;
+  border-bottom: none;
+}
+
+.card-dashboard tr:not(:last-child) {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-dashboard tr td {
+  padding: 2rem;
 }
 
