@@ -22,7 +22,7 @@
                                 <div class="col-md-6">
 
 
-                                    <img class="imagem" src="img/imagemDefault.png"  alt="Imagem de perfil" id="imagem">
+                                    <img class="imagem" src="{{asset('img/imgDefault.jpg')}}"  alt="Imagem de perfil" id="imagem">
                                     <input type="file" name="fotografia"  class="custom-file-input" id="escolherFotografia" aria-describedby="inputGroupFileAddon01" onchange="mudarFotografia(event)">
                                     <label class="custom-file-label input_fotografia" for="escolherFotografia"  data-browse="Pesquisar" >{{ __('Escolha uma Fotografia') }}</label>
                                     @error('fotografia')
@@ -170,7 +170,7 @@
     </div>
 </div>
 
-<!-- DEBUG ONLY 
+<!-- DEBUG ONLY
     TODO: remove this
     #Author: Afonso Vitório -->
 @if ($errors->any())
@@ -181,7 +181,7 @@
             @endforeach
         </ul>
     </div>
-    
+
 @endif
 
 <script>
