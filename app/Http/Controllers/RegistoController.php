@@ -69,7 +69,8 @@ class RegistoController extends Controller
 
         $request->session()->flash("Registo criado com sucesso!");
         Mail::to($validatedData['email'])->send(new WelcomeMail());
-        return redirect()->route('confirmation.register');
+
+        return view('confirmation.register');
     }
 
 }
