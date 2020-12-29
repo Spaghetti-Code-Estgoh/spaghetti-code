@@ -40,9 +40,17 @@ class RegistoController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         //Image Upload
-        //TODO: Adicionar um hash ao nome da imagem
-        $validatedData['imagePath'] = time().'.'.$request->fotografia->extension();
-        $request->fotografia->move(public_path('images'), $validatedData['imagePath']);
+        if(array_key_exists('imagePath', $validatedData))
+        {
+            //TODO: Adicionar um hash ao nome da imagem
+            $validatedData['imagePath'] = Hash::make(time() . $validatedData['email']).'.'.$request->fotografia->extension();
+            $request->fotografia->move(public_path('images'), $validatedData['imagePath']);
+            $validatedData['imagePath'] = "default.jpg";
+        }
+        else
+        {
+            $validatedData['imagePath'] = "default.jpg";
+        }
 
         // Try catch responsável por validar se um campo do registo é único da base de dados
         // TODO: Caso haja o erro da base de dados não dar dd (dump and die) 
