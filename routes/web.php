@@ -4,6 +4,7 @@ use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controller\RegistoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +56,5 @@ Route::get('/email', function () {
     Mail::to('lima.ed2@gmail.com')->send(new WelcomeMail());
     return new WelcomeMail();
 });
+//Routes do Registo #Autor: Afonso Vitório
+Route::resource('/registo', 'App\Http\Controllers\RegistoController')->only('store', 'create');

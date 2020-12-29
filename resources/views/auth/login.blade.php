@@ -7,6 +7,16 @@
 @endsection
 
 @section('content')
+
+<!-- Apresenta uma mensagem caso o registo do user tenha corrido com sucesso 
+    TODO: Not showing in current page
+    #Author: Afonso Vitório -->
+@if (session()->has('status'))
+    <p style="color: red">
+        {{ session()->get('status') }}
+    </p>
+@endif
+
 <div class="container cont-log">
     <div class="row justify-content-center box-log">
         <div class="col-md-10">
