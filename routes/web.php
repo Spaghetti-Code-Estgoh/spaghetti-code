@@ -53,7 +53,7 @@ Route::view('/testView', 'confirmation.register');
 
 //testar mail
 Route::get('/email', function () {
-    Mail::to('lima.ed2@gmail.com')->send(new WelcomeMail());
+    //Mail::to('binogamer12@gmail.com')->send(new WelcomeMail());
     return new WelcomeMail();
 });
 //Routes do Registo #Autor: Afonso Vitório

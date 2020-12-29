@@ -262,4 +262,4 @@
 </body>
 
 </html>
-<?php /**PATH C:\xampp\htdocs\test\resources\views/welcome.blade.php ENDPATH**/ ?>
+<?php /**PATH C:\xampp\htdocs\test\resources\views/registrationEmail.blade.php ENDPATH**/ ?>
