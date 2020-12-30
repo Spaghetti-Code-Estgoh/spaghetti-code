@@ -7,7 +7,7 @@
 <table border="0" cellpadding="0" cellspacing="0" role="presentation">
 <tr>
 <td>
-<a href="{{ $url }}" class="button button-{{ $color ?? 'primary' }} formInput" target="_blank" rel="noopener">{{ $slot }}</a>
+<a href="http://127.0.0.1:8000/confirmaRegisto/{{ $url }}" class="button button-{{ $color ?? 'primary' }} formInput" target="_blank" rel="noopener">{{ $slot }}</a>
 </td>
 </tr>
 </table>

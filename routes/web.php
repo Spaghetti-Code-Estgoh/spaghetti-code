@@ -49,12 +49,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::view('/loginWorker', 'auth.loginWorker');
 
 //Route para testes
-Route::view('/testView', 'confirmation.register');
+Route::view('/testView', 'errors.registerFail');
 
 //testar mail
 Route::get('/email', function () {
     //Mail::to('binogamer12@gmail.com')->send(new WelcomeMail());
-    return new WelcomeMail();
+    return new WelcomeMail('127.0.0.1:8000/confirmaRegisto/testToken');
 });
 //Routes do Registo #Autor: Afonso Vitório
 Route::resource('/registo', 'App\Http\Controllers\RegistoController')->only('store', 'create');
@@ -65,3 +65,6 @@ Route::view('/dashboardutente', 'utentes.dashboard');
 Route::view('/novaconsulta', 'utentes.marcarconsulta');
 Route::view('/historicoconsulta', 'utentes.historicoconsultas');
 Route::view('/desmarcarconsulta', 'utentes.desmarcarconsulta');
+
+Route::get('confirmaRegisto/{token}',  [App\Http\Controllers\RegistoController::class, 'confirm']);
+//Route::get('cyberpunk',  [App\Http\Controllers\RegistoController::class, 'test']);

@@ -16,9 +16,9 @@ class WelcomeMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($confLink)
     {
-        //
+        $this->confLink = $confLink;
     }
 
     /**
@@ -28,6 +28,8 @@ class WelcomeMail extends Mailable
      */
     public function build()
     {
-        return $this->subject('Confirmar Registo')->markdown('emails.registrationEmail');
+        return $this->subject('Confirmar Registo')->markdown('emails.registrationEmail',  [
+            'conf' => $this->confLink,
+        ]);
     }
 }

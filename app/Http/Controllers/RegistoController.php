@@ -8,6 +8,7 @@ use App\Models\utentes_n_aprovados;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -68,9 +69,27 @@ class RegistoController extends Controller
         }
 
         $request->session()->flash("Registo criado com sucesso!");
-        Mail::to($validatedData['email'])->send(new WelcomeMail());
+
+        //token criada, 20 carater alfanumericos
+        $confLink = bin2hex(random_bytes(20));;
+
+        Mail::to($validatedData['email'])->send(new WelcomeMail($confLink));
 
         return view('confirmation.register');
     }
 
+    //Função para ler o token do mail
+    protected function confirm(Request $request) {
+        $token = explode('/',$request->path());
+        //ver na bd o token e se tiver la confirmar conta e fazer return suc, caso contrario dar return para uma página de erro
+        return view('confirmation.registerSucc', ['urlC' => $token]);
+    }
+
+    /*
+    protected function test() {
+        $confLink = 'a6fd57s98adyg';
+
+        Mail::to('binogamer12@gmail.com')->send(new WelcomeMail($confLink));
+    }
+    */
 }

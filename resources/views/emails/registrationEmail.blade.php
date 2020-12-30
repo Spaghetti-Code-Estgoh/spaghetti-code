@@ -6,7 +6,7 @@ Para concluir o seu registo e desfrutar de tudo o que lhe temos para oferecer ca
 Caso não tenha sido você a criar esta conta ignore este email que em 48 horas a conta será eliminada.
 
 
-@component('mail::button', ['url' => 'test'])
+@component('mail::button', ['url' => $conf])
 Confirmar Registo
 @endcomponent
 
