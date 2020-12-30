@@ -22,7 +22,7 @@ class CreateMedicosTable extends Migration
             $table->string('especialidae');
             $table->integer('numeroCeluta');
             $table->string('nome');
-            $table->string('email');
+            $table->string('email')->unique();
             $table->string('password');
             $table->string('fotoPerfil');
             $table->integer('nif');

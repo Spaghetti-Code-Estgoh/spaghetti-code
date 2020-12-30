@@ -18,11 +18,15 @@ class UtentesNAprovados extends Migration
             $table->String('nome');
             $table->String('email')->unique();
             $table->String('password');
+            $table->String('contacto');
             $table->integer('nif')->unique();
             $table->integer('nss')->unique();
             $table->String('genero');
             $table->String('morada');
+            $table->String('imagePath');
             $table->Date('dataNascimento');
+            $table->String('tokenConfirm')->unique();
+            $table->timestamps();
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
             $table->collation = 'utf8mb4_unicode_ci';
