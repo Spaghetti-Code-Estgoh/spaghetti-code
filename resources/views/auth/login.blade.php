@@ -8,7 +8,7 @@
 
 @section('content')
 
-<!-- Apresenta uma mensagem caso o registo do user tenha corrido com sucesso 
+<!-- Apresenta uma mensagem caso o registo do user tenha corrido com sucesso
     TODO: Not showing in current page
     #Author: Afonso Vitório -->
 @if (session()->has('status'))
@@ -70,7 +70,7 @@
 
                             <div class="col-md-6" style="text-align: right">
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link linkForm" href="{{ route('password.request') }}">
+                                    <a class=" linkForm" href="{{ route('password.request') }}">
                                         {{ __('Esqueceu-se da sua password?') }}
                                     </a>
                                 @endif

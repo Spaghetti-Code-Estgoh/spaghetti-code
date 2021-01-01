@@ -1,5 +1,6 @@
 <?php
 
+use App\Mail\ResetMail;
 use App\Mail\WelcomeMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
@@ -49,12 +50,12 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::view('/loginWorker', 'auth.loginWorker');
 
 //Route para testes
-Route::view('/testView', 'errors.registerFail');
+Route::view('/testView', 'auth\passwords\reset');
 
 //testar mail
 Route::get('/email', function () {
-    //Mail::to('binogamer12@gmail.com')->send(new WelcomeMail());
-    return new WelcomeMail('127.0.0.1:8000/confirmaRegisto/testToken');
+    //Mail::to('binogamer12@gmail.com')->send(new ResetMail());
+    return new ResetMail();
 });
 //Routes do Registo #Autor: Afonso Vitório
 Route::resource('/registo', 'App\Http\Controllers\RegistoController')->only('store', 'create');
@@ -68,3 +69,4 @@ Route::view('/desmarcarconsulta', 'utentes.desmarcarconsulta');
 
 Route::get('confirmaRegisto/{token}',  [App\Http\Controllers\RegistoController::class, 'confirm']);
 //Route::get('cyberpunk',  [App\Http\Controllers\RegistoController::class, 'test']);
+
