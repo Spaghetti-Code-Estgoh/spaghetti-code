@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Mail\WelcomeMail;
+use App\Mail\WelcomeMailAdm;
 use App\Models\utentes_n_aprovados;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -34,6 +35,11 @@ class RegistoController extends Controller
     protected function create()
     {
         return view('auth.register');
+    }
+
+    protected function createAdm()
+    {
+        return view('admin.dashboard');
     }
 
     protected function store(StoreRegisto $request)
@@ -81,6 +87,36 @@ class RegistoController extends Controller
         Mail::to($validatedData['email'])->send(new WelcomeMail($confLink));
 
         return view('confirmation.register');
+    }
+
+    protected function storeAdm(StoreRegisto $request)
+    {
+        // Validação dos dados do registo
+        $validatedData = $request->validated();
+
+        // Encriptação da password
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        // Try catch responsável por validar se um campo do registo é único da base de dados
+        // TODO: Caso haja o erro da base de dados não dar dd (dump and die)
+        try {
+
+            $registo = Registo::create($validatedData);
+
+        } catch(\Illuminate\Database\QueryException $e){
+            $errorCode = $e->errorInfo[1];
+            if($errorCode == '1062'){
+                dd('Duplicate Entry');
+            }
+        }
+
+        $request->session()->flash("Registo criado com sucesso!");
+
+
+
+        Mail::to($validatedData['email'])->send(new WelcomeMailAdm());
+
+        return view('admin.dashboard');
     }
 
     //Função para ler o token do mail
