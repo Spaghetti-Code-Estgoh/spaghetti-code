@@ -40,7 +40,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
                 <ul class="navbar-nav mr-auto">
-                    <a class="navbar-brand" href="/"><img src="{{ asset('img/logo2.png') }}" class="img-responsive " ></a>
+                    <a class="navbar-brand" href="/"><img src="{{ asset('img/logo2.png') }}" class="img-responsive "></a>
                 </ul>
 
                 @if(Request::is('loginWorker'))
