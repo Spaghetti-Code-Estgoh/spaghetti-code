@@ -67,6 +67,24 @@ Route::view('/novaconsulta', 'utentes.marcarconsulta');
 Route::view('/historicoconsulta', 'utentes.historicoconsultas');
 Route::view('/desmarcarconsulta', 'utentes.desmarcarconsulta');
 
+//Rota teste para dashboard admin
+Route::view('/inserirfuncionario', 'admin.dashboard');
+Route::view('/gerirfuncionarios', 'admin.gerirfuncionarios');
+Route::view('/editarfuncionario', 'admin.editarfuncionario');
+Route::view('/eliminarfuncionario', 'admin.eliminarfuncionario');
+
+//Rota teste para dashboard funcionário
+Route::view('/dashboardfuncionario', 'funcionarios.dashboard');
+Route::view('/agendamedica', 'funcionarios.agendamedica');
+Route::view('/aprovarconsulta', 'funcionarios.aprovarconsulta');
+Route::view('/inserirutente', 'funcionarios.inserirutente');
+Route::view('/desmarcarconsulta', 'funcionarios.desmarcarconsulta');
+
+//Rota teste para dashboard médico
+Route::view('/consultas', 'medicos.dashboard');
+Route::view('/agenda', 'medicos.agenda');
+
+
 Route::get('confirmaRegisto/{token}',  [App\Http\Controllers\RegistoController::class, 'confirm']);
 Route::view('/erroRegisto', 'errors.registerFail');
 //Route::get('cyberpunk',  [App\Http\Controllers\RegistoController::class, 'test']);
