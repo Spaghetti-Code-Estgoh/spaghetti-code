@@ -9,7 +9,7 @@
                         <div class="card-header mx-auto" style="padding-top: 5rem">{{ __('Inserir Funcionarios') }}</div>
 
                         <div class="card-body" style="padding-top: 2rem">
-                            <form method="POST" action="{{ route('registo.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('registofuncionario.store') }}" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group row">
@@ -23,59 +23,21 @@
                                         <strong>{{ $message }}</strong></span>
                                         @enderror
 
+                                        <label for="utilizador" class=" col-form-label text-md-right">{{ __('Tipo de utilizador') }}</label><br>
+                                        <select name="utilizador" class="custom-select" id="utilizador" value="{{ old('utilizador') }}">
+                                            <option>{{ __('Escolher') }}</option>
+                                            <option value="medico">{{ __('Medico') }}</option>
+                                            <option value="funcionario">{{ __('Funcionario') }}</option>
+                                            <option value="admin">{{ __('Adminstrador') }}</option>
 
-                                        {{-- Data de Nascimento--}}
-                                        <label for="dataNascimento" class=" col-form-label text-md-right">{{ __('Data de Nascimento') }}</label>
-                                        <input id="dataNascimento" type="date" class="form-control @error('dataNascimento') is-invalid @enderror" name="dataNascimento" value="{{ old('dataNascimento') }}" required >
+                                        </select>
 
-                                        @error('dataNascimento')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong></span>
-                                        @enderror
-
-
-                                        @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong></span>
-                                        @enderror
-
-                                        {{-- NSS--}}
-                                        <label for="nss" class=" col-form-label text-md-right">{{ __('NSS') }}</label>
-                                        <input id="nss" type="text" class="form-control @error('nss') is-invalid @enderror" name="nss" value="{{ old('nss') }}" required autocomplete="nss">
-
-                                        @error('nss')
+                                        @error('utilizador')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
-                                        </span>
+                                    </span>
                                         @enderror
 
-
-                                        {{-- NIF--}}
-                                        <label for="nif" class=" col-form-label text-md-right">{{ __('NIF') }}</label>
-                                        <input id="nif" type="text" pattern="[0-9]{9}" class="form-control @error('nif') is-invalid @enderror" name="nif" required autocomplete="nif" value="{{ old('nif') }}">
-
-                                        @error('nif')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
-                                        @enderror
-
-                                    </div>
-
-
-                                    <div class="col-md-6">
-                                        {{-- Email--}}
-                                        <label for="email" class=" col-form-label text-md-right">{{ __('Email') }}</label>
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
-
-                                        {{-- Contacto--}}
-                                        <label for="contacto" class=" col-form-label text-md-right">{{ __('Contacto') }}</label>
-                                        <input id="contacto" type="tel" class="form-control @error('contacto') is-invalid @enderror" name="contacto" required autocomplete="contacto" value="{{ old('contacto') }}">
-
-                                        @error('contacto')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong></span>
-                                        @enderror
 
                                         {{-- Password--}}
                                         <label for="password" class=" col-form-label text-md-right">{{ __('Password') }}</label>
@@ -86,6 +48,30 @@
                                         <strong>{{ $message }}</strong>
                                          </span>
                                         @enderror
+
+                                    </div>
+
+
+                                    <div class="col-md-6">
+                                        {{-- Email--}}
+                                        <label for="email" class=" col-form-label text-md-right">{{ __('Email') }}</label>
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                        @error('email')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong></span>
+                                        @enderror
+
+
+                                        {{-- Contacto--}}
+                                        <label for="contacto" class=" col-form-label text-md-right">{{ __('Contacto') }}</label>
+                                        <input id="contacto" type="tel" class="form-control @error('contacto') is-invalid @enderror" name="contacto" required autocomplete="contacto" value="{{ old('contacto') }}">
+
+                                        @error('contacto')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong></span>
+                                        @enderror
+
 
                                         {{-- Confirmar password--}}
                                         <label for="password-confirm" class=" col-form-label text-md-right">{{ __('Confirmar Password') }}</label>

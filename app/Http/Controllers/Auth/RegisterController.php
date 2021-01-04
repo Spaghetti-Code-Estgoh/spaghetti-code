@@ -53,7 +53,7 @@ class RegisterController extends Controller
     public function store(StoreRegisto $request)
     {
         $validatedData = $request->validated();
-        
+
         $blogPost = Registo::create($validatedData);
 
         return redirect()->route('posts.show', ['post' => $blogPost->id]);
@@ -77,6 +77,15 @@ class RegisterController extends Controller
             'nif' => $data['nif'],
         ]);
     }
+
+    protected function createW(array$data) {
+        if ($data['utilizador'] == 'medico') {
+            return view('/');
+        } else {
+            return view('login');
+        }
+    }
+
     /*
     protected function create(array $data)
     {

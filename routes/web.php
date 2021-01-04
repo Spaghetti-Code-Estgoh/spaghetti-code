@@ -60,7 +60,7 @@ Route::get('/email', function () {
 });
 //Routes do Registo #Autor: Afonso Vitório
 Route::resource('/registo', 'App\Http\Controllers\RegistoController')->only('store', 'create');
-Route::resource('/inserirfuncionario', 'App\Http\Controllers\RegistoController')->only('createAdm', '');
+Route::resource('/registofuncionario', 'App\Http\Controllers\RegistoWController')->only('store', 'create');
 
 //Rota teste para dashboard utente
 //Author: Guilherme Jafar
@@ -70,7 +70,7 @@ Route::view('/historicoconsulta', 'utentes.historicoconsultas');
 Route::view('/desmarcarconsulta', 'utentes.desmarcarconsulta');
 
 //Rota teste para dashboard admin
-//Route::view('/inserirfuncionario', 'admin.dashboard');
+Route::view('/inserirfuncionario', 'admin.dashboard');
 Route::view('/gerirfuncionarios', 'admin.gerirfuncionarios');
 Route::view('/editarfuncionario', 'admin.editarfuncionario');
 Route::view('/eliminarfuncionario', 'admin.eliminarfuncionario');

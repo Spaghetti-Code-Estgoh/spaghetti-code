@@ -101,7 +101,7 @@ class RegistoController extends Controller
         // TODO: Caso haja o erro da base de dados não dar dd (dump and die)
         try {
 
-            $registo = Registo::create($validatedData);
+            $registo = Registo::createW($validatedData);
 
         } catch(\Illuminate\Database\QueryException $e){
             $errorCode = $e->errorInfo[1];
