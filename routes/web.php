@@ -68,5 +68,6 @@ Route::view('/historicoconsulta', 'utentes.historicoconsultas');
 Route::view('/desmarcarconsulta', 'utentes.desmarcarconsulta');
 
 Route::get('confirmaRegisto/{token}',  [App\Http\Controllers\RegistoController::class, 'confirm']);
+Route::view('/erroRegisto', 'errors.registerFail');
 //Route::get('cyberpunk',  [App\Http\Controllers\RegistoController::class, 'test']);
 

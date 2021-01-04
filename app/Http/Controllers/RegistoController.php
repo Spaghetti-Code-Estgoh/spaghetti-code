@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Requests\StoreRegisto;
 use App\Models\Registo;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 
 /**
  * Controlador responsável pelo registo de novos utilizadores
@@ -38,6 +40,10 @@ class RegistoController extends Controller
     {
         // Validação dos dados do registo
         $validatedData = $request->validated();
+
+        //token criada, 20 carater alfanumericos
+        $confLink = bin2hex(random_bytes(20));;
+        $validatedData['tokenConfirm'] = $confLink;
 
         // Encriptação da password
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -70,8 +76,7 @@ class RegistoController extends Controller
 
         $request->session()->flash("Registo criado com sucesso!");
 
-        //token criada, 20 carater alfanumericos
-        $confLink = bin2hex(random_bytes(20));;
+
 
         Mail::to($validatedData['email'])->send(new WelcomeMail($confLink));
 
@@ -81,6 +86,23 @@ class RegistoController extends Controller
     //Função para ler o token do mail
     protected function confirm(Request $request) {
         $token = explode('/',$request->path());
+        //print($token[1]);
+        try {
+            $found_user = DB::table('utentes_n_aprovados')
+                ->where('tokenConfirm',$token[1])
+                ->get();
+             if(count($found_user)){
+                 DB::table('utentes_n_aprovados')
+                     ->where('id',$found_user[0]->id)
+                     ->update(['confirmed'=>1]);
+             }else{
+                 return redirect('/erroRegisto');
+                 //erro! O user n existe com esse codigo
+             }
+        }catch (Exception $e){
+            echo '<script>console.log('.$e->getMessage().')</script>';
+            return redirect('/erroRegisto');
+        }
         //ver na bd o token e se tiver la confirmar conta e fazer return suc, caso contrario dar return para uma página de erro
         return view('confirmation.registerSucc', ['urlC' => $token]);
     }

@@ -30,7 +30,8 @@ class StoreRegisto extends FormRequest
             'genero' => 'required|in:masculino,feminino,outro',
             'morada' => 'required',
             'dataNascimento' => 'required',
-            'contacto' => 'required'
+            'contacto' => 'required',
+            'tokenConfirm' => 'nullable'
         ];
     }
 }
