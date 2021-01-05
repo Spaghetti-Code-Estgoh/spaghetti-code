@@ -1,5 +1,5 @@
 @extends('funcionarios/layout')
-{{-- //Author: Guilherme Jafar--}}
+{{-- //Author: Fabio Rodrigues--}}
 @section('content')
     <div>
         <h2 class="titulo" >Aprovar Consulta</h2>

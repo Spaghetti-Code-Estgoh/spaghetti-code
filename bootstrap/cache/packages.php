@@ -1,4 +1,15 @@
 <?php return array (
+  'acaronlex/laravel-calendar' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Acaronlex\\LaravelCalendar\\ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Calendar' => 'Acaronlex\\LaravelCalendar\\Facades\\Calendar',
+    ),
+  ),
   'facade/ignition' => 
   array (
     'providers' => 
