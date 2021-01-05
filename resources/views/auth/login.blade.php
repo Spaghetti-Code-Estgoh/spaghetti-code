@@ -26,7 +26,7 @@
                 <br>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('checkLogin') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -91,4 +91,20 @@
         </div>
     </div>
 </div>
+
 @endsection
+
+
+<!-- DEBUG ONLY
+    TODO: Change the way error messages are displayed
+    #Author: Afonso Vitório -->
+    @if ($errors->all())
+    <div>
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+
+@endif

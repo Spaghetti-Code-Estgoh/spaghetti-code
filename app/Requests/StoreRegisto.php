@@ -16,8 +16,6 @@ class StoreRegisto extends FormRequest
         return true;
     }
 
-    //TODO: Define more rules (?)
-    //TODO: Fotografia can be nullable, or must be an image
     public function rules()
     {
         return [

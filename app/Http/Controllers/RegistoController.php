@@ -15,13 +15,11 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use App\Requests\StoreRegisto;
 use App\Models\Registo;
+use App\Requests\LoginRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Auth;
 
-/**
- * Controlador responsável pelo registo de novos utilizadores
- * Autor: Afonso Vitório
- */
 class RegistoController extends Controller
 {
 
@@ -42,6 +40,10 @@ class RegistoController extends Controller
         return view('admin.dashboard');
     }
 
+    /**
+     * Função para guardar registo
+     *  Autor: Afonso Vitório
+     */
     protected function store(StoreRegisto $request)
     {
         // Validação dos dados do registo
@@ -143,11 +145,37 @@ class RegistoController extends Controller
         return view('confirmation.registerSucc', ['urlC' => $token]);
     }
 
-    /*
-    protected function test() {
-        $confLink = 'a6fd57s98adyg';
-
-        Mail::to('binogamer12@gmail.com')->send(new WelcomeMail($confLink));
-    }
+    /* 
+    * Função que faz o login de um user
+    * Autor: Afonso Vitório 
     */
+    protected function checkLogin(LoginRequest $request){
+
+        $validatedData = $request->validated();
+
+        $db_password = DB::table('utentes_n_aprovados')->select('password')->where('email', '=', $validatedData['email'])->first();
+
+        var_dump(Hash::check($validatedData['password'], $db_password->password));
+
+        if (Hash::check($validatedData['password'], $db_password->password)) {
+
+            $confirmed = DB::table('utentes_n_aprovados')->select('confirmed')->where('email', '=', $validatedData['email'])->first();
+            $confirmed = $confirmed->confirmed;
+
+            if($confirmed){
+                echo 'Sucesso!';
+                return view('home');  
+            }else{
+                return redirect()->back()->withInput()->withErrors(['Email ainda não confirmado!']);
+            }
+
+                 
+        }else{
+            return redirect()->back()->withInput()->withErrors(['Email ou Password incorretos!']);
+
+        }
+
+    }
+
+
 }

@@ -58,7 +58,7 @@ Route::get('/email', function () {
     //Mail::to('binogamer12@gmail.com')->send(new WelcomeMailAdm());
     return new WelcomeMailAdm();
 });
-//Routes do Registo #Autor: Afonso Vitório
+//Routes do Registo
 Route::resource('/registo', 'App\Http\Controllers\RegistoController')->only('store', 'create');
 Route::resource('/registofuncionario', 'App\Http\Controllers\RegistoWController')->only('store', 'create');
 
@@ -90,4 +90,8 @@ Route::view('/agenda', 'medicos.agenda');
 Route::get('confirmaRegisto/{token}',  [App\Http\Controllers\RegistoController::class, 'confirm']);
 Route::view('/erroRegisto', 'errors.registerFail');
 //Route::get('cyberpunk',  [App\Http\Controllers\RegistoController::class, 'test']);
+
+//Route Login 
+//Autor:Afonso Vitório
+Route::post('/checkLogin', [App\Http\Controllers\RegistoController::class, 'checkLogin'])->name('checkLogin');
 
