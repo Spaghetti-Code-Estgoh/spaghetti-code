@@ -117,9 +117,11 @@
                     <div class="col-md-3" style="border-right: 1px solid #F09C86">
                         <div class="menu">
                             <ul>
-                                <li><a href="/inserirfuncionario"  class="@if(strpos(Request::url() , 'inserirfuncionario')){{ 'active' }}@endif" ><i class="fa fa-user-plus"></i> Inserir Funcionário</a></li>
-                                <li><a href="/gerirfuncionarios" class="@if (strpos(Request::url() , 'gerirfuncionarios')){{ 'active' }} @elseif(strpos(Request::url() , 'editarfuncionario')){{ 'active' }} @elseif(strpos(Request::url() , 'eliminarfuncionario')) {{ 'active' }} @endif" >
-                                        <i class="fa fa-list"></i>Gerir Funcionários</a></li>
+                                <li><a href="/inserirfuncionario"  class="@if(strpos(Request::url() , 'inserirfuncionario')){{ 'active' }}@endif" ><i class="fa fa-user-plus"></i>&nbsp;Inserir Funcionário</a></li>
+                                <li><a href="/gerirfuncionarios" class="@if (strpos(Request::url() , 'gerirfuncionarios')){{ 'active' }} @elseif(strpos(Request::url() , 'editarfuncionario')){{ 'active' }}  @endif" >
+                                        <i class="fa fa-list"></i>&nbsp;Gerir Funcionários</a></li>
+                                <li><a href="/eliminarfuncionario" class="@if(strpos(Request::url() , 'eliminarfuncionario')) {{ 'active' }} @endif" >
+                                    <i class="fas fa-user-times"></i>&nbsp;Eliminar Funcionários</a></li>
                                 <li class="logout text-center">
                                     <a href="#">Log Out</a>
                                 </li>

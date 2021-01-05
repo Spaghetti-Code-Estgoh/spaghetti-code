@@ -735,3 +735,17 @@ main {
   padding: 2rem;
 }
 
+.eliminateBtn {
+  background-color: red !important;
+}
+
+.eliminateBtn:hover {
+  background-color: white !important;
+  color: red;
+}
+
+.infoFun {
+  width: 50%;
+  margin: 0 auto;
+}
+
