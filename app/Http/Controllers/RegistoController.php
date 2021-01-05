@@ -145,9 +145,9 @@ class RegistoController extends Controller
         return view('confirmation.registerSucc', ['urlC' => $token]);
     }
 
-    /* 
+    /*
     * Função que faz o login de um user
-    * Autor: Afonso Vitório 
+    * Autor: Afonso Vitório
     */
     protected function checkLogin(LoginRequest $request){
 
@@ -155,7 +155,7 @@ class RegistoController extends Controller
 
         $db_password = DB::table('utentes_n_aprovados')->select('password')->where('email', '=', $validatedData['email'])->first();
 
-        var_dump(Hash::check($validatedData['password'], $db_password->password));
+        //var_dump(Hash::check($validatedData['password'], $db_password->password));
 
         if (Hash::check($validatedData['password'], $db_password->password)) {
 
@@ -163,13 +163,12 @@ class RegistoController extends Controller
             $confirmed = $confirmed->confirmed;
 
             if($confirmed){
-                echo 'Sucesso!';
-                return view('home');  
+                return view('loading');
             }else{
                 return redirect()->back()->withInput()->withErrors(['Email ainda não confirmado!']);
             }
 
-                 
+
         }else{
             return redirect()->back()->withInput()->withErrors(['Email ou Password incorretos!']);
 

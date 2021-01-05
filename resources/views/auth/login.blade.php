@@ -12,10 +12,23 @@
     TODO: Not showing in current page
     #Author: Afonso Vitório -->
 @if (session()->has('status'))
-    <p style="color: red">
-        {{ session()->get('status') }}
-    </p>
+
 @endif
+
+<!-- DEBUG ONLY
+    TODO: Change the way error messages are displayed
+    #Author: Afonso Vitório -->
+@if ($errors->all())
+    @foreach ($errors->all() as $error)
+        <div class="alert alert-danger" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <strong>Aconteceu um erro!</strong> {{$error}}
+        </div>
+    @endforeach
+@endif
+
 
 <div class="container cont-log">
     <div class="row justify-content-center box-log">
@@ -94,17 +107,6 @@
 
 @endsection
 
-
-<!-- DEBUG ONLY
-    TODO: Change the way error messages are displayed
-    #Author: Afonso Vitório -->
-    @if ($errors->all())
-    <div>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-
-@endif
+<script>
+    $(".alert").alert('close')
+</script>

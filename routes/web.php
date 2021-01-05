@@ -91,7 +91,8 @@ Route::get('confirmaRegisto/{token}',  [App\Http\Controllers\RegistoController::
 Route::view('/erroRegisto', 'errors.registerFail');
 //Route::get('cyberpunk',  [App\Http\Controllers\RegistoController::class, 'test']);
 
-//Route Login 
+//Route Login
 //Autor:Afonso Vitório
 Route::post('/checkLogin', [App\Http\Controllers\RegistoController::class, 'checkLogin'])->name('checkLogin');
 
+//Route::view('/loading', 'loading');
