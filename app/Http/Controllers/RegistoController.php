@@ -157,22 +157,29 @@ class RegistoController extends Controller
 
         //var_dump(Hash::check($validatedData['password'], $db_password->password));
 
-        if (Hash::check($validatedData['password'], $db_password->password)) {
+        if ($db_password != null){
 
-            $confirmed = DB::table('utentes_n_aprovados')->select('confirmed')->where('email', '=', $validatedData['email'])->first();
-            $confirmed = $confirmed->confirmed;
+            if (Hash::check($validatedData['password'], $db_password->password)) {
 
-            if($confirmed){
-                return view('loading');
+                $confirmed = DB::table('utentes_n_aprovados')->select('confirmed')->where('email', '=', $validatedData['email'])->first();
+                $confirmed = $confirmed->confirmed;
+
+                if($confirmed){
+                    return view('loading');
+                }else{
+                    return redirect()->back()->withInput()->withErrors(['Email ainda não confirmado!']);
+                }
+
+
             }else{
-                return redirect()->back()->withInput()->withErrors(['Email ainda não confirmado!']);
+                return redirect()->back()->withInput()->withErrors(['Email ou Password incorretos!']);
+
             }
-
-
         }else{
             return redirect()->back()->withInput()->withErrors(['Email ou Password incorretos!']);
-
         }
+
+
 
     }
 
