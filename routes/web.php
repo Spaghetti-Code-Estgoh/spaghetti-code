@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controller\RegistoController;
+use Acaronlex\LaravelCalendar\Calendar;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,15 +78,99 @@ Route::view('/eliminarfuncionario', 'admin.eliminarfuncionario');
 
 //Rota teste para dashboard funcionário
 Route::view('/dashboardfuncionario', 'funcionarios.dashboard');
-Route::view('/agendamedica', 'funcionarios.agendamedica');
+
+Route::get('/agendamedica', function (){
+    $events = [];
+
+    $events[] = \Acaronlex\LaravelCalendar\Calendar::event(
+        'Consulta de clinica geral', //event title
+        false, //full day event?
+        '2021-01-11T08:30:00', //start time (you can also use Carbon instead of DateTime)
+        '2021-01-11T09:30:00', //end time (you can also use Carbon instead of DateTime)
+        0 //optionally, you can specify an event ID
+    );
+
+    $events[] = \Acaronlex\LaravelCalendar\Calendar::event(
+        "Valentine's Day", //event title
+        false, //full day event?
+        new \DateTime('2021-01-10T14:30:00'), //start time (you can also use Carbon instead of DateTime)
+        new \DateTime('2021-01-10T16:30:00'), //end time (you can also use Carbon instead of DateTime)
+        'stringEventId' //optionally, you can specify an event ID
+    );
+
+    $calendar = new Calendar();
+    $calendar->addEvents($events)
+        ->setOptions([
+            'locale' => 'pt',
+            'firstDay' => 0,
+            'displayEventTime' => true,
+            'selectable' => true,
+            'initialView' => 'timeGridWeek',
+            'headerToolbar' => [
+                'end' => 'today prev,next dayGridMonth timeGridWeek timeGridDay'
+            ],
+            'startTime'=> '08:00', // 8am
+            'endTime'=> '18:00', // 6pm
+        ]);
+    $calendar->setId('1');
+    $calendar->setCallbacks([
+        'select' => 'function(selectionInfo){}',
+        'eventClick' => 'function(event){}'
+    ]);
+
+    return view('funcionarios.agendamedica',  ['calendar'=>$calendar]);
+});
+
 Route::view('/aprovarconsulta', 'funcionarios.aprovarconsulta');
 Route::view('/inserirutente', 'funcionarios.inserirutente');
 Route::view('/desmarcarconsulta', 'funcionarios.desmarcarconsulta');
 
 //Rota teste para dashboard médico
 Route::view('/consultas', 'medicos.dashboard');
-Route::view('/agenda', 'medicos.agenda');
+//Route::view('/agenda', 'medicos.agenda');
 
+
+Route::get('/agenda', function (){
+    $events = [];
+
+    $events[] = \Acaronlex\LaravelCalendar\Calendar::event(
+        'Consulta de clinica geral', //event title
+        false, //full day event?
+        '2021-01-11T08:30:00', //start time (you can also use Carbon instead of DateTime)
+        '2021-01-11T09:30:00', //end time (you can also use Carbon instead of DateTime)
+        0 //optionally, you can specify an event ID
+    );
+
+    $events[] = \Acaronlex\LaravelCalendar\Calendar::event(
+        "Valentine's Day", //event title
+        false, //full day event?
+        new \DateTime('2021-01-10T14:30:00'), //start time (you can also use Carbon instead of DateTime)
+        new \DateTime('2021-01-10T16:30:00'), //end time (you can also use Carbon instead of DateTime)
+        'stringEventId' //optionally, you can specify an event ID
+    );
+
+    $calendar = new Calendar();
+    $calendar->addEvents($events)
+        ->setOptions([
+            'locale' => 'pt',
+            'firstDay' => 0,
+            'displayEventTime' => true,
+            'selectable' => true,
+            'initialView' => 'timeGridWeek',
+            'headerToolbar' => [
+                'end' => 'today prev,next dayGridMonth timeGridWeek timeGridDay'
+            ],
+            'startTime'=> '08:00', // 8am
+            'endTime'=> '18:00', // 6pm
+        ]);
+    $calendar->setId('1');
+    $calendar->setCallbacks([
+        'select' => 'function(selectionInfo){}',
+        'eventClick' => 'function(event){}'
+    ]);
+
+    return view('medicos.agenda',  ['calendar'=>$calendar]);
+});
 
 Route::get('confirmaRegisto/{token}',  [App\Http\Controllers\RegistoController::class, 'confirm']);
 Route::view('/erroRegisto', 'errors.registerFail');
