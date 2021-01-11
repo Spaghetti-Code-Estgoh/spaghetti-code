@@ -149,22 +149,27 @@ class RegistoController extends Controller
     * Função que faz o login de um user
     * Autor: Afonso Vitório
     */
-    protected function checkLogin(LoginRequest $request){
+    protected function checkLogin(LoginRequest $request)
+    {
 
         $validatedData = $request->validated();
 
-        $db_password = DB::table('utentes_n_aprovados')->select('password')->where('email', '=', $validatedData['email'])->first();
+        $utente_password = DB::table('utentes_n_aprovados')->select('password')->where('email', '=', $validatedData['email'])->first();
+        $admin_password = DB::table('admins')->select('password')->where('email', '=', $validatedData['email'])->first();
+        $medico_password = DB::table('medicos')->select('password')->where('email', '=', $validatedData['email'])->first();
+        $funcionario_password = DB::table('funcionario')->select('password')->where('email', '=', $validatedData['email'])->first();
 
-        //var_dump(Hash::check($validatedData['password'], $db_password->password));
+        //Login dos utentes
+        if ($utente_password != null)
+        {
 
-        if ($db_password != null){
-
-            if (Hash::check($validatedData['password'], $db_password->password)) {
+            if (Hash::check($validatedData['password'], $utente_password->password)) {
 
                 $confirmed = DB::table('utentes_n_aprovados')->select('confirmed')->where('email', '=', $validatedData['email'])->first();
                 $confirmed = $confirmed->confirmed;
 
                 if($confirmed){
+                    session(['tipo_conta' => 1]);
                     return view('loading');
                 }else{
                     return redirect()->back()->withInput()->withErrors(['Email ainda não confirmado!']);
@@ -175,11 +180,34 @@ class RegistoController extends Controller
                 return redirect()->back()->withInput()->withErrors(['Email ou Password incorretos!']);
 
             }
-        }else{
-            return redirect()->back()->withInput()->withErrors(['Email ou Password incorretos!']);
+
         }
-
-
+        //Login dos Admins
+        else if($admin_password != null)
+        {
+            if (Hash::check($validatedData['password'], $admin_password->password)) {
+                session(['tipo_conta' => 2]);
+                return view('loading');
+            }
+        }
+        //Login dos Medicos
+        else if($medico_password != null)
+        {
+            if (Hash::check($validatedData['password'], $medico_password->password)) {
+                session(['tipo_conta' => 3]);
+                return view('loading');
+            }
+        }
+        //Login dos Funcionarios
+        else if($funcionario_password != null)
+        {
+            if (Hash::check($validatedData['password'], $funcionario_password->password)) {
+                session(['tipo_conta' => 4]);
+                return view('loading');
+            }
+        }
+        // Caso nenhum login funcione
+        return redirect()->back()->withInput()->withErrors(['Email ou Password incorretos!']);
 
     }
 
