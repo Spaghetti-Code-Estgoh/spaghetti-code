@@ -160,17 +160,17 @@
     Autor: Afonso Vitório
 -->
 @if (session('tipo_conta') == 1)
-    <script> setTimeout(function(){window.location="{{view('utentes.dashboard')}} "}, 6000); </script>
+    <script> setTimeout(function(){window.location='/dashboardutente'}, 6000); </script>
 
 @elseif (session('tipo_conta') == 2)
-    <script> setTimeout(function(){window.location="{{view('admin.dashboard')}} "}, 6000); </script>
+    <script> setTimeout(function(){window.location='/inserirfuncionario'}, 6000); </script>
 
 @elseif (session('tipo_conta') == 3)
-    <script> setTimeout(function(){window.location="{{view('medico.dashboard')}} "}, 6000); </script>
+    <script> setTimeout(function(){window.location='/consultas'}, 6000); </script>
 
 @elseif (session('tipo_conta') == 4)
-    <script> setTimeout(function(){window.location="{{view('funcionarios.dashboard')}} "}, 6000); </script>
-    
+    <script> setTimeout(function(){window.location='/dashboardfuncionario'}, 6000); </script>
+
 @endif
 
 <script src="js/jquery.min.js"></script>
