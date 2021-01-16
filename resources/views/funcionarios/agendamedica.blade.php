@@ -3,31 +3,15 @@
 @section('content')
     <div>
         <div class="row">
-            <div class="col-6"> <h2 class="titulo">Lista Médicos</h2></div>
+            <div class="col-6"> <h2 class="titulo">Agenda Médica</h2></div>
             <div class="col-5"> <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisa Médico"></div><i class="fa fa-search fa-2x"></i>
+            <div class="col-12" style="margin-top: 2rem">
+                {!! $calendar->calendar() !!}
+                {!! $calendar->script() !!}
+            </div>
         </div>
 
-        <div class="card card-dashboard">
-        <table class="table-hover" id="myTable">
-            <tbody>
-            <tr>
-                <td scope="row">Med1</td>
-                <td>Esp1</td>
-                <td><button class="btn btn-primary" type="submit"> > </button></td>
-            </tr>
-            <tr>
-                <td scope="row">Med2</td>
-                <td>Esp2</td>
-                <td><button class="btn btn-primary" type="submit"> > </button></td>
-            </tr>
-            <tr>
-                <td scope="row">Med3</td>
-                <td>Esp3</td>
-                <td><button class="btn btn-primary" type="submit"> > </button></td>
-            </tr>
-            </tbody>
-        </table>
-        </div>
+
     </div>
 
     <script>

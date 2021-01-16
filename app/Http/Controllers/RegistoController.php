@@ -149,32 +149,141 @@ class RegistoController extends Controller
     * Função que faz o login de um user
     * Autor: Afonso Vitório
     */
-    protected function checkLogin(LoginRequest $request){
-
+    protected function checkLogin(LoginRequest $request)
+    {
+        // Valida os dados
         $validatedData = $request->validated();
 
-        $db_password = DB::table('utentes_n_aprovados')->select('password')->where('email', '=', $validatedData['email'])->first();
-
-        //var_dump(Hash::check($validatedData['password'], $db_password->password));
-
-        if (Hash::check($validatedData['password'], $db_password->password)) {
-
-            $confirmed = DB::table('utentes_n_aprovados')->select('confirmed')->where('email', '=', $validatedData['email'])->first();
-            $confirmed = $confirmed->confirmed;
-
-            if($confirmed){
-                return view('loading');
+        $tipoConta = $this->getAccountType($validatedData['email'], $validatedData['password']);
+        if ($tipoConta == 1) {
+            if($this->isAccountConfirmed($validatedData['email'])){
+                if($this->addToSessionVariable(1, $validatedData['email'])){
+                    return view('loading');
+                }else{
+                    return redirect()->back()->withInput()->withErrors(['Houve um erro, interno, pedimos desculpa...']);
+                }
             }else{
                 return redirect()->back()->withInput()->withErrors(['Email ainda não confirmado!']);
             }
+        } elseif ($tipoConta == 2) {
+            if($this->addToSessionVariable(2, $validatedData['email'])){
+                return view('loading');
+            }else{
+                return redirect()->back()->withInput()->withErrors(['Houve um erro, interno, pedimos desculpa...']);
+            }
 
+        } elseif($tipoConta == 3) {
+             if($this->addToSessionVariable(3, $validatedData['email'])){
+                    return view('loading');
+                }else{
+                    return redirect()->back()->withInput()->withErrors(['Houve um erro, interno, pedimos desculpa...']);
+                }
 
-        }else{
+        } elseif($tipoConta == 4){
+            if($this->addToSessionVariable(4, $validatedData['email'])){
+                return view('loading');
+            }else{
+                return redirect()->back()->withInput()->withErrors(['Houve um erro, interno, pedimos desculpa...']);
+            }
+
+        } elseif($tipoConta == 0){
             return redirect()->back()->withInput()->withErrors(['Email ou Password incorretos!']);
-
         }
 
     }
 
+    //Função que retorna o tipo de conta
+    //Autor Afonso Vitório
+    private function getAccountType($email, $password)
+    {
+        // Uitlizador
+        $target_password = DB::table('utentes_n_aprovados')->select('password')->where('email', '=', $email)->first();
+        if ($target_password != null){
+            if(Hash::check($password, $target_password->password)){
+                return 1;
+            }
+        }
+
+        // Admin
+        $target_password = DB::table('admins')->select('password')->where('email', '=', $email)->first();
+        if ($target_password != null){
+            if(Hash::check($password, $target_password->password)){
+                return 2;
+            }
+        }
+
+        // Medico
+        $target_password = DB::table('medicos')->select('password')->where('email', '=', $email)->first();
+        if ($target_password != null){
+            if(Hash::check($password, $target_password->password)){
+                return 3;
+            }
+        }
+
+        // Funcionario
+        $target_password = DB::table('funcionario')->select('password')->where('email', '=', $email)->first();
+        if ($target_password != null){
+            if(Hash::check($password, $target_password->password)){
+                return 4;
+            }
+        }
+
+        return 0;
+        
+
+    }
+
+    //Função para meter variveis na sessão
+    //Autor Afonso Vitório
+    private function addToSessionVariable($tipoConta, $email)
+    {
+        if (FALSE === is_int($tipoConta)) {
+            return 0;
+        }
+
+        // Utilizador
+        if($tipoConta == 1){
+            $campos = ['id', 'nome', 'imagePath'];
+
+            $resultados = DB::table('utentes_n_aprovados')->select($campos)->where('email', '=', $email)->first();
+            session(['id' => $resultados->id, 'nome' => $resultados->nome, 'imagePath' => $resultados->imagePath]);
+            
+        //Admin
+        }else if($tipoConta == 2){
+            $campos = ['id', 'nome'];
+
+            $resultados = DB::table('admins')->select($campos)->where('email', '=', $email)->first();
+             session(['id' => $resultados->id, 'nome' => $resultados->nome,'imagePath' => 'default.jpg']);
+
+        //Medico
+        }else if($tipoConta == 3){
+            $campos = ['id', 'nome', 'especialidae', 'fotoPerfil'];
+
+            $resultados = DB::table('medicos')->select($campos)->where('email', '=', $email)->first();
+            session(['id' => $resultados->id, 'nome' => $resultados->nome, 'especialidade' => $resultados->especialidae, 'imagePath' => $resultados->fotoPerfil]);
+
+        //Funcionario
+        }else if($tipoConta == 4){
+            $campos = ['id', 'nome', 'fotoPerfil'];
+
+            $resultados = DB::table('funcionario')->select($campos)->where('email', '=', $email)->first();
+            session(['id' => $resultados->id, 'nome' => $resultados->nome, 'imagePath' => $resultados->fotoPerfil]);
+
+        }
+
+        session(['tipo_conta' => $tipoConta]);   
+        
+        return 1;
+    }
+
+    //Função que verifica se a conta está confirmada
+    //Autor: Afonso Vitório
+    private function isAccountConfirmed($email)
+    {
+        $confirmed = DB::table('utentes_n_aprovados')->select('confirmed')->where('email', '=', $email)->first();
+        $confirmed = $confirmed->confirmed;
+
+        return $confirmed;
+    }
 
 }

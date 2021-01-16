@@ -155,7 +155,23 @@
 <h1 class="heading_inf"><span style="color: green">SC</span><span style="color:#F09C86">Med</span></h1>
 </body>
 
-<script> setTimeout(function(){window.location='/home'}, 6000); </script>
+<!-- 
+    Redirect para conta
+    Autor: Afonso Vitório
+-->
+@if (session('tipo_conta') == 1)
+    <script> setTimeout(function(){window.location='/dashboardutente'}, 6000); </script>
+
+@elseif (session('tipo_conta') == 2)
+    <script> setTimeout(function(){window.location='/inserirfuncionario'}, 6000); </script>
+
+@elseif (session('tipo_conta') == 3)
+    <script> setTimeout(function(){window.location='/consultas'}, 6000); </script>
+
+@elseif (session('tipo_conta') == 4)
+    <script> setTimeout(function(){window.location='/dashboardfuncionario'}, 6000); </script>
+
+@endif
 
 <script src="js/jquery.min.js"></script>
 <script src="js/jquery.easing.min.js"></script>
