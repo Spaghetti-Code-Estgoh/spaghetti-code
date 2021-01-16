@@ -1,6 +1,7 @@
 @extends('utentes/layout')
 {{-- //Author: Rafael Pais--}}
 @section('content')
+<form method="POST">
   <h1 class="titulo">Marcar Consulta</h1>
   <div class="row">
     <div class="col-md-3">
@@ -28,4 +29,5 @@
       <button type="submit" class="btn btn-primary btn-registo">Marcar Consulta</button>
     </div>
   </div>
+</form>
 @endsection

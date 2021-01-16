@@ -7,7 +7,7 @@
       <div class="col-md-12">
         <div class="card card-registo middle">
           <div class="card-body" style="padding-top: 2rem">
-           <form method="POST" action="{{ route('registo.store') }}" enctype="multipart/form-data">
+           <form method="POST">
              @csrf
              <div class="form-group row">
                <div class="col-md-12">
