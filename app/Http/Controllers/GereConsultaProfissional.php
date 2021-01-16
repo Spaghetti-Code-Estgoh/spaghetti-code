@@ -58,6 +58,20 @@ exit;
 }
 
     /*
+       *author Diogo Pinto
+       */
+    function GetConsultaCancelar(){
+
+
+        $consulta=DB::table('medicos')
+            ->join('consulta','consulta.medico_id','=','medicos.id')
+            ->where('estado','=','agendada')
+            ->get();
+
+        echo json_encode($consulta);
+        exit;
+    }
+    /*
  * autor:Diogo pinto
  * Descricao:
  * metodo usado para cancelar consulta
@@ -71,14 +85,16 @@ exit;
 
         try {
 
-            $id=\request('idC');
-            $observacoesAdmin=\request('observaçoesAdmin');
-            $consulta = consulta::find($id);
+            $id=\request('id');
+            $observacoesAdmin=\request('observacoesAdmin');
+            $consulta = DB::table('consulta')
+                ->where('id','=',$id)
+                ->get();
 
             if ($consulta) {
-                $consulta->estado = 'cancelado';
-                $consulta->observacoesAdmin= $observacoesAdmin;
-                $consulta->save();
+                $consulta2= DB::table('consulta')
+                    ->where('id', $id)
+                    ->update(['estado' =>'cancelada','observacoesadmin'=>$observacoesAdmin]);
             }
             //return view('/testet');
 
@@ -105,7 +121,7 @@ exit;
             $id = \request('id');
             $estado=\request('estado');
 
-            $consulta = DB::table('medicos')
+            $consulta = DB::table('consulta')
                 ->where('id','=',$id)
                 ->get();
             if ($consulta) {

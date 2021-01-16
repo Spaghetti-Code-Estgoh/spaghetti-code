@@ -185,5 +185,6 @@ Route::post('/checkLogin', [App\Http\Controllers\RegistoController::class, 'chec
 
 Route::post('/GetConsulta',[App\Http\Controllers\GereConsultaProfissional::class,'GetConsultaAgendada']);
 Route::post('/ChgConsulta',[App\Http\Controllers\GereConsultaProfissional::class,'ChgangeConsulta']);
-
+Route::post('/GetConsultaCancelar',[App\Http\Controllers\GereConsultaProfissional::class,'GetConsultaCancelar']);
+Route::post('/cancelarConsulta',[App\Http\Controllers\GereConsultaProfissional::class,'CancelarConsulta']);
 //Route::view('/loading', 'loading');
