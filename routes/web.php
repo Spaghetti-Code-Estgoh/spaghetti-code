@@ -68,6 +68,7 @@ Route::view('/dashboardutente', 'utentes.dashboard');
 Route::view('/novaconsulta', 'utentes.marcarconsulta');
 Route::view('/historicoconsulta', 'utentes.historicoconsultas');
 Route::view('/desmarcarconsulta', 'utentes.desmarcarconsulta');
+Route::view('/perfil', 'utentes.perfil');
 
 //Rota teste para dashboard admin
 Route::view('/inserirfuncionario', 'admin.dashboard');
