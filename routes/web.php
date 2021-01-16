@@ -180,4 +180,10 @@ Route::view('/erroRegisto', 'errors.registerFail');
 //Autor:Afonso Vitório
 Route::post('/checkLogin', [App\Http\Controllers\RegistoController::class, 'checkLogin'])->name('checkLogin');
 
+
+
+
+Route::post('/GetConsulta',[App\Http\Controllers\GereConsultaProfissional::class,'GetConsultaAgendada']);
+Route::post('/ChgConsulta',[App\Http\Controllers\GereConsultaProfissional::class,'ChgangeConsulta']);
+
 //Route::view('/loading', 'loading');
