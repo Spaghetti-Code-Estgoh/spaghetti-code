@@ -71,6 +71,12 @@ Route::view('/historicoconsulta', 'utentes.historicoconsultas');
 Route::view('/desmarcarconsulta', 'utentes.desmarcarconsulta');
 Route::view('/perfil', 'utentes.perfil');
 
+Route::post('/novaconsulta', [App\Http\Controllers\GereConsultaUtente::class, 'marcarConsulta']);
+
+Route::get('novaconsulta/', [App\Http\Controllers\GereConsultaUtente::class, 'index']); 
+Route::get('/novaconsulta/{id}', [App\Http\Controllers\GereConsultaUtente::class, 'getMedicos']);
+
+
 //Rota teste para dashboard admin
 Route::view('/inserirfuncionario', 'admin.dashboard');
 Route::view('/gerirfuncionarios', 'admin.gerirfuncionarios');

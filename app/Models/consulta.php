@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class consulta extends Model
 {
     use HasFactory;
+
+    protected $table = 'consulta'; // Nome da Base de Dados
+    public $timestamps = false;
+
 }
