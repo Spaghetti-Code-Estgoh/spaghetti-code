@@ -25,6 +25,7 @@
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/ourApp.css') }}" rel="stylesheet">
 
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
 <body>
 
@@ -120,7 +121,7 @@
                                 <li><a href="/dashboardutente"  class="@if(strpos(Request::url() , 'dashboardutente')){{ 'active' }}@endif" ><i class="fa fa-home"></i> Dashboard</a></li>
                                 <li><a href="/novaconsulta" class="@if (strpos(Request::url() , 'novaconsulta')){{ 'active' }} @endif " ><i class="fa fa-check-square-o"></i> Marcar Consulta</a></li>
                                 <li><a href="/historicoconsulta" class="@if (strpos(Request::url() , 'historicoconsulta')){{ 'active' }}@endif " ><i class="fa fa-list"></i> Histórico Consultas</a></li>
-                                <li><a href="/desmarcarconsulta" class="@if (strpos(Request::url() , 'desmarcarconsulta')){{ 'active' }}@endif " ><i class="fa fa-minus-circle"></i> Desmarcar Consulta</a></li>
+                                <li><a href="/desmarcarConsultaUtente" class="@if (strpos(Request::url() , 'desmarcarConsultaUtente')){{ 'active' }}@endif " ><i class="fa fa-minus-circle"></i> Desmarcar Consulta</a></li>
                                 <li class="logout text-center">
                                     <a href="#">Log Out</a>
                                 </li>

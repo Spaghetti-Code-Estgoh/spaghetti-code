@@ -68,12 +68,12 @@ Route::resource('/registofuncionario', 'App\Http\Controllers\RegistoWController'
 Route::view('/dashboardutente', 'utentes.dashboard');
 Route::view('/novaconsulta', 'utentes.marcarconsulta');
 Route::view('/historicoconsulta', 'utentes.historicoconsultas');
-Route::view('/desmarcarconsulta', 'utentes.desmarcarconsulta');
+Route::view('/desmarcarConsultaUtente', 'utentes.desmarcarConsultaUtente');
 Route::view('/perfil', 'utentes.perfil');
 
 Route::post('/novaconsulta', [App\Http\Controllers\GereConsultaUtente::class, 'marcarConsulta']);
 
-Route::get('novaconsulta/', [App\Http\Controllers\GereConsultaUtente::class, 'index']); 
+Route::get('novaconsulta/', [App\Http\Controllers\GereConsultaUtente::class, 'index']);
 Route::get('/novaconsulta/{id}', [App\Http\Controllers\GereConsultaUtente::class, 'getMedicos']);
 
 
@@ -100,8 +100,8 @@ Route::get('/agendamedica', function (){
     $events[] = \Acaronlex\LaravelCalendar\Calendar::event(
         "Valentine's Day", //event title
         false, //full day event?
-        new \DateTime('2021-01-10T14:30:00'), //start time (you can also use Carbon instead of DateTime)
-        new \DateTime('2021-01-10T16:30:00'), //end time (you can also use Carbon instead of DateTime)
+        new \DateTime('2021-01-10 14:30:00'), //start time (you can also use Carbon instead of DateTime)
+        new \DateTime('2021-01-10 16:30:00'), //end time (you can also use Carbon instead of DateTime)
         'stringEventId' //optionally, you can specify an event ID
     );
 
@@ -187,9 +187,15 @@ Route::view('/erroRegisto', 'errors.registerFail');
 //Autor:Afonso Vitório
 Route::post('/checkLogin', [App\Http\Controllers\RegistoController::class, 'checkLogin'])->name('checkLogin');
 
+//route:utente
+//route:Diogo Pinto
+Route::post('/GetConsultaCancelarUtente',[App\Http\Controllers\GereConsultaUtente::class,'GetConsultaCancelarUtente']);
+Route::post('/cancelarConsultaUtente',[App\Http\Controllers\GereConsultaUtente::class,'CancelarConsulta']);
 
 
 
+//route:funcionario
+//route: Diogo Pinto
 Route::post('/GetConsulta',[App\Http\Controllers\GereConsultaProfissional::class,'GetConsultaAgendada']);
 Route::post('/ChgConsulta',[App\Http\Controllers\GereConsultaProfissional::class,'ChgangeConsulta']);
 Route::post('/GetConsultaCancelar',[App\Http\Controllers\GereConsultaProfissional::class,'GetConsultaCancelar']);

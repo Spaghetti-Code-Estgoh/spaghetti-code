@@ -9,10 +9,10 @@
       <h3 class="titulo">Especialidade</h3>
     </div>
     <div class="card card-dashboard col-md-6">
-    
+
     <select id='especialidadeSelect' name='especialidadeSelect'>
        <option value='0'>-- Selecione a Especialidade --</option>
- 
+
        <!-- Read Departments -->
        @foreach($especialidadeData['data'] as $especialidade)
          <option value='{{ $especialidade->especialidae }}'>{{ $especialidade->especialidae }}</option>
@@ -27,7 +27,7 @@
       <h3 class="titulo">Médico</h3>
     </div>
     <div class="card card-dashboard col-md-6">
-      
+
     <select id='medicoSelect' name='medicoSelect'>
        <option value='0'>-- Selecione o Médico --</option>
     </select>
@@ -45,7 +45,7 @@
          // Empty the dropdown
          $('#medicoSelect').find('option').not(':first').remove();
 
-         // AJAX request 
+         // AJAX request
          $.ajax({
            url: 'novaconsulta/'+id,
            type: 'get',
@@ -64,9 +64,9 @@
                  var id = response['data'][i].id;
                  var nome = response['data'][i].nome;
 
-                 var option = "<option value='"+id+"'>"+nome+"</option>"; 
+                 var option = "<option value='"+id+"'>"+nome+"</option>";
 
-                 $("#medicoSelect").append(option); 
+                 $("#medicoSelect").append(option);
                }
              }
 

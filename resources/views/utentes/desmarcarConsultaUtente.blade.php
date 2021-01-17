@@ -1,7 +1,6 @@
-@extends('funcionarios/layout')
-{{-- //Author: Guilherme Jafar--}}
+@extends('utentes/layout')
+{{-- //Author: Rafael Pais--}}
 @section('content')
-
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <div>
         <h2 class="titulo" >Desmarcar Consulta</h2>
@@ -11,6 +10,7 @@
             </table>
         </div>
     </div>
+
     <script>
 
         $(document).ready(function(){
@@ -20,13 +20,12 @@
                 }
             });
             $.ajax({
-                url: '/GetConsultaCancelar',
+                url: '/GetConsultaCancelarUtente',
                 type: 'POST',
                 dataType: "JSON",
                 success: function(resonse){
-                    var query,  modal;
+                    var query;
                     for (let i=0;i<resonse.length;i++){
-
 
                         indece=resonse[i]['id'];
 
@@ -40,21 +39,17 @@
                             "        <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n" +
                             "            <div class=\"modal-content\">\n" +
                             "                <div class=\"modal-header\">\n" +
-                            "                    <h5 class=\"modal-title titulo\" id=\"exampleModalLongTitle\">Motivo</h5>\n" +
+                            "                    <h5 class=\"modal-title titulo\" id=\"exampleModalLongTitle\">Desmarcar Consulta</h5>\n" +
                             "                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\" aria-label=\"Close\">\n" +
                             "                        <span aria-hidden=\"true\">&times;</span>\n" +
                             "                    </button>\n" +
                             "                </div>\n" +
                             "                <div class=\"modal-body\">\n" +
-                            "                    <form>\n" +
-                            "                        <div class=\"form-group\">\n" +
-                            "                            <textarea class=\"form-control\" id=\"message-text"+indece+"\" ></textarea>\n" +
-                            "                        </div>\n" +
-                            "                           <p id=\"error"+indece+"\" ></p>"+
-                            "                    </form>\n" +
+                            "                    <p>Tem acerteza que quer desmarcar consulta</p>\n" +
                             "                </div>\n" +
                             "                <div class=\"modal-footer\">\n" +
-                            "                    <button type=\"button\" class=\"btn btn-primary remove\"  id=\"desmarcar\" onclick=\"ChangeStatus("+indece+",'message-text"+indece+"','error"+indece+"')\">Desmarcar</button>\n" +
+                            "                    <button type=\"button\" class=\"btn btn-primary \"  id=\"desmarcar\" onclick=\"ChangeStatus("+indece+")\">Desmarcar</button>\n" +
+                            "                    <button type=\"button\" class=\"btn btn-primary \" data-dismiss=\"modal\" aria-label=\"Close\">Cancelar</button>\n" +
                             "                </div>\n" +
                             "            </div>\n" +
                             "        </div>\n" +
@@ -64,7 +59,7 @@
                     }
 
 
-                        $('table').append(query);
+                    $('table').append(query);
 
 
                 },
@@ -75,44 +70,30 @@
         });
 
 
-        function ChangeStatus(id ,val,erro){
-            document.getElementById(erro).innerText='';
-           var obs= document.getElementById(val).value;
-            console.log(obs);
+        function ChangeStatus(id){
 
-                if (obs.length==0){
-
-                    document.getElementById(erro).style.color='red';
-                    document.getElementById(erro).innerText='tem que inserir um motivo para a desmarcação';
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
-            else if (obs.length==256){
-                    document.getElementById(erro).style.color='red';
-                document.getElementById(erro).innerText='tem que endicar um motivo mais resumido';
-                }
-                else {
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        }
-                    });
-                    $.ajax({
+                });
+                $.ajax({
 
-                        url: "/cancelarConsulta",
-                        type: "Post",
-                        data: {
-                            'id': id,
-                            'observacoesAdmin': obs
-                        },
-                        success: function (data) {//200 response comes here
-                           location.reload();
+                    url: "/cancelarConsultaUtente",
+                    type: "Post",
+                    data: {
+                        'id': id,
+                    },
+                    success: function (data) {//200 response comes here
+                        location.reload();
 
 
-                        },
-                        error: function (e) {
-                            console.log(e)
-                        }
-                    })
-                }
+                    },
+                    error: function (e) {
+                        console.log(e)
+                    }
+                })
+
         }
 
 
@@ -140,6 +121,8 @@
             }
         }
     </script>
+
+
 
 
 @endsection
