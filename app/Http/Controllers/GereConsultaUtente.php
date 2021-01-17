@@ -37,7 +37,7 @@ class GereConsultaUtente extends Controller
 
         // Carrega a especialidade
         $especialidadeData['data'] = medico::orderby("especialidae","asc")
-        			   ->select('especialidae')
+        			   ->select('especialidae')->distinct()
         			   ->get();
 
     	return view('/utentes/marcarconsulta')->with("especialidadeData",$especialidadeData);
