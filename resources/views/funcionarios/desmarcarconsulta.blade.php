@@ -133,40 +133,5 @@
         }
     </script>
 
-    <div>
-        <div class="row">
-            <div class="col-6"> <h2 class="titulo">Desmarcar Consulta</h2></div>
-            <div class="col-5"> <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisa Médico"></div><i class="fa fa-search fa-2x"></i>
-        </div>
-
-        <div class="card card-dashboard">
-            <table class="table-hover" id="myTable">
-
-            </table>
-        </div>
-    </div>
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title titulo" id="exampleModalLongTitle">Motivo</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="form-group">
-                            <textarea class="form-control" id="message-text" name=""></textarea>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" id="desmarcar" onclick="">Desmarcar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
 
 @endsection

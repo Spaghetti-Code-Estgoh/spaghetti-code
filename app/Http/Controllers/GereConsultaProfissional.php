@@ -84,7 +84,7 @@ exit;
     function CancelarConsulta(){
 
         try {
-
+            $func=session('id');
             $id=\request('id');
             $observacoesAdmin=\request('observacoesAdmin');
             $consulta = DB::table('consulta')
@@ -94,7 +94,7 @@ exit;
             if ($consulta) {
                 $consulta2= DB::table('consulta')
                     ->where('id', $id)
-                    ->update(['estado' =>'cancelada','observacoesadmin'=>$observacoesAdmin]);
+                    ->update(['estado' =>'cancelada','observacoesadmin'=>$observacoesAdmin,'funcionario_id'=>$func]);
             }
             //return view('/testet');
 
