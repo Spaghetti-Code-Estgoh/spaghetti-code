@@ -80,7 +80,14 @@
 
     </div>
   </div>
-
+  <div class="row">
+    <div class="col-md-3">
+      <h3 class="titulo">Data / Hora </h3>
+    </div>
+    <div class="card card-dashboard col-md-6">
+      <input type="datetime-local" id="dataHoraConsulta" name="dataHoraConsulta">
+    </div>
+  </div>
   <div class="row">
     <div class="mx-auto text-center">
       <button type="submit" class="btn btn-primary btn-registo">Marcar Consulta</button>

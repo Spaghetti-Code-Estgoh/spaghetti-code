@@ -11,16 +11,18 @@ class GereConsultaUtente extends Controller
 {
 
     function marcarConsulta(Request $req){
-
+        
         $idUser = $req->session()->get('id');
 
+        $date = strtotime($req->dataHoraConsulta) + 3600;
+        
         try {
 
      $consulta = new consulta;
         $consulta->estado = "marcar";
-        $consulta->DataHora = null;
-        $consulta->DataHoraFim = null;
-        $consulta->observacoesmedicas = null;
+        $consulta->DataHora = $req->dataHoraConsulta;
+        $consulta->DataHoraFim = date("Y-m-d H:i:s", $date);
+        $consulta->observacoesmedicas = null; 
         $consulta->observacoesadmin = null;
         $consulta->medico_id = $req->medicoSelect;
         $consulta->funcionario_id = null;
