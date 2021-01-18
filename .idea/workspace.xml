@@ -5,16 +5,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GereConsultaUtente.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GereConsultaUtente.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_16_161803_utentes.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_16_161803_utentes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/ourApp.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/ourApp.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/mix-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/mix-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/ourApp.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/ourApp.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/utentes/_dashboard.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/utilizadores/_dashboard.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/utentes/_layout.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/utilizadores/_layout.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/medicos/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/medicos/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/utentes/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/utentes/dashboard.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/utentes/historicoconsultas.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/utentes/historicoconsultas.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/utentes/desmarcarConsultaUtente.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/utentes/desmarcarConsultaUtente.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/utentes/marcarconsulta.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/utentes/marcarconsulta.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/utentes/perfil.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/utentes/perfil.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/storage/logs/laravel.log" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/laravel.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -216,6 +211,7 @@
       <workItem from="1609762212684" duration="4743000" />
       <workItem from="1610013402002" duration="4334000" />
       <workItem from="1610279535665" duration="6381000" />
+      <workItem from="1610996757493" duration="1079000" />
     </task>
     <servers />
   </component>
@@ -227,21 +223,21 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="506" y="208" key="#com.intellij.fileTypes.FileTypeChooser/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610993394713" />
-    <state width="1493" height="192" key="GridCell.Tab.0.bottom" timestamp="1610993708047">
+    <state width="1493" height="192" key="GridCell.Tab.0.bottom" timestamp="1610994590517">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="192" key="GridCell.Tab.0.bottom/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610993708047" />
-    <state width="1493" height="192" key="GridCell.Tab.0.center" timestamp="1610993708047">
+    <state width="1493" height="192" key="GridCell.Tab.0.bottom/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610994590517" />
+    <state width="1493" height="192" key="GridCell.Tab.0.center" timestamp="1610994590508">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="192" key="GridCell.Tab.0.center/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610993708047" />
-    <state width="1493" height="192" key="GridCell.Tab.0.left" timestamp="1610993708047">
+    <state width="1493" height="192" key="GridCell.Tab.0.center/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610994590508" />
+    <state width="1493" height="192" key="GridCell.Tab.0.left" timestamp="1610994590508">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="192" key="GridCell.Tab.0.left/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610993708047" />
-    <state width="1493" height="192" key="GridCell.Tab.0.right" timestamp="1610993708047">
+    <state width="1493" height="192" key="GridCell.Tab.0.left/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610994590508" />
+    <state width="1493" height="192" key="GridCell.Tab.0.right" timestamp="1610994590508">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="192" key="GridCell.Tab.0.right/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610993708047" />
+    <state width="1493" height="192" key="GridCell.Tab.0.right/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610994590508" />
   </component>
 </project>

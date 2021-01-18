@@ -43,7 +43,7 @@ class GereConsultaUtente extends Controller
         			   ->select('especialidae')->distinct()
         			   ->get();
 
-    	return view('/utilizadores/marcarconsulta')->with("especialidadeData",$especialidadeData);
+    	return view('/utentes/marcarconsulta')->with("especialidadeData",$especialidadeData);
     }
 
     // ir buscar os medicos de uma especialidade

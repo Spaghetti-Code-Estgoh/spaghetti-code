@@ -65,11 +65,11 @@ Route::resource('/registofuncionario', 'App\Http\Controllers\RegistoWController'
 
 //Rota teste para dashboard utente
 //Author: Guilherme Jafar
-Route::view('/dashboardutente', 'utilizadores.dashboard');
-Route::view('/novaconsulta', 'utilizadores.marcarconsulta');
-Route::view('/historicoconsulta', 'utilizadores.historicoconsultas');
-Route::view('/desmarcarConsultaUtente', 'utilizadores.desmarcarConsultaUtente');
-Route::view('/perfil', 'utilizadores.perfil');
+Route::view('/dashboardutente', 'utentes.dashboard');
+Route::view('/novaconsulta', 'utentes.marcarconsulta');
+Route::view('/historicoconsulta', 'utentes.historicoconsultas');
+Route::view('/desmarcarConsultaUtente', 'utentes.desmarcarConsultaUtente');
+Route::view('/perfil', 'utentes.perfil');
 
 Route::post('/novaconsulta', [App\Http\Controllers\GereConsultaUtente::class, 'marcarConsulta']);
 
