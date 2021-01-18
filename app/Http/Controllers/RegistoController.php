@@ -78,7 +78,7 @@ class RegistoController extends Controller
         } catch(\Illuminate\Database\QueryException $e){
             $errorCode = $e->errorInfo[1];
             if($errorCode == '1062'){
-                dd('Duplicate Entry');
+                return redirect()->back()->withInput()->withErrors(['Registo já existente...']);
             }
         }
 
@@ -108,7 +108,7 @@ class RegistoController extends Controller
         } catch(\Illuminate\Database\QueryException $e){
             $errorCode = $e->errorInfo[1];
             if($errorCode == '1062'){
-                dd('Duplicate Entry');
+                return redirect()->back()->withInput()->withErrors(['Registo já existente...']);
             }
         }
 
