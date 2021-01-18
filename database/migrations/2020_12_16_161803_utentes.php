@@ -13,7 +13,7 @@ class Utentes extends Migration
      */
     public function up()
     {
-        Schema::create('utentes',function (Blueprint $table){
+        Schema::create('utilizadores',function (Blueprint $table){
             $table->id()->autoIncrement();
             $table->String('nome');
             $table->String('email')->unique();
@@ -39,6 +39,6 @@ class Utentes extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('utentes');
+        Schema::dropIfExists('utilizadores');
     }
 }

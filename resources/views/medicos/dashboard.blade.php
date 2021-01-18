@@ -70,8 +70,8 @@
                     <p>Deseja dar Início a consulta?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Cancelar</button>
-                    <button type="button" class="btn btn-primary">Iniciar</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Cancelar</button>
+                    <a href="/terminarconsulta" type="button" class="btn btn-primary">Iniciar</a>
                 </div>
             </div>
         </div>
