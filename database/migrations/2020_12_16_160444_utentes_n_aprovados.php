@@ -26,6 +26,7 @@ class UtentesNAprovados extends Migration
             $table->String('imagePath');
             $table->Date('dataNascimento');
             $table->String('tokenConfirm')->unique();
+            $table->integer('confirmed')->default(0);
             $table->timestamps();
             $table->engine = 'InnoDB';
             $table->charset = 'utf8mb4';
