@@ -1,103 +1,81 @@
 @extends('utentes/layout')
 {{-- //Author: Guilherme Jafar--}}
 @section('content')
-    <h2 class="titulo" >Proximas Consultas</h2>
+<h2 class="titulo" >Proximas Consultas</h2>
     <div class="card card-dashboard">
         <table style="width:100%">
+        
+        @foreach ($consulta as $cons)
             <tr>
-                <td>Medico 1</td>
-                <td>Especialidade1</td>
-                <td>Data1</td>
-                <td><a href="#" class="btn"  data-toggle="modal" data-target="#exampleModalCenter">Saber Mais</a></td>
+                <td>{{$cons->nome}}</td>
+                <td>{{$cons->especialidae}}</td>
+                <td>{{$cons->DataHora}}</td>
+                <td><a href="#" class="btn" data-toggle="modal" data-target="#{{ $cons->id }}">Saber Mais</a></td>
+            
+                <div class="modal fade" id="{{ $cons->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title titulo" id="exampleModalLongTitle">Iniciar Consulta</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                
+                                <p>Médico: {{$cons->nome}} </p>
+                                <p>Especialidade: {{$cons->especialidae}} </p>
+                                <p>Data/Hora: {{$cons->DataHora}} </p>
+                                <p>Estado: {{$cons->estado}} </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
             </tr>
-            <tr>
-                <td>Medico 2</td>
-                <td>Especialidade2</td>
-                <td>Data2</td>
-                <td><a href="#" class="btn">Saber Mais</a></td>
-            </tr>
-            <tr>
-                <td>Medico 3</td>
-                <td>Especialidade3</td>
-                <td>Data3</td>
-                <td><a href="#" class="btn">Saber Mais</a></td>
-            </tr>
+        @endforeach
 
-        </table>
+        </table>    
     </div>
-
+ 
     <h2 class="titulo"  >Consultas Em Espera</h2>
     <div class="card card-dashboard">
         <table style="width:100%">
-            <tr>
-                <td>Medico 1</td>
-                <td>Especialidade1</td>
-                <td>Data1</td>
-                <td><a href="#" class="btn" data-toggle="modal" data-target="#exampleModalCenter1">Saber Mais</a></td>
-            </tr>
-            <tr>
-                <td>Medico 2</td>
-                <td>Especialidade2</td>
-                <td>Data2</td>
-                <td><a href="#" class="btn">Saber Mais</a></td>
-            </tr>
-            <tr>
-                <td>Medico 3</td>
-                <td>Especialidade3</td>
-                <td>Data3</td>
-                <td><a href="#" class="btn">Saber Mais</a></td>
-            </tr>
+            
+            @foreach ($consultaEspera as $consEspera)
+                <tr>
+                    <td>{{$consEspera->nome}}</td>
+                    <td>{{$consEspera->especialidae}}</td>
+                    <td>{{$consEspera->DataHora}}</td>
+                    <td><a href="#" class="btn"  data-toggle="modal" data-target="#{{ $consEspera->id }}">Saber Mais</a></td>
 
-        </table>
+                    <div class="modal fade" id="{{ $consEspera->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title titulo" id="exampleModalLongTitle">Iniciar Consulta</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Médico: {{$consEspera->nome}}</p>
+                                    <p>Especialidade: {{$consEspera->especialidae}} </p>
+                                    <p>Data/Hora: {{$consEspera->DataHora}}</p>
+                                    <p>Estado: {{$consEspera->estado}}</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary">Fechar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </tr>
+            @endforeach
+
+            </table>  
     </div>
-
-
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title titulo" id="exampleModalLongTitle">Iniciar Consulta</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Médico: </p>
-                    <p>Especialidade: </p>
-                    <p>Data: </p>
-                    <p>Hora: </p>
-                    <p>Estado: </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title titulo" id="exampleModalLongTitle">Iniciar Consulta</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Médico: </p>
-                    <p>Especialidade: </p>
-                    <p>Data: </p>
-                    <p>Hora: </p>
-                    <p>Estado: </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary">Fechar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
 @endsection

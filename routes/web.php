@@ -76,6 +76,7 @@ Route::post('/novaconsulta', [App\Http\Controllers\GereConsultaUtente::class, 'm
 Route::get('novaconsulta/', [App\Http\Controllers\GereConsultaUtente::class, 'index']);
 Route::get('/novaconsulta/{id}', [App\Http\Controllers\GereConsultaUtente::class, 'getMedicos']);
 
+Route::get('/dashboardutente',[App\Http\Controllers\GereConsultaUtente::class,'GetConsultaProximaUtente']);
 
 //Rota teste para dashboard admin
 Route::view('/inserirfuncionario', 'admin.dashboard');

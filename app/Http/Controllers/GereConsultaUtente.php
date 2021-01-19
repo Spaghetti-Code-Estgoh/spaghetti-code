@@ -58,6 +58,28 @@ class GereConsultaUtente extends Controller
 
     }
 
+    function GetConsultaProximaUtente(){
+
+        $ut=session('id');
+        
+        $consulta=DB::table('medicos')
+            ->join('consulta','consulta.medico_id','=','medicos.id')
+            ->where('estado','=','agendada')
+            ->where('dataHora', '>', \Carbon\Carbon::now()->toDateTimeString())
+            ->where('utente_id','=',$ut)
+            ->get();
+
+        $consultaEspera=DB::table('medicos')
+            ->join('consulta','consulta.medico_id','=','medicos.id')
+            ->where('estado','=','marcar')
+            ->where('utente_id','=',$ut)
+            ->get();
+
+            return view('/utentes/dashboard')->with("consulta",$consulta)->with("consultaEspera",$consultaEspera);
+      
+    }
+    
+
     /*
              *author Diogo Pinto
              */
