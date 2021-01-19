@@ -9,6 +9,29 @@ use Illuminate\Support\Facades\DB;
 class GereConsultaProfissional extends Controller
 {
 
+    /**
+     * autor: Alexandre Lopes
+     * metodo usado para apresentar a lista de consultas
+     * de um determinado médico
+     */
+     function listarConsultasMedicos (){
+
+        $id_med=session('id');
+
+        $consultas=DB::table('medicos')
+        ->join('consulta','consulta.medico_id','=','medicos.id')
+        ->join('utentes', 'consulta.utente_id', '=', 'utentes.id' )
+        ->where('medico_id','=',$id_med)
+        ->where('DataHora', '>', now())
+        ->get();
+        
+        //$consultas = DB::table('consulta')->where('medico_id', $id_med)->get();
+
+        return view('medicos/dashboard', ['consulta'=> $consultas]);
+
+    }
+
+
 
     /*
      * autor:Diogo pinto
