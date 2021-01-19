@@ -10,24 +10,18 @@
         <div class="card card-dashboard">
             <table class="table-hover" id="myTable">
                 <tbody>
+                   
+                   @foreach ($consulta as $c)
+
                 <tr>
-                    <td scope="row">Paciente1</td>
-                    <td>Especialidade 1</td>
-                    <td>Data1</td>
+                    <td scope="row">{{ $c->nome }}</td>
+                    <td>{{ $c->especialidae }}</td>
+                    <td>{{ $c->DataHora }}</td>
                     <td><button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> > </button></td>
                 </tr>
-                <tr>
-                    <td scope="row">Paciente2</td>
-                    <td>Especialidade 2</td>
-                    <td>Data2</td>
-                    <td><button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> > </button></td>
-                </tr>
-                <tr>
-                    <td scope="row">Paciente3</td>
-                    <td>Especialidade 3</td>
-                    <td>Data3</td>
-                    <td><button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> > </button></td>
-                </tr>
+                @endforeach
+
+
                 </tbody>
             </table>
         </div>

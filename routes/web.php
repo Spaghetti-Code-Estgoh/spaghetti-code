@@ -205,3 +205,10 @@ Route::post('/ChgConsulta',[App\Http\Controllers\GereConsultaProfissional::class
 Route::post('/GetConsultaCancelar',[App\Http\Controllers\GereConsultaProfissional::class,'GetConsultaCancelar']);
 Route::post('/cancelarConsulta',[App\Http\Controllers\GereConsultaProfissional::class,'CancelarConsulta']);
 //Route::view('/loading', 'loading');
+
+
+//Route: medico
+//Autor: Alexandre Lopes
+Route::get('/consultas', "App\Http\Controllers\GereConsultaProfissional@listarConsultasMedicos");
+
+
