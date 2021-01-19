@@ -79,6 +79,18 @@ class GereConsultaUtente extends Controller
       
     }
     
+    function GetConsultaHistoricoUtente(){
+
+        $ut=session('id');
+        $consultaHistorico=DB::table('medicos')
+            ->join('consulta','consulta.medico_id','=','medicos.id')
+            ->where('estado','=','terminada')
+            ->where('utente_id','=',$ut)
+            ->get();
+
+            return view('/utentes/historicoconsultas')->with("consultaHistorico",$consultaHistorico);
+      
+    }
 
     /*
              *author Diogo Pinto

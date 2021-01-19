@@ -78,6 +78,8 @@ Route::get('/novaconsulta/{id}', [App\Http\Controllers\GereConsultaUtente::class
 
 Route::get('/dashboardutente',[App\Http\Controllers\GereConsultaUtente::class,'GetConsultaProximaUtente']);
 
+Route::get('/historicoconsulta',[App\Http\Controllers\GereConsultaUtente::class,'GetConsultaHistoricoUtente']);
+
 //Rota teste para dashboard admin
 Route::view('/inserirfuncionario', 'admin.dashboard');
 Route::view('/gerirfuncionarios', 'admin.gerirfuncionarios');
