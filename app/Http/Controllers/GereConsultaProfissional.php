@@ -24,6 +24,7 @@ class GereConsultaProfissional extends Controller
         ->where('medico_id','=',$id_med)
         ->where('DataHora', '>', now())
         ->get();
+       
         
         //$consultas = DB::table('consulta')->where('medico_id', $id_med)->get();
 
@@ -31,6 +32,34 @@ class GereConsultaProfissional extends Controller
 
     }
 
+
+
+    function comecarConsulta (Request $request, $dataHoraConsulta){
+
+        $consultas = DB::table('consulta')
+        ->where('DataHora', '=', $dataHoraConsulta)
+        ->update(['estado' => 'Comecar']);
+
+        return view('medicos/terminarconsulta');
+    }
+
+
+    
+    function mostrarHoraObsConsulta (){
+
+    
+        $id_med=session('id');
+
+        $consultas=DB::table('medicos')
+        ->join('consulta','consulta.medico_id','=','medicos.id')
+        ->join('utentes', 'consulta.utente_id', '=', 'utentes.id' )
+        ->where('medico_id','=',$id_med)
+        ->where('DataHora', '>', now())
+        ->get();
+       
+
+        return view('medicos/terminarconsulta', ['consulta' => $consultas]);
+    }
 
 
     /*

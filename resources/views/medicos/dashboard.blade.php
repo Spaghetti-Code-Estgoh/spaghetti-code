@@ -19,7 +19,7 @@
                     <td>{{ $c->DataHora }}</td>
                     <td><button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> > </button></td>
                 </tr>
-                @endforeach
+                
 
 
                 </tbody>
@@ -49,6 +49,8 @@
                 }
             }
         }
+
+
     </script>
 
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -65,9 +67,10 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Cancelar</button>
-                    <a href="/terminarconsulta" type="button" class="btn btn-primary">Iniciar</a>
+                    <a href="{{ url('/terminarconsulta/'.$c->DataHora) }}" type="button" class="btn btn-primary">Iniciar</a>
                 </div>
             </div>
         </div>
     </div>
+    @endforeach
 @endsection
