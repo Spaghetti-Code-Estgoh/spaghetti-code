@@ -11,13 +11,20 @@
         <div class="card card-dashboard">
             <table class="table-hover" id="myTable">
                 <tbody>
+                    
+        
+
                     <tr>
                         <td scope="row">Data:</td>
                     </tr>
                     <tr>
                         <td>Nome do Paciente: </td>
                     </tr>
-                </tbody>
+                    
+                </tbody>  
+                  
+            
+
             </table>
         </div>
     </div>
