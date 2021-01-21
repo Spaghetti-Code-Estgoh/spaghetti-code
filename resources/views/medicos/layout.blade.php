@@ -1,3 +1,13 @@
+<!-- 
+Redirect para homepage caso não seja o admin
+Autor: Afonso Vitório
+-->
+@if (session('tipo_conta') != 3)
+<script> setTimeout(function(){window.location='/home'}); </script>
+
+@endif
+
+
 {{-- //Author: Guilherme Jafar--}}
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -129,7 +139,7 @@
                                 <li><a href="/consultas"  class="@if(strpos(Request::url() , 'consultas')){{ 'active' }}@endif" ><i class="fa fa-home"></i> Consultas</a></li>
                                 <li><a href="/agenda" class="@if (strpos(Request::url() , 'agenda')){{ 'active' }} @endif " ><i class="fa fa-calendar"></i> Agenda</a></li>
                                 <li class="logout text-center">
-                                    <a href="#">Log Out</a>
+                                    <a href="/logout">Log Out</a>
                                 </li>
                             </ul>
                         </div>

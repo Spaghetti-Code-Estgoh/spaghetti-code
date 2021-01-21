@@ -1,3 +1,12 @@
+<!-- 
+Redirect para homepage caso não seja o admin
+Autor: Afonso Vitório
+-->
+@if (session('tipo_conta') != 4)
+<script> setTimeout(function(){window.location='/home'}); </script>
+
+@endif
+
 {{-- //Author: Guilherme Jafar--}}
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -130,7 +139,7 @@
                                 <li><a href="/desmarcarconsulta"  class="@if(strpos(Request::url() , 'desmarcarconsulta')){{ 'active' }}@endif" ><i class="fa fa-minus-circle"></i> Desmarcar Consulta</a></li>
 
                                 <li class="logout text-center">
-                                    <a href="#">Log Out</a>
+                                    <a href="/logout">Log Out</a>
                                 </li>
                             </ul>
                         </div>

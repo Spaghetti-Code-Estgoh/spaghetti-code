@@ -1,3 +1,23 @@
+<!-- 
+    Redirect para conta
+    Autor: Afonso Vitório
+-->
+@if (session('tipo_conta') == 1)
+    <script> setTimeout(function(){window.location='/dashboardutente'}); </script>
+
+@elseif (session('tipo_conta') == 2)
+    <script> setTimeout(function(){window.location='/inserirfuncionario'}); </script>
+
+@elseif (session('tipo_conta') == 3)
+    <script> setTimeout(function(){window.location='/consultas'}); </script>
+
+@elseif (session('tipo_conta') == 4)
+    <script> setTimeout(function(){window.location='/dashboardfuncionario'}); </script>
+
+@endif
+
+
+
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>

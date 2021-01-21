@@ -1,6 +1,17 @@
 @extends('admin/layout')
 {{-- //Author: Guilherme Jafar--}}
 @section('content')
+
+<!-- 
+Redirect para homepage caso não seja o admin
+Autor: Afonso Vitório
+-->
+@if (session('tipo_conta') != 2)
+<script> setTimeout(function(){window.location='/home'}); </script>
+
+@endif
+
+
     <div class="section-registo" >
         <div class="container" style="height: 100vh;">
             <div class="row justify-content-center">
@@ -95,5 +106,6 @@
             </div>
         </div>
     </div>
+
 
 @endsection

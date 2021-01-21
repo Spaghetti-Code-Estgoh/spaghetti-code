@@ -30,6 +30,10 @@ Route::get('/home', function () {
 
 Route::view('/', 'welcome');
 
+Route::get('/logout', function () {
+    return view('logout');
+});
+
 
 //Route::get('/post/{id}/{welcome?}', [PostController::class, 'show']);
 

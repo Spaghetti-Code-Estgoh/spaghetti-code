@@ -1,3 +1,13 @@
+<!-- 
+Redirect para homepage caso não seja o admin
+Autor: Afonso Vitório
+-->
+@if (session('tipo_conta') != 2)
+<script> setTimeout(function(){window.location='/home'}); </script>
+
+@endif
+
+
 {{-- //Author: Guilherme Jafar--}}
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -123,7 +133,7 @@
                                 <li><a href="/eliminarfuncionario" class="@if(strpos(Request::url() , 'eliminarfuncionario')) {{ 'active' }} @endif" >
                                     <i class="fas fa-user-times"></i>&nbsp;Eliminar Funcionários</a></li>
                                 <li class="logout text-center">
-                                    <a href="#">Log Out</a>
+                                    <a href="/logout">Log Out</a>
                                 </li>
                             </ul>
                         </div>
