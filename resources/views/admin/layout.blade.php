@@ -67,16 +67,16 @@ Autor: Afonso Vitório
                         <li class="nav-item avatar dropdown d-flex align-items-center">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                <img src="{{asset('img/imagemtesteDashboard.png')}}" class="rounded-circle z-depth-0"
+                                <img src="{{url('images/') . "/" . session('imagePath')}}" class="rounded-circle z-depth-0"
                                      alt="avatar image">
-                                Maria Santos
+                                {{ session('nome') }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink-55">
                                 <a class="dropdown-item" href="#!">
                                     <span>Editar Perfil</span>
                                 </a>
-                                <a class="dropdown-item" href="#!">
+                                <a class="dropdown-item" href="/logout">
                                     <span>Log Out</span>
                                 </a>
 

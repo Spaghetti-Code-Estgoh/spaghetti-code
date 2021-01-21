@@ -59,14 +59,12 @@ class RegistoController extends Controller
         //Image Upload
         if(array_key_exists('imagePath', $validatedData))
         {
-            //TODO: Adicionar um hash ao nome da imagem
             $validatedData['imagePath'] = Hash::make(time() . $validatedData['email']).'.'.$request->fotografia->extension();
             $request->fotografia->move(public_path('images'), $validatedData['imagePath']);
-            $validatedData['imagePath'] = "default.jpg";
         }
         else
         {
-            $validatedData['imagePath'] = "default.jpg";
+            $validatedData['imagePath'] = "default.png";
         }
 
         // Try catch responsável por validar se um campo do registo é único da base de dados
@@ -100,7 +98,6 @@ class RegistoController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         // Try catch responsável por validar se um campo do registo é único da base de dados
-        // TODO: Caso haja o erro da base de dados não dar dd (dump and die)
         try {
 
             $registo = Registo::createW($validatedData);
@@ -253,7 +250,7 @@ class RegistoController extends Controller
             $campos = ['id', 'nome'];
 
             $resultados = DB::table('admins')->select($campos)->where('email', '=', $email)->first();
-             session(['id' => $resultados->id, 'nome' => $resultados->nome,'imagePath' => 'default.jpg']);
+             session(['id' => $resultados->id, 'nome' => $resultados->nome,'imagePath' => 'default.png']);
 
         //Medico
         }else if($tipoConta == 3){
