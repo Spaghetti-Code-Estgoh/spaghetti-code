@@ -10,10 +10,9 @@
     </div>
     <div class="card card-dashboard col-md-6">
 
-    <select id='especialidadeSelect' name='especialidadeSelect'>
-       <option value='0'>-- Selecione a Especialidade --</option>
+    <select id='especialidadeSelect' name='especialidadeSelect' required>
+       <option value="">-- Selecione a Especialidade --</option>
 
-       <!-- Read Departments -->
        @foreach($especialidadeData['data'] as $especialidade)
          <option value='{{ $especialidade->especialidae }}'>{{ $especialidade->especialidae }}</option>
        @endforeach
@@ -28,8 +27,8 @@
     </div>
     <div class="card card-dashboard col-md-6">
 
-    <select id='medicoSelect' name='medicoSelect'>
-       <option value='0'>-- Selecione o Médico --</option>
+    <select id='medicoSelect' name='medicoSelect' required>
+       <option value="">-- Selecione o Médico --</option>
     </select>
 
     <!-- Script -->
@@ -85,7 +84,7 @@
       <h3 class="titulo">Data / Hora </h3>
     </div>
     <div class="card card-dashboard col-md-6">
-      <input type="datetime-local" id="dataHoraConsulta" name="dataHoraConsulta">
+      <input type="datetime-local" id="dataHoraConsulta" name="dataHoraConsulta" required>
     </div>
   </div>
   <div class="row">
