@@ -58,18 +58,17 @@ class RegistoController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         //Image Upload
-        if(array_key_exists('imagePath', $validatedData))
+        if(array_key_exists('fotografia', $validatedData))
         {
             $validatedData['imagePath'] = Hash::make(time() . $validatedData['email']).'.'.$request->fotografia->extension();
             $request->fotografia->move(public_path('images'), $validatedData['imagePath']);
+            unset($validatedData['fotografia']);
         }
         else
         {
             $validatedData['imagePath'] = "default.png";
         }
 
-        // Try catch responsável por validar se um campo do registo é único da base de dados
-        // TODO: Caso haja o erro da base de dados não dar dd (dump and die)
         try {
 
             $registo = Registo::create($validatedData);
