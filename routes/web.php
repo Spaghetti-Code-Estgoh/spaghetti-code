@@ -214,8 +214,9 @@ Route::post('/cancelarConsulta',[App\Http\Controllers\GereConsultaProfissional::
 //Route: medico
 //Autor: Alexandre Lopes
 Route::get('/consultas', "App\Http\Controllers\GereConsultaProfissional@listarConsultasMedicos");
-//Route::get('/terminarconsulta', "App\Http\Controllers\GereConsultaProfissional@mostrarHoraObsConsulta");
 Route::get('/terminarconsulta/{id}', "App\Http\Controllers\GereConsultaProfissional@comecarConsulta");
+Route::get('/consultas/{id}', "App\Http\Controllers\GereConsultaProfissional@terminarConsulta");
+
 
 
 //Test PDF

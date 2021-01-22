@@ -12,13 +12,14 @@
             <table class="table-hover" id="myTable">
                 <tbody>
                     
-        
+                    @foreach ($cons as $c)
+
 
                     <tr>
-                        <td scope="row">Data:</td>
+                        <td scope="row">Data: {{ $c->DataHora }}</td>
                     </tr>
                     <tr>
-                        <td>Nome do Paciente: </td>
+                        <td>Nome do Paciente: {{ $c->nome }} </td>
                     </tr>
                     
                 </tbody>  
@@ -32,14 +33,17 @@
     <div class="row">
         <div class="col-6"> <h2 class="titulo">Observações</h2></div>
         <div class="col-md-12">
-            <form>
-                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+            <form action="{{ url('consultas/'.$c->id)}}" method="get">
+                <textarea class="form-control" name="observacoes" id="exampleFormControlTextarea1" rows="5"></textarea>
+
+                <div class="col-6"> <h2 class="titulo">Preço (€)</h2> </div><br>
+                <div class="col-2"> <input class="form-control" name="preco" type="number"></div><br>
 
                 <button type="submit" class="btn btn-primary mb-2">Terminar</button>
             </form>
 
 
         </div>
-    </div>
-
+    </div
+@endforeach
 @endsection

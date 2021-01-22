@@ -14,84 +14,59 @@ class GereConsultaProfissional extends Controller
      * metodo usado para apresentar a lista de consultas
      * de um determinado médico
      */
-     function listarConsultasMedicos (){
+    function listarConsultasMedicos (){
 
         $id_med=session('id');
 
-        $consultas=DB::table('medicos')
-        ->join('consulta','consulta.medico_id','=','medicos.id')
+        $consultas=DB::table('consulta')
         ->join('utentes', 'consulta.utente_id', '=', 'utentes.id' )
+        ->join('medicos','medicos.id','=','consulta.medico_id')
+        ->select('consulta.id', 'medicos.especialidae', 'utentes.nome', 'consulta.DataHora' )
         ->where('medico_id','=',$id_med)
         ->where('DataHora', '>', now())
+        ->where('estado', '=', 'Agendada')
         ->get();
-       
-        
-        //$consultas = DB::table('consulta')->where('medico_id', $id_med)->get();
-
+    
         return view('medicos/dashboard', ['consulta'=> $consultas]);
 
     }
 
+  /**
+   *  autor: Alexandre Lopes
+   */
+    function comecarConsulta ($idConsulta){
 
-
-    function comecarConsulta (Request $request, $dataHoraConsulta){
-
-        $consultas = DB::table('consulta')
-        ->where('DataHora', '=', $dataHoraConsulta)
-        ->update(['estado' => 'Comecar']);
-
-        return view('medicos/terminarconsulta');
-    }
-
-
-    
-    function mostrarHoraObsConsulta (){
-
-    
         $id_med=session('id');
 
-        $consultas=DB::table('medicos')
-        ->join('consulta','consulta.medico_id','=','medicos.id')
+         DB::table('consulta')
+        ->where('id', '=', $idConsulta)
+        ->update(['estado' => 'Comecar']);
+
+        $cons=DB::table('consulta')
         ->join('utentes', 'consulta.utente_id', '=', 'utentes.id' )
+        ->join('medicos','medicos.id','=','consulta.medico_id')
+        ->select('consulta.id', 'medicos.especialidae', 'utentes.nome', 'consulta.DataHora' )
         ->where('medico_id','=',$id_med)
         ->where('DataHora', '>', now())
         ->get();
-       
 
-        return view('medicos/terminarconsulta', ['consulta' => $consultas]);
+        return view('medicos/terminarconsulta', ['cons'=> $cons]);
     }
 
 
-    /*
-     * autor:Diogo pinto
-     * Descricao:
-     * metodo usado para terminar consulta
-     * Parametros de entrada:
-     * id: consiste no id da consulta
-     * observações :variavel que contem as observacoes do medico
-     * retorno:
-     * rederecionamento de pagina
+    /**
+     *  autor: Alexandre Lopes
      */
-    function terminarConsulta(){
+    function terminarConsulta(Request $request, $id){
 
-        try {
-
-            $id=\request('id');
-            $observacoesMedicas=\request('observaçoes');
-            $consulta = consulta::find($id);
-
-            if ($consulta) {
-                $consulta->estado = 'terminar';
-                $consulta->observacoesMedicas= $observacoesMedicas;
-                $consulta->save();
-            }
-            return view('/teste');
-
-        }catch (Exception $e){
-            echo '<script>console.log('.$e->getMessage().')</script>';
-            return redirect('/ERROR_PAGE');
-        }
+        $consulta = consulta::find($id);
+        $consulta->estado = 'Terminada';
+        $consulta->observacoesmedicas = $request->input('observacoes');
+        $consulta->preco = $request->input('preco');
+        $consulta->save();
+        return redirect('/');
     }
+
 
 
     /*
