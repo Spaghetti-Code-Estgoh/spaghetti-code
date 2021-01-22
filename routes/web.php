@@ -219,4 +219,4 @@ Route::get('/terminarconsulta/{id}', "App\Http\Controllers\GereConsultaProfissio
 
 
 //Test PDF
-Route::get('/test/printpdf', [App\Http\Controllers\PDFController::class, 'printPDF']);
+Route::get('/recibo/printpdf/{id}', [App\Http\Controllers\PDFController::class, 'printPDF']);

@@ -10,7 +10,8 @@
                 <td>{{$cons->especialidae}}</td>
                 <td>{{$cons->DataHora}}</td>
                 <td><a href="#" class="btn" data-toggle="modal" data-target="#{{ $cons->id }}">Saber Mais</a></td>
-            
+                <td><a href="/recibo/printpdf/{{$cons->id}}" class="btn btn-down">Download <i class="fas fa-download"></i></a></td>
+
                 <div class="modal fade" id="{{ $cons->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                         <div class="modal-content">
@@ -21,7 +22,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                
+
                                 <p>Médico: {{$cons->nome}} </p>
                                 <p>Especialidade: {{$cons->especialidae}} </p>
                                 <p>Data/Hora: {{$cons->DataHora}} </p>
@@ -34,7 +35,7 @@
                         </div>
                     </div>
                 </div>
-            
+
             </tr>
         @endforeach
       </table>
