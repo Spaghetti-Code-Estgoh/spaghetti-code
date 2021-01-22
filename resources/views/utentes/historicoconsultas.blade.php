@@ -26,6 +26,7 @@
                                 <p>Especialidade: {{$cons->especialidae}} </p>
                                 <p>Data/Hora: {{$cons->DataHora}} </p>
                                 <p>Estado: {{$cons->estado}} </p>
+                                <p>Preço: {{$cons->preco}} </p>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary">Fechar</button>

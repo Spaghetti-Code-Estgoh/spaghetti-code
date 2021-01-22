@@ -27,6 +27,7 @@ class GereConsultaUtente extends Controller
         $consulta->medico_id = $req->medicoSelect;
         $consulta->funcionario_id = null;
         $consulta->utente_id = $idUser;
+        $consulta->preco = null;
         $consulta->save();
         return redirect('/dashboardutente');
 
