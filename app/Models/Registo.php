@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 class Registo extends Model
 {
     use HasFactory;
-    protected $table = 'utentes_n_aprovados'; // Nome da Base de Dados
+    protected $table = 'utentes'; // Nome da Base de Dados
 
     protected $fillable = ['nome', 'email', 'password', 'nif', 'nss', 'genero', 'morada', 'dataNascimento', 'imagePath', 'contacto', 'tokenConfirm'];
 }

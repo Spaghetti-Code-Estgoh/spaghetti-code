@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Mail\WelcomeMail;
 use App\Mail\WelcomeMailAdm;
-use App\Models\utentes_n_aprovados;
+use App\Models\utentes;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -19,6 +19,7 @@ use App\Requests\LoginRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class RegistoController extends Controller
 {
@@ -50,7 +51,7 @@ class RegistoController extends Controller
         $validatedData = $request->validated();
 
         //token criada, 20 carater alfanumericos
-        $confLink = bin2hex(random_bytes(20));;
+        $confLink = bin2hex(random_bytes(20));
         $validatedData['tokenConfirm'] = $confLink;
 
         // Encriptação da password
@@ -81,8 +82,6 @@ class RegistoController extends Controller
         }
 
         $request->session()->flash("Registo criado com sucesso!");
-
-
 
         Mail::to($validatedData['email'])->send(new WelcomeMail($confLink));
 
@@ -123,11 +122,11 @@ class RegistoController extends Controller
         $token = explode('/',$request->path());
         //print($token[1]);
         try {
-            $found_user = DB::table('utentes_n_aprovados')
+            $found_user = DB::table('utentes')
                 ->where('tokenConfirm',$token[1])
                 ->get();
              if(count($found_user)){
-                 DB::table('utentes_n_aprovados')
+                 DB::table('utentes')
                      ->where('id',$found_user[0]->id)
                      ->update(['confirmed'=>1]);
              }else{
@@ -151,7 +150,15 @@ class RegistoController extends Controller
         // Valida os dados
         $validatedData = $request->validated();
 
+        $remember = array_key_exists('remember', $validatedData);
+
         $tipoConta = $this->getAccountType($validatedData['email'], $validatedData['password']);
+
+        //Faz o remember me
+        if($remember){
+            $this->createRememberMe($tipoConta, $validatedData['email']);
+        }
+    
         if ($tipoConta == 1) {
             if($this->isAccountConfirmed($validatedData['email'])){
                 if($this->addToSessionVariable(1, $validatedData['email'])){
@@ -194,7 +201,7 @@ class RegistoController extends Controller
     private function getAccountType($email, $password)
     {
         // Uitlizador
-        $target_password = DB::table('utentes_n_aprovados')->select('password')->where('email', '=', $email)->first();
+        $target_password = DB::table('utentes')->select('password')->where('email', '=', $email)->first();
         if ($target_password != null){
             if(Hash::check($password, $target_password->password)){
                 return 1;
@@ -242,7 +249,7 @@ class RegistoController extends Controller
         if($tipoConta == 1){
             $campos = ['id', 'nome', 'imagePath'];
 
-            $resultados = DB::table('utentes_n_aprovados')->select($campos)->where('email', '=', $email)->first();
+            $resultados = DB::table('utentes')->select($campos)->where('email', '=', $email)->first();
             session(['id' => $resultados->id, 'nome' => $resultados->nome, 'imagePath' => $resultados->imagePath]);
             
         //Admin
@@ -277,10 +284,37 @@ class RegistoController extends Controller
     //Autor: Afonso Vitório
     private function isAccountConfirmed($email)
     {
-        $confirmed = DB::table('utentes_n_aprovados')->select('confirmed')->where('email', '=', $email)->first();
+        $confirmed = DB::table('utentes')->select('confirmed')->where('email', '=', $email)->first();
         $confirmed = $confirmed->confirmed;
 
         return $confirmed;
+    }
+
+    //Função que adiciona um token de remember me às cookies e à base de dados
+    //Autor: Afonso Vitório
+    private function createRememberMe($tipoConta, $email)
+    {
+        $token = Hash::make($tipoConta . $email . time());
+
+        if($tipoConta == 1)
+        {
+            DB::update('update utentes set remember_token = ? where email = ?', [$token, $email]);
+        }   
+        else if($tipoConta == 2)
+        {
+            DB::update('update admins set remember_token = ? where email = ?', [$token, $email]);
+        }  
+        else if($tipoConta == 3)
+        {
+            DB::update('update medicos set remember_token = ? where email = ?', [$token, $email]);
+        }  
+        else if($tipoConta == 4)
+        {
+            DB::update('update funcionario set remember_token = ? where email = ?', [$token, $email]);
+        }  
+
+        Cookie::queue('rememberMe', $token, 60);
+
     }
 
 }
