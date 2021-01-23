@@ -10,18 +10,13 @@
         <div class="card card-dashboard">
             <table class="md-dash" id="myTable">
                 <tbody>
-
                    @foreach ($consulta as $c)
-
                 <tr>
                     <td scope="row">{{ $c->nome }}</td>
                     <td>{{ $c->especialidae }}</td>
                     <td>{{ $c->DataHora }}</td>
                     <td><button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> > </button></td>
                 </tr>
-
-
-
                 </tbody>
             </table>
         </div>
@@ -49,8 +44,6 @@
                 }
             }
         }
-
-
     </script>
 
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
