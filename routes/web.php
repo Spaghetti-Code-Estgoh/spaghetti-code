@@ -63,9 +63,17 @@ Route::get('/email', function () {
     //Mail::to('binogamer12@gmail.com')->send(new WelcomeMailAdm());
     return new WelcomeMailAdm();
 });
+
 //Routes do Registo
 Route::resource('/registo', 'App\Http\Controllers\RegistoController')->only('store', 'create');
 Route::resource('/registofuncionario', 'App\Http\Controllers\RegistoWController')->only('store', 'create');
+
+//Routes de alterar definições de conta
+Route::post('/alterarPerfilUtente', [App\Http\Controllers\AlterarPerfilController::class, 'alterarUtente'])->name('alterarUtente');
+Route::post('/alterarPerfilAdmin', [App\Http\Controllers\AlterarPerfilController::class, 'alterarAdmin'])->name('alterarAdmin');
+Route::post('/alterarPerfilMedico', [App\Http\Controllers\AlterarPerfilController::class, 'alterarMedico'])->name('alterarMedico');
+Route::post('/alterarPerfilFuncionario', [App\Http\Controllers\AlterarPerfilController::class, 'alterarFuncionario'])->name('alterarFuncionario');
+
 
 //Rota teste para dashboard utente
 //Author: Guilherme Jafar

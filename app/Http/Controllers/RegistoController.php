@@ -246,10 +246,10 @@ class RegistoController extends Controller
 
         // Utilizador
         if($tipoConta == 1){
-            $campos = ['id', 'nome', 'imagePath'];
+            $campos = ['id', 'nome', 'imagePath', 'email', 'contacto', 'nif', 'nss'];
 
             $resultados = DB::table('utentes')->select($campos)->where('email', '=', $email)->first();
-            session(['id' => $resultados->id, 'nome' => $resultados->nome, 'imagePath' => $resultados->imagePath]);
+            session(['id' => $resultados->id, 'nome' => $resultados->nome, 'imagePath' => $resultados->imagePath, 'email' => $resultados->email, 'contacto' => $resultados->contacto, 'nif' => $resultados->nif, 'nss' => $resultados->nss]);
             
         //Admin
         }else if($tipoConta == 2){
