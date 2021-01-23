@@ -2,7 +2,7 @@
 {{-- //Author: Guilherme Jafar--}}
 @section('content')
 
-<!-- 
+<!--
 Redirect para homepage caso não seja o admin
 Autor: Afonso Vitório
 -->
@@ -35,10 +35,10 @@ Autor: Afonso Vitório
                                         @enderror
 
                                         <label for="utilizador" class=" col-form-label text-md-right">{{ __('Tipo de utilizador') }}</label><br>
-                                        <select name="utilizador" class="custom-select" id="utilizador" value="{{ old('utilizador') }}">
+                                        <select name="utilizador" class="custom-select" id="utilizador" value="{{ old('utilizador') }}" disabled>
                                             <option>{{ __('Escolher') }}</option>
                                             <option value="medico">{{ __('Medico') }}</option>
-                                            <option value="funcionario">{{ __('Funcionario') }}</option>
+                                            <option value="funcionario" selected>{{ __('Funcionario') }}</option>
                                             <option value="admin">{{ __('Adminstrador') }}</option>
 
                                         </select>
@@ -89,12 +89,65 @@ Autor: Afonso Vitório
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
 
                                     </div>
+
+                                    <div class="col-md-6">
+                                        {{-- NIF--}}
+                                        <label for="nif" class=" col-form-label text-md-right">{{ __('NIF') }}</label>
+                                        <input id="nif" type="text" pattern="[0-9]{9}" class="form-control @error('nif') is-invalid @enderror" name="nif" required autocomplete="nif" value="{{ old('nif') }}">
+
+                                        @error('nif')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                         </span>
+                                        @enderror
+
+
+                                        {{-- Morada--}}
+                                        <label for="morada" class=" col-form-label text-md-right">{{ __('Morada') }}</label>
+                                        <input id="morada" type="text" class="form-control @error('morada') is-invalid @enderror" name="morada" required autocomplete="morada" value="{{ old('morada') }}">
+
+                                        @error('morada')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                         </span>
+                                        @enderror
+                                    </div>
+
+                                <div class="col-md-6">
+                                    {{-- Gênero--}}
+                                    <label for="genero" class=" col-form-label text-md-right">{{ __('Gênero') }}</label><br>
+                                    <select name="genero" class="custom-select" id="genero" value="{{ old('genero') }}">
+                                        <option>{{ __('Escolher') }}</option>
+                                        <option value="masculino">{{ __('Masculino') }}</option>
+                                        <option value="feminino">{{ __('Feminino') }}</option>
+                                        <option value="outro">{{ __('Outro') }}</option>
+
+                                    </select>
+
+                                    @error('genero')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                      </span>
+                                    @enderror
+
+                                    <input type="file" name="fotografia"  class="custom-file-input" id="escolherFotografia" aria-describedby="inputGroupFileAddon01" onchange="mudarFotografia(event)">
+                                    <label class="custom-file-label input_fotografia" for="escolherFotografia"  data-browse="Pesquisar" >{{ __('Escolha uma Fotografia') }}</label>
+                                    @error('fotografia')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
                                 </div>
+                                    <div class="col-md-12">
+                                        <br>
+                                        <img class="imagem" src="{{asset('img/imgDefault.jpg')}}"  alt="Imagem de perfil" id="imagem">
+                                    </div>
+                            </div>
 
 
                                 <div class="form-group row mb-0">
                                     <div class="col-md-12 mx-auto text-center" >
-                                        <button type="submit" class="btn btn-primary btn-registo">
+                                        <button type="submit" class="btn btn-primary btn-registo" style="width: 100%">
                                             {{ __('Registar') }}
                                         </button>
                                     </div>
@@ -107,5 +160,6 @@ Autor: Afonso Vitório
         </div>
     </div>
 
+<script src="{{ asset('js/components/imageUpload.js')}}"></script>
 
 @endsection

@@ -60,7 +60,7 @@ Route::view('/testView', 'auth\passwords\reset');
 
 //testar mail
 Route::get('/email', function () {
-    //Mail::to('binogamer12@gmail.com')->send(new WelcomeMailAdm());
+    Mail::to('binogamer12@gmail.com')->send(new WelcomeMailAdm());
     return new WelcomeMailAdm();
 });
 
@@ -94,6 +94,7 @@ Route::get('/historicoconsulta',[App\Http\Controllers\GereConsultaUtente::class,
 
 //Rota teste para dashboard admin
 Route::view('/inserirfuncionario', 'admin.dashboard');
+Route::view('/inserirmedico', 'admin.inserirmedico');
 Route::view('/gerirfuncionarios', 'admin.gerirfuncionarios');
 Route::view('/editarfuncionario', 'admin.editarfuncionario');
 Route::view('/eliminarfuncionario', 'admin.eliminarfuncionario');
