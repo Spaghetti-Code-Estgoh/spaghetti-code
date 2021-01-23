@@ -26,6 +26,7 @@
                                 <p>Médico: {{$cons->nome}} </p>
                                 <p>Especialidade: {{$cons->especialidae}} </p>
                                 <p>Data/Hora: {{$cons->DataHora}} </p>
+                                <p>Observações: {{$cons->observacoesmedicas}} </p>
                                 <p>Estado: {{$cons->estado}} </p>
                                 <p>Preço: {{$cons->preco}} </p>
                             </div>
