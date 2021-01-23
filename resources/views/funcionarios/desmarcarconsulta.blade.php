@@ -54,7 +54,7 @@
                             "                    </form>\n" +
                             "                </div>\n" +
                             "                <div class=\"modal-footer\">\n" +
-                            "                    <button type=\"button\" class=\"btn btn-primary remove\"  id=\"desmarcar\" onclick=\"ChangeStatus("+indece+",'message-text"+indece+"','error"+indece+"')\">Desmarcar</button>\n" +
+                            "                    <button type=\"button\" class=\"btn btn-primary remove\"  id=\"desmarcar\" onclick=\"ChangeStatus("+indece+")\">Desmarcar</button>\n" +
                             "                </div>\n" +
                             "            </div>\n" +
                             "        </div>\n" +
@@ -75,7 +75,9 @@
         });
 
 
-        function ChangeStatus(id ,val,erro){
+        function ChangeStatus(id ){
+           var erro='error'+id;
+            var val='message-text'+id;
             document.getElementById(erro).innerText='';
            var obs= document.getElementById(val).value;
             console.log(obs);

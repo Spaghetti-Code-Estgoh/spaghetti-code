@@ -22,6 +22,7 @@ Autor: Afonso Vitório
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -133,7 +134,7 @@ Autor: Afonso Vitório
                         <div class="menu">
                             <ul>
                                 <li><a href="/dashboardfuncionario"  class="@if(strpos(Request::url() , 'dashboardfuncionario')){{ 'active' }}@endif" ><i class="fa fa-home"></i> Dashboard</a></li>
-                                <li><a href="/agendamedica"  class="@if(strpos(Request::url() , 'agendamedica')){{ 'active' }}@endif" ><i class="fa fa-calendar"></i> Agenda Médica</a></li>
+                                <li><a href="/agendamedicaFunc"  class="@if(strpos(Request::url() , 'agendamedicaFunc')){{ 'active' }}@endif" ><i class="fa fa-calendar"></i> Agenda Médica</a></li>
                                 <li><a href="/aprovarconsulta"  class="@if(strpos(Request::url() , 'aprovarconsulta')){{ 'active' }}@endif" ><i class="fa fa-calendar-check-o"></i> Aprovar Consulta</a></li>
                                 <li><a href="/inserirutente"  class="@if(strpos(Request::url() , 'inserirutente')){{ 'active' }}@endif" ><i class="fa fa-user-plus"></i> Inserir Utente</a></li>
                                 <li><a href="/desmarcarconsulta"  class="@if(strpos(Request::url() , 'desmarcarconsulta')){{ 'active' }}@endif" ><i class="fa fa-minus-circle"></i> Desmarcar Consulta</a></li>
