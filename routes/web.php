@@ -221,3 +221,4 @@ Route::get('/consultas/{id}', "App\Http\Controllers\GereConsultaProfissional@ter
 
 //Test PDF
 Route::get('/recibo/printpdf/{id}', [App\Http\Controllers\PDFController::class, 'printPDF']);
+Route::get('/pc/printpdf/{id}', [App\Http\Controllers\PDFController::class, 'printPDFPC']);

@@ -8,9 +8,9 @@
         </div>
 
         <div class="card card-dashboard">
-            <table class="table-hover" id="myTable">
+            <table class="md-dash" id="myTable">
                 <tbody>
-                   
+
                    @foreach ($consulta as $c)
 
                 <tr>
@@ -19,7 +19,7 @@
                     <td>{{ $c->DataHora }}</td>
                     <td><button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter"> > </button></td>
                 </tr>
-                
+
 
 
                 </tbody>

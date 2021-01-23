@@ -25,11 +25,11 @@ class PDFController extends Controller
 
         foreach ($consultaHistorico as $con) {
             foreach ($utent as $ut) {
-                $valor = 50;
+                $valor = $con->preco;
                 $valorI = $valor * 0.23;
                 $valorSI = $valor - $valorI;
 
-                $data = explode(" ", $con->DataHora);
+                $dataC = explode(" ", $con->DataHora);
 
                 if ($con->observacoesmedicas == null) {
                     $obs = 'Nada a registar';
@@ -44,8 +44,8 @@ class PDFController extends Controller
                     'morada' => $ut->morada,
                     'tipoC' => $con->especialidae,
                     'medico' => $con->nome,
-                    'data' => $data[0],
-                    'hora' => $data[1],
+                    'data' => $dataC[0],
+                    'hora' => $dataC[1],
                     'obs' => $obs,
                     'valorT' => $valor.'$',
                     'valorI' => $valorI.'$',
@@ -53,7 +53,41 @@ class PDFController extends Controller
                 ];
             }
         }
-        $pdf = PDF::loadView('pdfView', $data);
+        $pdf = PDF::loadView('pdf.pdfView', $data);
+        return $pdf->download('consulta.pdf');
+    }
+
+    public function printPDFPC($id)
+    {
+        $ut=session('id');
+        $consultaHistorico=DB::table('medicos')
+            ->join('consulta','consulta.medico_id','=','medicos.id')
+            ->where('estado','=','agendada')
+            ->where('utente_id','=',$ut)
+            ->where('consulta.id', '=', $id)
+            ->get();
+
+        $utent = DB::table('utentes')->where('id', '=', $ut)->get(['nome', 'email', 'morada']);
+
+        foreach ($consultaHistorico as $con) {
+            foreach ($utent as $ut) {
+
+                $dataC = explode(" ", $con->DataHora);
+
+
+                // This  $data array will be passed to our PDF blade
+                $data = [
+                    'utente' => $ut->nome,
+                    'email' => $ut->email,
+                    'morada' => $ut->morada,
+                    'tipoC' => $con->especialidae,
+                    'medico' => $con->nome,
+                    'data' => $dataC[0],
+                    'hora' => $dataC[1],
+                ];
+            }
+        }
+        $pdf = PDF::loadView('pdf.pdfPCView', $data);
         return $pdf->download('consulta.pdf');
     }
 }

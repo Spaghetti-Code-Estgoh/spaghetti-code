@@ -713,7 +713,7 @@ main {
 }
 
 .btn-down:hover {
-  background-color: #EEEEEE;
+  background-color: white;
   color: #00bf00;
   border: white;
 }
@@ -766,5 +766,18 @@ textarea {
 .infoFun {
   width: 50%;
   margin: 0 auto;
+}
+
+.md-dash:hover {
+  border-radius: 25px;
+  background-color: #EEEEEE;
+  color: black;
+}
+
+.medFoo {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
 }
 

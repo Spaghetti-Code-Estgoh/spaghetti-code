@@ -1,4 +1,4 @@
-<!-- 
+<!--
 Redirect para homepage caso não seja o admin
 Autor: Afonso Vitório
 -->
@@ -49,7 +49,7 @@ Autor: Afonso Vitório
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav mr-auto mt-4">
                     <a class="navbar-brand" href="/"><img src="{{ asset('img/logo2.png') }}" class="img-responsive "></a>
                 </ul>
 

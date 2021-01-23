@@ -9,9 +9,9 @@
         </div>
 
         <div class="card card-dashboard">
-            <table class="table-hover" id="myTable">
+            <table class="md-dash" id="myTable">
                 <tbody>
-                    
+
                     @foreach ($cons as $c)
 
 
@@ -21,10 +21,10 @@
                     <tr>
                         <td>Nome do Paciente: {{ $c->nome }} </td>
                     </tr>
-                    
-                </tbody>  
-                  
-            
+
+                </tbody>
+
+
 
             </table>
         </div>
