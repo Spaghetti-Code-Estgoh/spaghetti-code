@@ -26,7 +26,7 @@
                     <td>Funcionario 3</td>
                     <td>Cargo</td>
                     <td>Email 3</td>
-                    <<td><a href="/eliminarfuncionario"><i class="fa fa-times fa-2x" style="color: black"></i></a></td>
+                    <td><a href="/eliminarfuncionario"><i class="fa fa-times fa-2x" style="color: black"></i></a></td>
                     <td><a href="/editarfuncionario"><i class="fas fa-chevron-right fa-2x" style="color: black"></i></a></td>
                 </tr>
             </table>
