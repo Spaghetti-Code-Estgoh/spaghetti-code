@@ -82,7 +82,7 @@ Autor: Afonso Vitório
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink-55">
-                                <a class="dropdown-item" href="#!">
+                                <a class="dropdown-item" href="/medico/perfil">
                                     <span>Editar Perfil</span>
                                 </a>
                                 <a class="dropdown-item" href="/logout">

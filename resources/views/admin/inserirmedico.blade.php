@@ -13,9 +13,23 @@ Autor: Afonso Vitório
 
 
     <div class="section-registo" >
-        <div class="container" style="height: 100vh;">
+        <div class="" >
             <div class="row justify-content-center">
                 <div class="col-md-12">
+                    @if ($errors->any())
+                        <div style="padding-top: 2rem">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li class="alert alert-danger alert-dismissible show" role="alert">
+                                        {{ $error }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="card card-registo middle">
                         <div class="card-header mx-auto" style="padding-top: 5rem">{{ __('Inserir Medicos') }}</div>
 

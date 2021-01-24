@@ -22,7 +22,7 @@
                     @endif
                     <div class="card card-registo middle">
                         <div class="card-body" style="padding-top: 2rem">
-                            <form method="POST" action="{{ route('alterarUtente') }}">
+                            <form method="POST" action="{{ route('alterarFuncionario') }}">
                                 @csrf
                                 <div class="form-group row">
                                     <div class="col-md-12">

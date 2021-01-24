@@ -116,6 +116,7 @@ Route::view('/func/perfil', 'funcionarios.perfil');
 //Rota teste para dashboard médico
 Route::view('/consultas', 'medicos.dashboard');
 Route::view('/terminarconsulta', 'medicos.terminarconsulta');
+Route::view('/medico/perfil', 'medicos.perfil');
 //Route::view('/agenda', 'medicos.agenda');
 
 
