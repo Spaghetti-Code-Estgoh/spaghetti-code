@@ -60,7 +60,6 @@ Route::view('/testView', 'auth\passwords\reset');
 
 //testar mail
 Route::get('/email', function () {
-    Mail::to('binogamer12@gmail.com')->send(new WelcomeMailAdm());
     return new WelcomeMailAdm();
 });
 
@@ -143,6 +142,7 @@ Route::post('/GetConsulta',[App\Http\Controllers\GereConsultaProfissional::class
 Route::post('/ChgConsulta',[App\Http\Controllers\GereConsultaProfissional::class,'ChgangeConsulta']);
 Route::post('/GetConsultaCancelar',[App\Http\Controllers\GereConsultaProfissional::class,'GetConsultaCancelar']);
 Route::post('/cancelarConsulta',[App\Http\Controllers\GereConsultaProfissional::class,'CancelarConsulta']);
+Route::post('/RemarcarConsulta',[App\Http\Controllers\GereConsultaProfissional::class,'remarcar']);
 Route::get('/agendamedicaFunc',[\App\Http\Controllers\GereConsultaProfissional::class,'agendaMedicaEmpty']);
 Route::get('/agendamedicaFuncionario',[\App\Http\Controllers\GereConsultaProfissional::class,'agendaMedicaFunc']);
 //Route::view('/loading', 'loading');

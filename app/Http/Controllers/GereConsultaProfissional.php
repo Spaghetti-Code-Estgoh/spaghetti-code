@@ -91,7 +91,31 @@ class GereConsultaProfissional extends Controller
         }
         return redirect('/');
     }
+    function remarcar(){
 
+        try {
+            $func=session('id');
+            $id=\request('id');
+            $obs=\request('obs');
+            $time=\request('time');
+            $date = strtotime($time) + 3600;
+
+            $consulta = DB::table('consulta')
+                ->where('id','=',$id)
+                ->get();
+
+            if ($consulta) {
+                $consulta2= DB::table('consulta')
+                    ->where('id', $id)
+                    ->update(['estado' =>'agendada','observacoesadmin'=>$obs,'funcionario_id'=>$func,'DataHora'=>$time,"DataHoraFim"=>date("Y-m-d H:i:s", $date)]);
+            }
+            //return view('/testet');
+
+        }catch (Exception $e){
+            echo '<script>console.log('.$e->getMessage().')</script>';
+            return redirect('/ERROR_PAGE');
+        }
+    }
 
 
     /*
