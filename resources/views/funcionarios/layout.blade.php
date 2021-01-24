@@ -79,7 +79,7 @@ Autor: Afonso Vitório
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink-55">
-                                <a class="dropdown-item" href="#!">
+                                <a class="dropdown-item" href="/func/perfil">
                                     <span>Editar Perfil</span>
                                 </a>
                                 <a class="dropdown-item" href="/logout">
@@ -161,46 +161,6 @@ Autor: Afonso Vitório
 
 
     <footer id="footer" class="medFoo">
-{{--            <div class="top-footer">--}}
-{{--                <div class="container">--}}
-{{--                    <div class="row">--}}
-{{--                        <div class="col-md-4 col-sm-4 marb20">--}}
-{{--                            <div class="ftr-tle">--}}
-{{--                                <h4 class="white no-padding">Sobre Nós</h4>--}}
-{{--                            </div>--}}
-{{--                            <div class="info-sec">--}}
-{{--                                <p>Somos uma equipa de estudantes de engenharia informática da ESTGOH 3ºano!</p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-md-4 col-sm-4 marb20">--}}
-{{--                            <div class="ftr-tle">--}}
-{{--                                <h4 class="white no-padding">Quick Links</h4>--}}
-{{--                            </div>--}}
-{{--                            <div class="info-sec">--}}
-{{--                                <ul class="quick-info">--}}
-{{--                                    <li><a href="#banner"><i class="fa fa-circle"></i>Home</a></li>--}}
-{{--                                    <li><a href="#service"><i class="fa fa-circle"></i>Service</a></li>--}}
-{{--                                    <li><a href="#"><i class="fa fa-circle"></i>Registo</a></li>--}}
-{{--                                    <li><a href="#"><i class="fa fa-circle"></i>Login</a></li>--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-md-4 col-sm-4 marb20">--}}
-{{--                            <div class="ftr-tle">--}}
-{{--                                <h4 class="white no-padding">Sigam nos</h4>--}}
-{{--                            </div>--}}
-{{--                            <div class="info-sec">--}}
-{{--                                <ul class="social-icon">--}}
-{{--                                    <li class="bglight-blue"><i class="fa fa-facebook"></i></li>--}}
-{{--                                    <li class="bgred"><i class="fa fa-google-plus"></i></li>--}}
-{{--                                    <li class="bgdark-blue"><i class="fa fa-linkedin"></i></li>--}}
-{{--                                    <li class="bglight-blue"><i class="fa fa-twitter"></i></li>--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
         <div class="footer-line">
             <div class="container">
                 <div class="row">

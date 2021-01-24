@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ConcludedMail;
 use App\Models\consulta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Acaronlex\LaravelCalendar\Calendar;
+use Illuminate\Support\Facades\Mail;
+
 class GereConsultaProfissional extends Controller
 {
 
@@ -23,8 +26,7 @@ class GereConsultaProfissional extends Controller
             ->join('medicos','medicos.id','=','consulta.medico_id')
             ->select('consulta.id', 'medicos.especialidae', 'utentes.nome', 'consulta.DataHora' )
             ->where('medico_id','=',$id_med)
-            ->where('DataHora', '>', now())
-            ->where('estado', '=', 'Agendada')
+            ->where('estado', '=', 'agendada')
             ->get();
 
         $iniciadas = DB::table('consulta')
@@ -32,10 +34,9 @@ class GereConsultaProfissional extends Controller
             ->join('medicos','medicos.id','=','consulta.medico_id')
             ->select('consulta.id', 'medicos.especialidae', 'utentes.nome', 'consulta.DataHora' )
             ->where('medico_id','=',$id_med)
-            ->where('DataHora', '>', now())
             ->where('estado', '=', 'Comecar')
             ->get();
-   
+
 
         return view('medicos/dashboard', ['consulta'=> $consultas, 'iniciadas'=> $iniciadas]);
 
@@ -58,7 +59,6 @@ class GereConsultaProfissional extends Controller
             ->select('consulta.id', 'medicos.especialidae', 'utentes.nome', 'consulta.DataHora' )
             ->where('medico_id','=',$id_med)
             ->where('consulta.id', '=', $idConsulta)
-            ->where('DataHora', '>', now())
             ->get();
 
         return view('medicos/terminarconsulta', ['cons'=> $cons]);
@@ -67,6 +67,7 @@ class GereConsultaProfissional extends Controller
 
     /**
      *  autor: Alexandre Lopes
+     * Fabian Nunes
      */
     function terminarConsulta(Request $request, $id){
 
@@ -75,6 +76,18 @@ class GereConsultaProfissional extends Controller
         $consulta->observacoesmedicas = $request->input('observacoes');
         $consulta->preco = $request->input('preco');
         $consulta->save();
+        $pdf = (new PDFController)->printPDFEmail($id);
+
+        $ut=session('id');
+        $con=DB::table('utentes')
+            ->join('consulta','consulta.utente_id','=','utentes.id')
+            ->where('estado','=','terminada')
+            ->where('medico_id','=',$ut)
+            ->where('consulta.id', '=', $id)
+            ->get();
+        foreach ($con as $c) {
+            Mail::to($c->email)->send(new ConcludedMail($pdf));
+        }
         return redirect('/');
     }
 

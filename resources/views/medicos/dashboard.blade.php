@@ -49,10 +49,10 @@
 
   <div>
        <br><br><br><br><br>
+      <div class="row">
+          <div class="col-6"> <h2 class="titulo">Consultas Iniciadas</h2></div>
+      </div>
          @foreach ($iniciadas as $i)
- <div class="row">
-            <div class="col-6"> <h2 class="titulo">Consultas Iniciadas</h2></div>
-        </div>
         <div class="card card-dashboard">
             <table class="md-dash" id="myTable">
                 <tbody>

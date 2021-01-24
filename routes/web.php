@@ -111,6 +111,7 @@ Route::view('/agendamedicaFunc','funcionarios.agendamedica');
 Route::view('/aprovarconsulta', 'funcionarios.aprovarconsulta');
 Route::view('/inserirutente', 'funcionarios.inserirutente');
 Route::view('/desmarcarconsulta', 'funcionarios.desmarcarconsulta');
+Route::view('/func/perfil', 'funcionarios.perfil');
 
 //Rota teste para dashboard médico
 Route::view('/consultas', 'medicos.dashboard');
