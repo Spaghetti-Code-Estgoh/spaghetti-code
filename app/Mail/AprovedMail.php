@@ -16,10 +16,9 @@ class AprovedMail extends Mailable
      *
      * @return void
      */
-    public function __construct($pdf, $data)
+    public function __construct($pdf)
     {
         $this->pdf = $pdf;
-        $this->data = $data;
     }
 
     /**
@@ -29,6 +28,6 @@ class AprovedMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.arpoved')->with($this->data)->attachData($this->pdf->output(), "confirmacao.pdf");
+        return $this->markdown('emails.arpoved')->attachData($this->pdf->output(), "confirmacao.pdf");
     }
 }

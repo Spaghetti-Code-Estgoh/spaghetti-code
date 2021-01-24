@@ -138,11 +138,8 @@ class PDFController extends Controller
 
     public function printPDFPCEmail($id)
     {
-        $ut=session('id');
         $consultaHistorico=DB::table('utentes')
             ->join('consulta','consulta.utente_id','=','utentes.id')
-            ->where('estado','=','agendada')
-            ->where('funcionario_id','=',$ut)
             ->where('consulta.id', '=', $id)
             ->get();
 
