@@ -135,4 +135,36 @@ class PDFController extends Controller
         }
         return PDF::loadView('pdf.pdfView', $data);
     }
+
+    public function printPDFPCEmail($id)
+    {
+        $ut=session('id');
+        $consultaHistorico=DB::table('utentes')
+            ->join('consulta','consulta.utente_id','=','utentes.id')
+            ->where('estado','=','agendada')
+            ->where('funcionario_id','=',$ut)
+            ->where('consulta.id', '=', $id)
+            ->get();
+
+        foreach ($consultaHistorico as $con) {
+
+            $med = DB::table('medicos')->where('id', '=', $con->medico_id)->get(['nome', 'especialidae']);
+
+                foreach ($med as $md) {
+                    $dataC = explode(" ", $con->DataHora);
+
+                    // This  $data array will be passed to our PDF blade
+                    $data = [
+                        'utente' => $con->nome,
+                        'email' => $con->email,
+                        'morada' => $con->morada,
+                        'tipoC' => $md->especialidae,
+                        'medico' => $md->nome,
+                        'data' => $dataC[0],
+                        'hora' => $dataC[1],
+                    ];
+            }
+        }
+        return PDF::loadView('pdf.pdfPCView', $data);
+    }
 }

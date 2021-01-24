@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AprovedMail;
 use App\Mail\ConcludedMail;
 use App\Models\consulta;
 use Illuminate\Http\Request;
@@ -179,10 +180,34 @@ class GereConsultaProfissional extends Controller
             $consulta2= DB::table('consulta')
                 ->where('id', $id)
                 ->update(['estado' =>$estado]);
+            if ($estado == 'agendada') {
+                $pdf = (new PDFController)->printPDFPCEmail($id);
+                $ut=session('id');
+                $con=DB::table('utentes')
+                    ->join('consulta','consulta.utente_id','=','utentes.id')
+                    ->join('medicos', 'medicos.id', '=', 'consulta.medico_id')
+                    ->where('consulta.estado','=','agendada')
+                    ->where('consulta.funcionario_id','=',$ut)
+                    ->where('consulta.id', '=', $id)
+                    ->select('utentes.nome as unome, medicos.nome as mnome, utentes.email as umail, medicos.especialidae, consulta.DataHora')
+                    ->get();
+                foreach ($con as $c) {
+                    $dataC = explode(" ", $c->DataHora);
+                    $data = [
+                        'nome' => $c->unome,
+                        'email' => $c->umail,
+                        'tipoC' => $c->especialidae,
+                        'medico' => $c->mnome,
+                        'data' => $dataC[0],
+                        'hora' => $dataC[1],
+                    ];
+                    Mail::to($c->umail)->send(new AprovedMail($pdf, $data));
+                }
+            }
         }
         return redirect('/GetConsulta');
-
     }
+
     function agendaMedicaEmpty(){
         $events = [];
         $calendar = new Calendar();

@@ -32,7 +32,7 @@
                                         "<td>"+resonse[i]['nome']+"</td>"+
                                         "<td>"+resonse[i]['especialidae']+"</td>"+
                                         "<td>"+resonse[i]['DataHora']+"</td>"+
-                                        "<td><button  class=\"btn btn-primary openModal\" data-toggle=\"modal\" data-target=\"#exampleModalCenter"+indece+"\" > Não Aprovar</button>" +
+                                        "<td><a class=\"btn btn-primary openModal\" data-toggle=\"modal\" data-target=\"#exampleModalCenter"+indece+"\" > Não Aprovar</button>" +
                                "         <td><button   class=\"btn btn-primary remove\"  onclick=' ChangeStatus("+indece+",\"agendada\");'>Aprovar</button>" +
 
                                "    <div class=\"modal fade\" id=\"exampleModalCenter"+indece+"\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalCenterTitle\" aria-hidden=\"true\">\n" +
@@ -83,7 +83,7 @@
                 data : { 'id' : id ,
                         'estado':estado},
                 success:function(data){//200 response comes here
-
+                    alert(data);
                 },
                 error:function(e){
                     console.log(e)
