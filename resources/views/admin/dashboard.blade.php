@@ -13,9 +13,23 @@ Autor: Afonso Vitório
 
 
     <div class="section-registo" >
-        <div class="container" style="height: 100vh;">
+        <div  >
             <div class="row justify-content-center">
                 <div class="col-md-12">
+                    @if ($errors->any())
+                        <div style="padding-top: 2rem">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li class="alert alert-danger alert-dismissible show" role="alert">
+                                        {{ $error }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="card card-registo middle">
                         <div class="card-header mx-auto" style="padding-top: 5rem">{{ __('Inserir Funcionarios') }}</div>
 
@@ -46,7 +60,7 @@ Autor: Afonso Vitório
                                         @error('utilizador')
                                         <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
-                                    </span>
+                                         </span>
                                         @enderror
 
 
@@ -80,7 +94,8 @@ Autor: Afonso Vitório
 
                                         @error('contacto')
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong></span>
+                                             <strong>{{ $message }}</strong>
+                                        </span>
                                         @enderror
 
 
@@ -113,43 +128,41 @@ Autor: Afonso Vitório
                                         @enderror
                                     </div>
 
-                                <div class="col-md-6">
-                                    {{-- Gênero--}}
-                                    <label for="genero" class=" col-form-label text-md-right">{{ __('Gênero') }}</label><br>
-                                    <select name="genero" class="custom-select" id="genero" value="{{ old('genero') }}">
-                                        <option>{{ __('Escolher') }}</option>
-                                        <option value="masculino">{{ __('Masculino') }}</option>
-                                        <option value="feminino">{{ __('Feminino') }}</option>
-                                        <option value="outro">{{ __('Outro') }}</option>
+                                    <div class="col-md-6">
+                                        {{-- Gênero--}}
+                                        <label for="genero" class=" col-form-label text-md-right">{{ __('Gênero') }}</label><br>
+                                        <select name="genero" class="custom-select" id="genero" value="{{ old('genero') }}">
+                                            <option>{{ __('Escolher') }}</option>
+                                            <option value="masculino">{{ __('Masculino') }}</option>
+                                            <option value="feminino">{{ __('Feminino') }}</option>
+                                            <option value="outro">{{ __('Outro') }}</option>
 
-                                    </select>
+                                        </select>
 
-                                    @error('genero')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                      </span>
-                                    @enderror
+                                        @error('genero')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                          </span>
+                                        @enderror
 
-                                    <input type="file" name="fotografia"  class="custom-file-input" id="escolherFotografia" aria-describedby="inputGroupFileAddon01" onchange="mudarFotografia(event)">
-                                    <label class="custom-file-label input_fotografia" for="escolherFotografia"  data-browse="Pesquisar" >{{ __('Escolha uma Fotografia') }}</label>
-                                    @error('fotografia')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                    @enderror
-                                </div>
+                                        <input type="file" name="fotografia"  class="custom-file-input" id="escolherFotografia" aria-describedby="inputGroupFileAddon01" onchange="mudarFotografia(event)">
+                                        <label class="custom-file-label input_fotografia" for="escolherFotografia"  data-browse="Pesquisar" >{{ __('Escolha uma Fotografia') }}</label>
+                                        @error('fotografia')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
+                                    </div>
                                     <div class="col-md-12">
                                         <br>
                                         <img class="imagem" src="{{asset('img/imgDefault.jpg')}}"  alt="Imagem de perfil" id="imagem">
                                     </div>
-                            </div>
-
-
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-12 mx-auto text-center" >
-                                        <button type="submit" class="btn btn-primary btn-registo" style="width: 100%">
-                                            {{ __('Registar') }}
-                                        </button>
+                                    <div class="form-group row mb-0">
+                                        <div class="col-md-12 mx-auto text-center" >
+                                            <button type="submit" class="btn btn-primary btn-registo" style="width: 100%">
+                                                {{ __('Registar') }}
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </form>

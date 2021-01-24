@@ -1,10 +1,25 @@
 @extends('funcionarios/layout')
 {{-- //Author: Rafael Pais--}}
+
 @section('content')
     <div class="section-registo" >
-        <div class="container" style="height: 100vh;">
+        <div class="">
             <div class="row justify-content-center">
                 <div class="col-md-12">
+                    @if ($errors->any())
+                        <div style="padding-top: 2rem">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li class="alert alert-danger alert-dismissible show" role="alert">
+                                        {{ $error }}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="card card-registo middle">
                         <div class="card-body" style="padding-top: 2rem">
                             <form method="POST" action="{{ route('alterarUtente') }}">
@@ -12,6 +27,13 @@
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <img class="imagem" src="{{url('images/') . "/" . session('imagePath')}}" alt="Imagem de perfil" id="imagem">
+                                        <input type="file" name="fotografia"  class="custom-file-input" id="escolherFotografia" aria-describedby="inputGroupFileAddon01" onchange="mudarFotografia(event)">
+                                        <label class="custom-file-label input_fotografia" for="escolherFotografia"  data-browse="Pesquisar" >{{ __('Escolha uma Fotografia') }}</label>
+                                        @error('fotografia')
+                                        <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                        </span>
+                                        @enderror
                                     </div>
                                     <div class="col-md-6">
                                         {{-- Nome--}}<br>
@@ -74,15 +96,6 @@
                                         <span class="invalid-feedback" role="alert">
                                          <strong>{{ $message }}</strong>
                                          </span>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="file" name="fotografia"  class="custom-file-input" id="escolherFotografia" aria-describedby="inputGroupFileAddon01" onchange="mudarFotografia(event)">
-                                        <label class="custom-file-label input_fotografia" for="escolherFotografia"  data-browse="Pesquisar" >{{ __('Escolha uma Fotografia') }}</label>
-                                        @error('fotografia')
-                                        <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                        </span>
                                         @enderror
                                     </div>
                                 </div>

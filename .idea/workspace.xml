@@ -2,12 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f70d0a76-8c18-4c7d-bffe-4f5b20c9e93e" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/dummy-repo.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dummy-repo.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/css/ourApp.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/ourApp.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/utilizadores/_layout.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/utilizadores/_layout.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/funcionarios/agendamedica.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/funcionarios/agendamedica.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/logs/laravel.log" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/laravel.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/utilizadores/_dashboard.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/utilizadores/_dashboard.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/admin/dashboard.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/auth/register.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/auth/register.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/funcionarios/desmarcarconsulta.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/funcionarios/desmarcarconsulta.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/funcionarios/inserirutente.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/funcionarios/inserirutente.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/funcionarios/perfil.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/funcionarios/perfil.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/utentes/perfil.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/utentes/perfil.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -137,6 +142,11 @@
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
       <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
       <path value="$PROJECT_DIR$/vendor/acaronlex/laravel-calendar" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-font-lib" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-svg-lib" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf" />
+      <path value="$PROJECT_DIR$/vendor/dompdf/dompdf" />
+      <path value="$PROJECT_DIR$/vendor/sabberworm/php-css-parser" />
     </include_path>
   </component>
   <component name="ProjectId" id="1mFM9zJfMo9SxdQey2iPerKlEZX" />
@@ -162,7 +172,7 @@
       <recent name="D:\MAMP\htdocs\SCMED\spaghetti-code\resources\views\admin" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.watch">
     <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -185,8 +195,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.watch" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.watch" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.watch" />
@@ -210,6 +220,7 @@
       <workItem from="1610013402002" duration="4334000" />
       <workItem from="1610279535665" duration="6381000" />
       <workItem from="1610996757493" duration="1079000" />
+      <workItem from="1611487217123" duration="4883000" />
     </task>
     <servers />
   </component>
@@ -221,21 +232,21 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="506" y="208" key="#com.intellij.fileTypes.FileTypeChooser/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610993394713" />
-    <state width="1493" height="191" key="GridCell.Tab.0.bottom" timestamp="1611427286861">
+    <state width="1493" height="191" key="GridCell.Tab.0.bottom" timestamp="1611487903389">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="191" key="GridCell.Tab.0.bottom/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1611427286861" />
-    <state width="1493" height="191" key="GridCell.Tab.0.center" timestamp="1611427286861">
+    <state width="1493" height="191" key="GridCell.Tab.0.bottom/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1611487903389" />
+    <state width="1493" height="191" key="GridCell.Tab.0.center" timestamp="1611487903389">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="191" key="GridCell.Tab.0.center/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1611427286861" />
-    <state width="1493" height="191" key="GridCell.Tab.0.left" timestamp="1611427286861">
+    <state width="1493" height="191" key="GridCell.Tab.0.center/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1611487903389" />
+    <state width="1493" height="191" key="GridCell.Tab.0.left" timestamp="1611487903388">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="191" key="GridCell.Tab.0.left/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1611427286861" />
-    <state width="1493" height="191" key="GridCell.Tab.0.right" timestamp="1611427286861">
+    <state width="1493" height="191" key="GridCell.Tab.0.left/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1611487903388" />
+    <state width="1493" height="191" key="GridCell.Tab.0.right" timestamp="1611487903389">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="191" key="GridCell.Tab.0.right/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1611427286861" />
+    <state width="1493" height="191" key="GridCell.Tab.0.right/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1611487903389" />
   </component>
 </project>

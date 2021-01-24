@@ -2,9 +2,23 @@
 {{-- //Author: Rafael Pais--}}
 @section('content')
 <div class="section-registo" >
-  <div class="container" style="height: 100vh;">
+  <div class="container" >
     <div class="row justify-content-center">
       <div class="col-md-12">
+          @if ($errors->any())
+              <div style="padding-top: 2rem">
+                  <ul>
+                      @foreach ($errors->all() as $error)
+                          <li class="alert alert-danger alert-dismissible show" role="alert">
+                              {{ $error }}
+                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                              </button>
+                          </li>
+                      @endforeach
+                  </ul>
+              </div>
+          @endif
         <div class="card card-registo middle">
           <div class="card-body" style="padding-top: 2rem">
            <form method="POST" action="{{ route('alterarUtente') }}">
@@ -27,7 +41,7 @@
                     <input id="dataNascimento" type="date" class="form-control @error('dataNascimento') is-invalid @enderror" name="dataNascimento" value="{{ old('dataNascimento') }}" required >
                      @error('dataNascimento')
                       <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong> 
+                        <strong>{{ $message }}</strong>
                       </span>
                      @enderror
                   {{-- Email--}}

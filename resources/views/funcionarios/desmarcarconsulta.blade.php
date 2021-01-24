@@ -34,7 +34,7 @@
                             "<td>"+resonse[i]['nome']+"</td>"+
                             "<td>"+resonse[i]['especialidae']+"</td>"+
                             "<td>"+resonse[i]['DataHora']+"</td>"+
-                            "<td><button class=\"btn btn-primary openModal\" data-toggle=\"modal\" data-target=\"#exampleModalCenter"+indece+"\"> + </button>" +
+                            "<td><button class=\"btn btn-primary openModal\" data-toggle=\"modal\" data-target=\"#exampleModalCenter"+indece+"\"> Desmarcar </button>" +
 
                             "    <div class=\"modal fade\" id=\"exampleModalCenter"+indece+"\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"exampleModalCenterTitle\" aria-hidden=\"true\">\n" +
                             "        <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n" +
