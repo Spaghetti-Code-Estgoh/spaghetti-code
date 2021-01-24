@@ -17,10 +17,10 @@ Autor: Afonso Vitório
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="card card-registo middle">
-                        <div class="card-header mx-auto" style="padding-top: 5rem">{{ __('Inserir Funcionarios') }}</div>
+                        <div class="card-header mx-auto" style="padding-top: 5rem">{{ __('Inserir Medicos') }}</div>
 
                         <div class="card-body" style="padding-top: 2rem">
-                            <form method="POST" action="{{ route('registofuncionario.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('storeMedico') }}" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group row">

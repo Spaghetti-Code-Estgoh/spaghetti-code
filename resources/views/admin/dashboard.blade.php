@@ -20,7 +20,7 @@ Autor: Afonso Vitório
                         <div class="card-header mx-auto" style="padding-top: 5rem">{{ __('Inserir Funcionarios') }}</div>
 
                         <div class="card-body" style="padding-top: 2rem">
-                            <form method="POST" action="{{ route('registofuncionario.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('storeFuncionario') }}" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group row">

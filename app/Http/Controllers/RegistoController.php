@@ -20,6 +20,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
+use App\Requests\StoreFuncionarioRegisto;
+use App\Requests\StoreMedicoRegisto;
 
 class RegistoController extends Controller
 {
@@ -86,6 +88,95 @@ class RegistoController extends Controller
 
         return view('confirmation.register');
     }
+
+    protected function storeFuncionario(StoreFuncionarioRegisto $request)
+    {
+        $validatedData = $request->validated();
+
+        //Encriptação da password
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        //Image Upload
+        if(array_key_exists('fotografia', $validatedData))
+        {
+            $validatedData['imagePath'] = Hash::make(time() . $validatedData['email']).'.'.$request->fotografia->extension();
+            $request->fotografia->move(public_path('images'), $validatedData['imagePath']);
+            unset($validatedData['fotografia']);
+        }
+        else
+        {
+            $validatedData['imagePath'] = "default.png";
+        }
+
+        try {
+
+            DB::table('funcionario')->insert([
+                'nome' => $validatedData['nome'],
+                'email' => $validatedData['email'],
+                'password' => $validatedData['password'],
+                'nif' => $validatedData['nif'],
+                'genero' => $validatedData['genero'],
+                'morada' => $validatedData['morada'],
+                'contacto' => $validatedData['contacto'],
+                'fotoPerfil' => $validatedData['imagePath']
+            ]);
+
+        } catch(\Illuminate\Database\QueryException $e){
+            $errorCode = $e->errorInfo[1];
+            if($errorCode == '1062'){
+                return redirect()->back()->withInput()->withErrors(['Registo já existente...']);
+            }
+        }
+
+        $request->session()->flash("Registo criado com sucesso!");
+
+        return view('home');    
+    }
+
+    //TODO: Alterar para medico
+    protected function storeMedico(StoreMedicoRegisto $request)
+    {
+        $validatedData = $request->validated();
+
+        //Encriptação da password
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        //Image Upload
+        if(array_key_exists('fotografia', $validatedData))
+        {
+            $validatedData['imagePath'] = Hash::make(time() . $validatedData['email']).'.'.$request->fotografia->extension();
+            $request->fotografia->move(public_path('images'), $validatedData['imagePath']);
+            unset($validatedData['fotografia']);
+        }
+        else
+        {
+            $validatedData['imagePath'] = "default.png";
+        }
+
+        try {
+
+            DB::table('medicos')->insert([
+                'nome' => $validatedData['nome'],
+                'email' => $validatedData['email'],
+                'password' => $validatedData['password'],
+                'nif' => $validatedData['nif'],
+                'especialidae' => $validatedData['esp'],
+                'numeroCeluta' => $validatedData['ced'],
+                'fotoPerfil' => $validatedData['imagePath']
+            ]);
+
+        } catch(\Illuminate\Database\QueryException $e){
+            $errorCode = $e->errorInfo[1];
+            if($errorCode == '1062'){
+                return redirect()->back()->withInput()->withErrors(['Registo já existente...']);
+            }
+        }
+
+        $request->session()->flash("Registo criado com sucesso!");
+
+        return view('home');    
+    }
+
 
     protected function storeAdm(StoreRegisto $request)
     {

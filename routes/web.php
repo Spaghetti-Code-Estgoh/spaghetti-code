@@ -66,7 +66,9 @@ Route::get('/email', function () {
 
 //Routes do Registo
 Route::resource('/registo', 'App\Http\Controllers\RegistoController')->only('store', 'create');
-Route::resource('/registofuncionario', 'App\Http\Controllers\RegistoWController')->only('store', 'create');
+Route::post('/registofuncionario', [App\Http\Controllers\RegistoController::class, 'storeFuncionario'])->name('storeFuncionario');
+Route::post('/registomedico', [App\Http\Controllers\RegistoController::class, 'storeMedico'])->name('storeMedico');
+
 
 //Routes de alterar definições de conta
 Route::post('/alterarPerfilUtente', [App\Http\Controllers\AlterarPerfilController::class, 'alterarUtente'])->name('alterarUtente');
