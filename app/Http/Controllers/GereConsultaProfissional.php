@@ -27,7 +27,17 @@ class GereConsultaProfissional extends Controller
             ->where('estado', '=', 'Agendada')
             ->get();
 
-        return view('medicos/dashboard', ['consulta'=> $consultas]);
+        $iniciadas = DB::table('consulta')
+            ->join('utentes', 'consulta.utente_id', '=', 'utentes.id' )
+            ->join('medicos','medicos.id','=','consulta.medico_id')
+            ->select('consulta.id', 'medicos.especialidae', 'utentes.nome', 'consulta.DataHora' )
+            ->where('medico_id','=',$id_med)
+            ->where('DataHora', '>', now())
+            ->where('estado', '=', 'Comecar')
+            ->get();
+   
+
+        return view('medicos/dashboard', ['consulta'=> $consultas, 'iniciadas'=> $iniciadas]);
 
     }
 

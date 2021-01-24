@@ -21,6 +21,55 @@
         </div>
     </div>
 
+
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title titulo" id="exampleModalLongTitle">Iniciar Consulta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Deseja dar Início a consulta?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Cancelar</button>
+                    <a href="{{ url('terminarconsulta/'.$c->id) }}" type="button" class="btn btn-primary">Iniciar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @endforeach
+
+
+
+
+  <div>
+       <br><br><br><br><br>
+         @foreach ($iniciadas as $i)
+ <div class="row">
+            <div class="col-6"> <h2 class="titulo">Consultas Iniciadas</h2></div>
+        </div>
+        <div class="card card-dashboard">
+            <table class="md-dash" id="myTable">
+                <tbody>
+                <tr>
+                    <td scope="row">{{ $i->nome }}</td>
+                    <td>{{ $i->especialidae }}</td>
+                    <td>{{ $i->DataHora }}</td>
+                    <td><button class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter2"> > </button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+
     <script>
         function myFunction() {
             // Declare variables
@@ -45,24 +94,26 @@
         }
     </script>
 
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+     <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title titulo" id="exampleModalLongTitle">Iniciar Consulta</h5>
+                    <h5 class="modal-title titulo" id="exampleModalLongTitle">Retomar Consulta</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>Deseja dar Início a consulta?</p>
+                    <p>Deseja Retomar a consulta?</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">Cancelar</button>
-                    <a href="{{ url('terminarconsulta/'.$c->id) }}" type="button" class="btn btn-primary">Iniciar</a>
+                    <a href="{{ url('terminarconsulta/'.$i->id) }}" type="button" class="btn btn-primary">Retomar</a>
                 </div>
             </div>
         </div>
     </div>
-    @endforeach
+
+     @endforeach
 @endsection
