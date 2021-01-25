@@ -9,7 +9,7 @@
                         <div class="card-header mx-auto" style="padding-top: 5rem">{{ __('Eliminar Funcionarios') }}</div>
 
                         <div class="card-body" style="padding-top: 2rem">
-                            <form method="POST" action="{{ route('registofuncionario.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group row justify-content-center">
