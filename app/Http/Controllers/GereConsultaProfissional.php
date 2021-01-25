@@ -212,7 +212,25 @@ class GereConsultaProfissional extends Controller
     }
 
     function agendaMedicaEmpty(){
+
+        $consultas=DB::table('consulta')
+            ->join('medicos','medicos.id','=','consulta.medico_id')
+            ->select('consulta.id', 'medicos.especialidae', 'medicos.nome', 'consulta.DataHora','consulta.DataHoraFim' )
+            ->where('estado', '=', 'Agendada')
+            ->get();
         $events = [];
+        foreach ($consultas as $c){
+            $events[] = \Acaronlex\LaravelCalendar\Calendar::event(
+                $c->nome."-".$c->especialidae, //event title
+                false, //full day event?
+                new \DateTime($c->DataHora), //start time (you can also use Carbon instead of DateTime)
+                new \DateTime($c->DataHoraFim), //end time (you can also use Carbon instead of DateTime)
+                'stringEventId' //optionally, you can specify an event ID
+            );
+
+
+        }
+
         $calendar = new Calendar();
         $calendar->addEvents($events)
             ->setOptions([
