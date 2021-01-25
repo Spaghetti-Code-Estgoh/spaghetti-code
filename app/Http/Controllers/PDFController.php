@@ -164,4 +164,31 @@ class PDFController extends Controller
         }
         return PDF::loadView('pdf.pdfPCView', $data);
     }
+
+    public function printPDFPCanceledEmail($id)
+    {
+        $consultaHistorico=DB::table('utentes')
+            ->join('consulta','consulta.utente_id','=','utentes.id')
+            ->where('consulta.id', '=', $id)
+            ->get();
+
+        foreach ($consultaHistorico as $con) {
+
+            $med = DB::table('medicos')->where('id', '=', $con->medico_id)->get(['nome', 'especialidae']);
+
+            foreach ($med as $md) {
+
+                // This  $data array will be passed to our PDF blade
+                $data = [
+                    'utente' => $con->nome,
+                    'email' => $con->email,
+                    'morada' => $con->morada,
+                    'tipoC' => $md->especialidae,
+                    'medico' => $md->nome,
+                    'obs' => $con->observacoesadmin
+                ];
+            }
+        }
+        return PDF::loadView('pdf.pdfPCanceledView', $data);
+    }
 }

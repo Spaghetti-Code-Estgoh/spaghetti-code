@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\AprovedMail;
 use App\Mail\ConcludedMail;
+use App\Mail\NotAprovedMail;
 use App\Models\consulta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -171,6 +172,7 @@ class GereConsultaProfissional extends Controller
                 $consulta2= DB::table('consulta')
                     ->where('id', $id)
                     ->update(['estado' =>'cancelada','observacoesadmin'=>$observacoesAdmin,'funcionario_id'=>$func]);
+                $this->sendPDFU(1, $id);
             }
             //return view('/testet');
 
@@ -204,17 +206,7 @@ class GereConsultaProfissional extends Controller
             $consulta2= DB::table('consulta')
                 ->where('id', $id)
                 ->update(['estado' =>$estado]);
-            if ($estado == 'agendada') {
-                $pdf = (new PDFController)->printPDFPCEmail($id);
-                $con=DB::table('utentes')
-                    ->join('consulta','consulta.utente_id','=','utentes.id')
-                    ->where('consulta.id', '=', $id)
-                    ->get();
-
-                foreach ($con as $c) {
-                    Mail::to($c->email)->send(new AprovedMail($pdf));
-                }
-            }
+            $this->sendPDFU(0, $id);
         }
         return redirect('/GetConsulta');
     }
@@ -245,6 +237,21 @@ class GereConsultaProfissional extends Controller
 
     }
 
+    function sendPDFU($estado, $id) {
+        $con=DB::table('utentes')
+            ->join('consulta','consulta.utente_id','=','utentes.id')
+            ->where('consulta.id', '=', $id)
+            ->get();
+        foreach ($con as $c) {
+            if ($estado == 0) {
+                $pdf = (new PDFController)->printPDFPCEmail($id);
+                Mail::to($c->email)->send(new AprovedMail($pdf));
+            } else if ($estado == 1) {
+                $pdf = (new PDFController)->printPDFPCanceledEmail($id);
+                Mail::to($c->email)->send(new NotAprovedMail($pdf));
+            }
+        }
+    }
 
 
     function agendaMedicaFunc(){

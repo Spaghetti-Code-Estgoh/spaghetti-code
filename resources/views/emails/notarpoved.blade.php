@@ -1,8 +1,8 @@
 @component('mail::message')
-# Consulta Terminada
+# Consulta Cancelada
 
-Olá! Esperemos que a consulta tenha corrido bem e que em breve esteja a sentir melhor.
-Enviamos em anexo o recibo da consulta.
+Olá! Infelizmente informamos que a sua consulta foi cancelada.
+Enviamos em anexo um documento com mais informações.
 
 Obrigado pela sua confiança,<br>
 {{ config('app.name') }}

@@ -28,6 +28,6 @@ class NotAprovedMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.concluded')->attachData($this->pdf->output(), "recibo.pdf");
+        return $this->markdown('emails.notarpoved')->attachData($this->pdf->output(), "cancelamento.pdf");
     }
 }
