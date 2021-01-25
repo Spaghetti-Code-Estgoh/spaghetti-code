@@ -16,7 +16,7 @@
                 <br>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('checkLogin') }}">
                         @csrf
 
                         <div class="form-group row">
@@ -50,10 +50,9 @@
                             <div class="col-md-12">
                                     <select name="worker" id="worker" class="worker-select">
                                         <option value="0" selected disabled>Indique o tipo de utilizador que é</option>
-                                        <option value="1">Médico</option>
-                                        <option value="2">Enfermeiro</option>
-                                        <option value="3">Funcionario Simples</option>
-                                        <option value="4">Adminstrador</option>
+                                        <option value="1">Adminstrador</option>
+                                        <option value="2">Médico</option>
+                                        <option value="3">Funcionário</option>
                                     </select>
                             </div>
 

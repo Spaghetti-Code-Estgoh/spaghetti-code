@@ -241,8 +241,20 @@ class RegistoController extends Controller
         $validatedData = $request->validated();
 
         $remember = array_key_exists('remember', $validatedData);
+        if(array_key_exists('worker', $validatedData)){
+            // 1 na variavel tipo conta corresponde ao utilizador, 2 - admin, 3 - medico, 4 - funcionário
+            // 1 na variável worker do array validated data corresponde ao admin, 2 - medico, 3 - funcionário
+            $tipoConta = 1 + $validatedData['worker'];
 
-        $tipoConta = $this->getAccountType($validatedData['email'], $validatedData['password']);
+        }else{
+            $tipoConta = 1;
+        }
+
+        if (!$this->checkPassword($validatedData['email'], $validatedData['password'], $tipoConta)) {
+            //Tipo de conta com o valor 0 corresponde à password incorreta para o conta especificada, do tipo especificado
+            $tipoConta = 0;
+        }
+
 
         //Faz o remember me
         if($remember){
@@ -286,45 +298,48 @@ class RegistoController extends Controller
 
     }
 
-    //Função que retorna o tipo de conta
+    //Função que retorna o tipo de conta com base no email
     //Autor Afonso Vitório
-    private function getAccountType($email, $password)
+    private function checkPassword($email, $password, $tipoConta)
     {
         // Uitlizador
-        $target_password = DB::table('utentes')->select('password')->where('email', '=', $email)->first();
-        if ($target_password != null){
-            if(Hash::check($password, $target_password->password)){
-                return 1;
+        if($tipoConta == 1){
+            $target_password = DB::table('utentes')->select('password')->where('email', '=', $email)->first();
+            if ($target_password != null){
+                if(Hash::check($password, $target_password->password)){
+                    return true;
+                }
             }
         }
-
-        // Admin
-        $target_password = DB::table('admins')->select('password')->where('email', '=', $email)->first();
-        if ($target_password != null){
-            if(Hash::check($password, $target_password->password)){
-                return 2;
+        // Admin    
+        elseif ($tipoConta == 2) {
+            $target_password = DB::table('admins')->select('password')->where('email', '=', $email)->first();
+            if ($target_password != null){
+                if(Hash::check($password, $target_password->password)){
+                    return true;
+                }
             }
-        }
-
+        }   
         // Medico
-        $target_password = DB::table('medicos')->select('password')->where('email', '=', $email)->first();
-        if ($target_password != null){
-            if(Hash::check($password, $target_password->password)){
-                return 3;
+        elseif ($tipoConta == 3) {
+            $target_password = DB::table('medicos')->select('password')->where('email', '=', $email)->first();
+            if ($target_password != null){
+                if(Hash::check($password, $target_password->password)){
+                    return true;
+                }
             }
         }
-
         // Funcionario
-        $target_password = DB::table('funcionario')->select('password')->where('email', '=', $email)->first();
-        if ($target_password != null){
-            if(Hash::check($password, $target_password->password)){
-                return 4;
+        elseif ($tipoConta == 4) {
+            $target_password = DB::table('funcionario')->select('password')->where('email', '=', $email)->first();
+            if ($target_password != null){
+                if(Hash::check($password, $target_password->password)){
+                    return true;
+                }
             }
         }
 
-        return 0;
-        
-
+        return false;
     }
 
     //Função para meter variveis na sessão
