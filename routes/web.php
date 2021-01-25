@@ -161,3 +161,10 @@ Route::get('/agenda',[\App\Http\Controllers\GereConsultaProfissional::class,'age
 //Test PDF
 Route::get('/recibo/printpdf/{id}', [App\Http\Controllers\PDFController::class, 'printPDF']);
 Route::get('/pc/printpdf/{id}', [App\Http\Controllers\PDFController::class, 'printPDFPC']);
+
+
+//Route: admin
+//Autor: Alexandre Lopes
+Route::get('/gerirfuncionarios', "App\Http\Controllers\RegistoController@listarFuncionarios");
+Route::get('/editarfuncionario/{id}', "App\Http\Controllers\RegistoController@verInformaçãoFuncionarios");
+

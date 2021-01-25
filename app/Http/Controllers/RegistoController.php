@@ -422,4 +422,36 @@ class RegistoController extends Controller
 
     }
 
+
+
+        
+      //Função que lista os médicos e funcionários 
+      //Autor: Alexandre Lopes
+      function listarFuncionarios (){
+
+        $medicos = DB::table('medicos')->get();
+
+        $funcionarios = DB::table('funcionario')->get();
+
+
+        return view('admin/gerirfuncionarios', ['medicos'=> $medicos, 'funcionarios'=> $funcionarios]);
+
+    }
+
+     //Função que mostra a informção detalhada acerca de um médico/funcionário
+     //Autor: Alexandre Lopes
+     function verInformaçãoFuncionarios ($id_funcionario){
+
+            $funcionarios=DB::table('funcionario', 'medicos')
+            ->where('id','=',$id_funcionario)
+            ->get();
+
+
+        return view('admin/editarfuncionario', ['funcionarios'=> $funcionarios]);
+
+    }
+
+
+
+
 }

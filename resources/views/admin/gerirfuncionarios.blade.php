@@ -8,28 +8,29 @@
         </div>
         <div class="card card-dashboard">
             <table class="table-hover" style="width:100%">
+
+                  @foreach ($medicos as $m)
                 <tr>
-                    <td>Funcionario 1</td>
-                    <td>Cargo</td>
-                    <td>Email 1</td>
+                    <td>{{ $m->nome }}</td>
+                    <td> Médico </td>
+                    <td>{{ $m->email }}</td>
                     <td><a href="/eliminarfuncionario"><i class="fa fa-times fa-2x" style="color: black"></i></a></td>
-                    <td><a href="/editarfuncionario"><i class="fas fa-chevron-right fa-2x" style="color: black"></i></a></td>
+                    <td><a href="{{ url('editarfuncionario/'.$m->id) }}"><i class="fas fa-chevron-right fa-2x" style="color: black"></i></a></td>
                 </tr>
+                 @endforeach
+
+                     @foreach ($funcionarios as $f)
                 <tr>
-                    <td>Funcionario 2</td>
-                    <td>Cargo</td>
-                    <td>Email 2</td>
+                    <td>{{ $f->nome }}</td>
+                    <td> Funcionário </td>
+                    <td>{{ $f->email }}</td>
                     <td><a href="/eliminarfuncionario"><i class="fa fa-times fa-2x" style="color: black"></i></a></td>
-                    <td><a href="/editarfuncionario"><i class="fas fa-chevron-right fa-2x" style="color: black"></i></a></td>
+                    <td><a href="{{ url('editarfuncionario/'.$f->id) }}"><i class="fas fa-chevron-right fa-2x" style="color: black"></i></a></td>
                 </tr>
-                <tr>
-                    <td>Funcionario 3</td>
-                    <td>Cargo</td>
-                    <td>Email 3</td>
-                    <td><a href="/eliminarfuncionario"><i class="fa fa-times fa-2x" style="color: black"></i></a></td>
-                    <td><a href="/editarfuncionario"><i class="fas fa-chevron-right fa-2x" style="color: black"></i></a></td>
-                </tr>
+                 @endforeach
+
             </table>
         </div>
     </div>
+   
 @endsection

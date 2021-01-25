@@ -6,27 +6,27 @@
         <br><br>
         <div class="card card-dashboard infoFun">
             <table class="table-hover">
+
+                @foreach ($funcionarios as $f)
                 <tr>
                     <td><b>Nome</b></td>
-                    <td>Médico 1</td>
+                    <td>{{ $f->nome }}</td>
                 </tr>
                 <tr>
                     <td><b>Email</b></td>
-                    <td>Email 1</td>
+                    <td>{{ $f->email }}</td>
                 </tr>
                 <tr>
                     <td><b>Contacto</b></td>
-                    <td>Contacto 1</td>
+                    <td> </td>
                 </tr>
                 <tr>
                     <td><b>Especialidade</b></td>
-                    <td>Especialidade 1</td>
-                </tr>
-                <tr>
-                    <td>etc</td>
-                    <td>etc</td>
+                    <td></td>
                 </tr>
             </table>
         </div>
     </div>
+                @endforeach
+
 @endsection
