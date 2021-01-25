@@ -186,11 +186,11 @@ values
 insert into medicos
 (nome, email, password, especialidae, numeroCeluta, fotoPerfil, nif)
 values
-('Test Medico', 'user@teste.com', '$2y$10$lS0CKwJyXZZqf1M/TuXOhOwdFUx68cp/7.tl1bH9YrCmzHPdtDDfK', 'Medicina Geral', 420, 'default.png', 159456753);
+('Test Medico', 'medico@teste.com', '$2y$10$lS0CKwJyXZZqf1M/TuXOhOwdFUx68cp/7.tl1bH9YrCmzHPdtDDfK', 'Medicina Geral', 420, 'default.png', 159456753);
 
 insert into funcionario
 (nome, email, password, contacto, fotoPerfil, genero, morada, nif)
 values
-('Admin Test', 'admin@teste.com', '$2y$10$lS0CKwJyXZZqf1M/TuXOhOwdFUx68cp/7.tl1bH9YrCmzHPdtDDfK', 159456789, 'default.png', 'm', 'casa', 159456789);
+('Admin Test', 'funcionario@teste.com', '$2y$10$lS0CKwJyXZZqf1M/TuXOhOwdFUx68cp/7.tl1bH9YrCmzHPdtDDfK', 159756789, 'default.png', 'm', 'casa', 159453789);
 
 
