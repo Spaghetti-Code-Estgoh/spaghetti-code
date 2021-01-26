@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\ResetMail;
 use App\Mail\WelcomeMail;
 use App\Mail\WelcomeMailAdm;
 use App\Providers\RouteServiceProvider;
@@ -132,7 +133,7 @@ class RegistoController extends Controller
 
         $request->session()->flash("Registo criado com sucesso!");
 
-        return view('home');    
+        return view('home');
     }
 
     /*
@@ -179,7 +180,7 @@ class RegistoController extends Controller
 
         $request->session()->flash("Registo criado com sucesso!");
 
-        return view('home');    
+        return view('home');
     }
 
 
@@ -265,7 +266,7 @@ class RegistoController extends Controller
         if($remember){
             $this->createRememberMe($tipoConta, $validatedData['email']);
         }
-    
+
         if ($tipoConta == 1) {
             if($this->isAccountConfirmed($validatedData['email'])){
                 if($this->addToSessionVariable(1, $validatedData['email'])){
@@ -316,7 +317,7 @@ class RegistoController extends Controller
                 }
             }
         }
-        // Admin    
+        // Admin
         elseif ($tipoConta == 2) {
             $target_password = DB::table('admins')->select('password')->where('email', '=', $email)->first();
             if ($target_password != null){
@@ -324,7 +325,7 @@ class RegistoController extends Controller
                     return true;
                 }
             }
-        }   
+        }
         // Medico
         elseif ($tipoConta == 3) {
             $target_password = DB::table('medicos')->select('password')->where('email', '=', $email)->first();
@@ -361,7 +362,7 @@ class RegistoController extends Controller
 
             $resultados = DB::table('utentes')->select($campos)->where('email', '=', $email)->first();
             session(['id' => $resultados->id, 'nome' => $resultados->nome, 'imagePath' => $resultados->imagePath, 'email' => $resultados->email, 'contacto' => $resultados->contacto, 'nif' => $resultados->nif, 'nss' => $resultados->nss]);
-            
+
         //Admin
         }else if($tipoConta == 2){
             $campos = ['id', 'nome'];
@@ -385,8 +386,8 @@ class RegistoController extends Controller
 
         }
 
-        session(['tipo_conta' => $tipoConta]);   
-        
+        session(['tipo_conta' => $tipoConta]);
+
         return 1;
     }
 
@@ -409,25 +410,25 @@ class RegistoController extends Controller
         if($tipoConta == 1)
         {
             DB::update('update utentes set remember_token = ? where email = ?', [$token, $email]);
-        }   
+        }
         else if($tipoConta == 2)
         {
             DB::update('update admins set remember_token = ? where email = ?', [$token, $email]);
-        }  
+        }
         else if($tipoConta == 3)
         {
             DB::update('update medicos set remember_token = ? where email = ?', [$token, $email]);
-        }  
+        }
         else if($tipoConta == 4)
         {
             DB::update('update funcionario set remember_token = ? where email = ?', [$token, $email]);
-        }  
+        }
 
         Cookie::queue('rememberMe', $token, 60);
 
     }
- 
-    //Função que lista os médicos e funcionários 
+
+    //Função que lista os médicos e funcionários
     //Autor: Alexandre Lopes
     function listarFuncionarios ()
     {
@@ -502,11 +503,13 @@ class RegistoController extends Controller
 
         $token = bin2hex(random_bytes(20));
 
+        $reset = '1/'.$token;
+
         if ($validatedData['worker'] == 1) {
             try {
                 DB::table('utentes')->where('email', '=', $validatedData['email'])->update(['reset_token' => $token]);
                 $informacao = "Email de recuperação de conta enviado com sucesso!";
-
+                $reset = '1/'.$token;
             } catch(Exception $e) {
                 $informacao = "Conta não existente...";
             }
@@ -519,9 +522,7 @@ class RegistoController extends Controller
             # code...
         }
 
-        //TODO: Manda email de recuperação
-
-        //Mail::to($validatedData['email'])->send(new WelcomeMail($confLink));
+        Mail::to($validatedData['email'])->send(new ResetMail($reset));
 
         $request->session()->flash($informacao);
 

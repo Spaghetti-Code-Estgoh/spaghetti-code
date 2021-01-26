@@ -16,9 +16,9 @@ class ResetMail extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($reset)
     {
-        //
+        $this->reset = $reset;
     }
 
     /**
@@ -28,6 +28,8 @@ class ResetMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.reset');
+        return $this->subject('Recuperar Password')->markdown('emails.reset',  [
+            'reset' => $this->reset,
+        ]);
     }
 }

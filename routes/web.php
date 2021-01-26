@@ -175,3 +175,5 @@ Route::get('/pc/printpdf/{id}', [App\Http\Controllers\PDFController::class, 'pri
 Route::get('/gerirfuncionarios', "App\Http\Controllers\RegistoController@listarFuncionarios");
 Route::get('/editarfuncionario/{id}', "App\Http\Controllers\RegistoController@verInformaçãoFuncionarios");
 
+//Reset password
+Route::get('auth/password/reset/{type}/{token}', );

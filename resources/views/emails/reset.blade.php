@@ -7,7 +7,7 @@ para introduzires a tua password nova.<br>
 Caso não tenhas sido tu a fazeres este pedido, ignora o simplesmente que o pedido de alteração
 será eliminado em 48 horas.
 
-@component('mail::button2', ['url' => ''])
+@component('mail::button2', ['url' => $reset])
 Alterar Password
 @endcomponent
 
