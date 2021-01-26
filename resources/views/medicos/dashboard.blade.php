@@ -7,7 +7,7 @@
             <div class="col-5"> <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Pesquisa Utente"></div><label for="myInput"><i class="fa fa-search fa-2x"></i></label>
         </div>
         <div class="card card-dashboard">
-            <table class="md-dash" id="myTable" style="width:100%">
+            <table id="myTable" style="width:100%">
                 <tbody>
                 @foreach ($consulta as $c)
                 <tr>
@@ -52,7 +52,7 @@
           <div class="col-6"> <h2 class="titulo">Consultas Iniciadas</h2></div>
       </div>
         <div class="card card-dashboard">
-            <table class="md-dash" id="myTable" style="width:100%">
+            <table id="myTable" style="width:100%">
                 <tbody>
                 @foreach ($iniciadas as $i)
                 <tr>
