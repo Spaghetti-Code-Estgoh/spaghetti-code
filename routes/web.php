@@ -63,13 +63,16 @@ Route::get('/email', function () {
     return new WelcomeMailAdm();
 });
 
-//Routes do Registo
+//Routes do Registo e Eliminação
+//Autor: Afonso Vitório
 Route::resource('/registo', 'App\Http\Controllers\RegistoController')->only('store', 'create');
 Route::post('/registofuncionario', [App\Http\Controllers\RegistoController::class, 'storeFuncionario'])->name('storeFuncionario');
 Route::post('/registomedico', [App\Http\Controllers\RegistoController::class, 'storeMedico'])->name('storeMedico');
+Route::post('/eliminaFuncionario', [App\Http\Controllers\RegistoController::class, 'eliminaFuncionario'])->name('eliminaFuncionario');
 
 
 //Routes de alterar definições de conta
+//Autor: Afonso Vitório
 Route::post('/alterarPerfilUtente', [App\Http\Controllers\AlterarPerfilController::class, 'alterarUtente'])->name('alterarUtente');
 Route::post('/alterarPerfilAdmin', [App\Http\Controllers\AlterarPerfilController::class, 'alterarAdmin'])->name('alterarAdmin');
 Route::post('/alterarPerfilMedico', [App\Http\Controllers\AlterarPerfilController::class, 'alterarMedico'])->name('alterarMedico');

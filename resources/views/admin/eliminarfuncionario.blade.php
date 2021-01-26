@@ -9,7 +9,7 @@
                         <div class="card-header mx-auto" style="padding-top: 5rem">{{ __('Eliminar Funcionarios') }}</div>
 
                         <div class="card-body" style="padding-top: 2rem">
-                            <form method="POST" action="" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('eliminaFuncionario') }}" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-group row justify-content-center">
@@ -37,7 +37,7 @@
                                         <br>
 
                                         <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" id="gridCheck">
+                                            <input class="form-check-input" type="checkbox" id="gridCheck" name="gridCheck">
                                             &nbsp;&nbsp;&nbsp;
                                             <abel class="form-check-label" for="gridCheck" style="color: red">
                                                     Confirmo que tenho certeza da ação que vou realizar

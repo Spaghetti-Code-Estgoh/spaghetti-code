@@ -5,23 +5,19 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Mail\WelcomeMail;
 use App\Mail\WelcomeMailAdm;
-use App\Models\utentes;
 use App\Providers\RouteServiceProvider;
-use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
 use App\Requests\StoreRegisto;
 use App\Models\Registo;
 use App\Requests\LoginRequest;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cookie;
 use App\Requests\StoreFuncionarioRegisto;
 use App\Requests\StoreMedicoRegisto;
+use App\Requests\EliminarFuncionarioRequest;
+use Exception;
 
 class RegistoController extends Controller
 {
@@ -89,6 +85,10 @@ class RegistoController extends Controller
         return view('confirmation.register');
     }
 
+    /*
+    * Função que guarda um registo do tipo Funcionario
+    * Autor: Afonso Vitório
+    */
     protected function storeFuncionario(StoreFuncionarioRegisto $request)
     {
         $validatedData = $request->validated();
@@ -133,7 +133,10 @@ class RegistoController extends Controller
         return view('home');    
     }
 
-    //TODO: Alterar para medico
+    /*
+    * Função que guarda um registo do tipo Medico
+    * Autor: Afonso Vitório
+    */
     protected function storeMedico(StoreMedicoRegisto $request)
     {
         $validatedData = $request->validated();
@@ -289,7 +292,7 @@ class RegistoController extends Controller
             if($this->addToSessionVariable(4, $validatedData['email'])){
                 return view('loading');
             }else{
-                return redirect()->back()->withInput()->withErrors(['Houve um erro, interno, pedimos desculpa...']);
+                return redirect()->back()->withInput()->withErrors(['Houve um erro interno, pedimos desculpa...']);
             }
 
         } elseif($tipoConta == 0){
@@ -421,13 +424,11 @@ class RegistoController extends Controller
         Cookie::queue('rememberMe', $token, 60);
 
     }
-
-
-
-        
-      //Função que lista os médicos e funcionários 
-      //Autor: Alexandre Lopes
-      function listarFuncionarios (){
+ 
+    //Função que lista os médicos e funcionários 
+    //Autor: Alexandre Lopes
+    function listarFuncionarios ()
+    {
 
         $medicos = DB::table('medicos')->get();
 
@@ -440,7 +441,8 @@ class RegistoController extends Controller
 
      //Função que mostra a informção detalhada acerca de um médico/funcionário
      //Autor: Alexandre Lopes
-     function verInformaçãoFuncionarios ($id_funcionario){
+    function verInformaçãoFuncionarios ($id_funcionario)
+    {
 
             $funcionarios=DB::table('funcionario', 'medicos')
             ->where('id','=',$id_funcionario)
@@ -451,6 +453,46 @@ class RegistoController extends Controller
 
     }
 
+    //Função que permite eliminar um funcionário
+    //Autor Afonso Vitório
+    function eliminaFuncionario(EliminarFuncionarioRequest $request)
+    {
+        $validatedData = $request->validated();
+
+        if ($validatedData['worker'] == 1) {
+            try {
+                DB::table('admins')->where('email', '=', $validatedData['email'])->delete();
+                $informacao = "Conta eliminada com sucesso!";
+
+            } catch(Exception $e) {
+                $informacao = "Ocurreu um erro ao eliminar a conta...";
+            }
+
+        }elseif ($validatedData['worker'] == 2) {
+            try {
+                DB::table('medicos')->where('email', '=', $validatedData['email'])->delete();
+                $informacao = "Conta eliminada com sucesso!";
+
+            } catch(Exception $e) {
+                $informacao = "Ocurreu um erro ao eliminar a conta...";
+            }
+
+        }elseif ($validatedData['worker'] == 3) {
+            try {
+                DB::table('funcionario')->where('email', '=', $validatedData['email'])->delete();
+                $informacao = "Conta eliminada com sucesso!";
+
+            } catch(Exception $e) {
+                $informacao = "Ocurreu um erro ao eliminar a conta...";
+            }
+
+        }
+
+        $request->session()->flash($informacao);
+
+        return view('admin.eliminarfuncionario');
+
+    }
 
 
 
