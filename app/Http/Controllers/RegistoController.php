@@ -442,19 +442,32 @@ class RegistoController extends Controller
 
     }
 
-    //Função que mostra a informção detalhada acerca de um médico/funcionário
+    //Função que mostra a informção detalhada acerca de um funcionário
     //Autor: Alexandre Lopes
     function verInformaçãoFuncionarios ($id_funcionario)
     {
 
-            $funcionarios=DB::table('funcionario', 'medicos')
+            $funcionarios=DB::table('funcionario')
             ->where('id','=',$id_funcionario)
             ->get();
-
 
         return view('admin/editarfuncionario', ['funcionarios'=> $funcionarios]);
 
     }
+
+      //Função que mostra a informção detalhada acerca de um médico
+      //Autor: Alexandre Lopes
+       function verInformaçãoMedicos ($id_medico)
+    {
+
+            $medicos=DB::table('medicos')
+            ->where('id','=',$id_medico)
+            ->get();
+
+        return view('admin/editarmedico', ['medicos'=> $medicos]);
+
+    }
+    
 
     //Função que permite eliminar um funcionário
     //Autor Afonso Vitório
