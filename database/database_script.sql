@@ -1,7 +1,7 @@
 /*
 Script para a criação da base de dados
 (não está na versão final)
-Autor: Afonso Vitório 
+Autor: Afonso Vitório
 */
 
 
@@ -202,3 +202,15 @@ values
 ('Admin Test', 'funcionario@teste.com', '$2y$10$lS0CKwJyXZZqf1M/TuXOhOwdFUx68cp/7.tl1bH9YrCmzHPdtDDfK', 159756789, 'default.png', 'm', 'casa', 159453789);
 
 
+--events
+SET @@global.event_scheduler = 1;
+SELECT @@global.event_scheduler;
+--verificar que esta on
+CREATE DEFINER=`root`@`%` EVENT `clean_user`
+	ON SCHEDULE
+		EVERY 1 HOUR STARTS '2021-01-26 15:00:13'
+	ON COMPLETION NOT PRESERVE
+	ENABLE
+	COMMENT ''
+	DO DELETE FROM utentes WHERE created_at<NOW() - INTERVAL 2 DAY
+AND confirmed=0
