@@ -19,7 +19,7 @@ use App\Requests\StoreFuncionarioRegisto;
 use App\Requests\StoreMedicoRegisto;
 use App\Requests\EliminarFuncionarioRequest;
 use App\Requests\EmailPasswordResetRequest;
-use App\Requests\ResetPassword;
+use App\Requests\ResetPasswordRequest;
 use Exception;
 
 class RegistoController extends Controller
@@ -497,13 +497,12 @@ class RegistoController extends Controller
 
     }
 
+    //Autor: Afonso Vitório
     function criaTokenMandaEmailResetPassword(EmailPasswordResetRequest $request)
     {
         $validatedData = $request->validated();
 
         $token = bin2hex(random_bytes(20));
-
-        $reset = '1/'.$token;
 
         if ($validatedData['worker'] == 1) {
             try {
@@ -515,26 +514,100 @@ class RegistoController extends Controller
             }
 
         }elseif ($validatedData['worker'] == 2) {
-            # code...
+            try {
+                DB::table('admins')->where('email', '=', $validatedData['email'])->update(['reset_token' => $token]);
+                $informacao = "Email de recuperação de conta enviado com sucesso!";
+                $reset = '2/'.$token;
+            } catch(Exception $e) {
+                $informacao = "Conta não existente...";
+            }
+
         }elseif ($validatedData['worker'] == 3) {
-            # code...
+            try {
+                DB::table('medicos')->where('email', '=', $validatedData['email'])->update(['reset_token' => $token]);
+                $informacao = "Email de recuperação de conta enviado com sucesso!";
+                $reset = '3/'.$token;
+            } catch(Exception $e) {
+                $informacao = "Conta não existente...";
+            }
+
         }elseif ($validatedData['worker'] == 4) {
-            # code...
+            try {
+                DB::table('funcionario')->where('email', '=', $validatedData['email'])->update(['reset_token' => $token]);
+                $informacao = "Email de recuperação de conta enviado com sucesso!";
+                $reset = '4/'.$token;
+            } catch(Exception $e) {
+                $informacao = "Conta não existente...";
+            }
+
         }
 
         Mail::to($validatedData['email'])->send(new ResetMail($reset));
 
         $request->session()->flash($informacao);
 
-        return view('home');
+        return view('welcome');
 
     }
 
-    function resetPassword(ResetPassword $request)
+    //Função que retorna a view de reset password
+    //Autor: Afonso Vitório
+    function resetPassword($type, $token)
     {
-        //Verificar se o código de reset é válido
-        //Na função que dá reset à pw remover o que estiver no campo reset_token
+        return view('auth.passwords.reset', compact('type', 'token'));
+    }
 
+    //Função que faz o reset da password
+    //Autor: Afonso Vitório
+    function resetPasswordDo(ResetPasswordRequest $request, $type, $token)
+    {
+        $validatedData = $request->validated();
+
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        if ($type == 1) {
+            try {
+                DB::table('utentes')->where('reset_token', '=', $token)->update(['password' => $validatedData['password']]);
+                DB::table('utentes')->where('reset_token', '=', $token)->update(['reset_token' => '']);
+                $informacao = "Password alterada com sucesso!";
+
+            } catch(Exception $e) {
+                $informacao = "Password não alterada...";
+            }
+        }elseif ($type == 2) {
+            try {
+                DB::table('admins')->where('reset_token', '=', $token)->update(['password' => $validatedData['password']]);
+                DB::table('admins')->where('reset_token', '=', $token)->update(['reset_token' => '']);
+                $informacao = "Password alterada com sucesso!";
+
+            } catch(Exception $e) {
+                $informacao = "Password não alterada...";
+            }
+        }elseif ($type == 3) {
+            try {
+                DB::table('medicos')->where('reset_token', '=', $token)->update(['password' => $validatedData['password']]);
+                DB::table('medicos')->where('reset_token', '=', $token)->update(['reset_token' => '']);
+                $informacao = "Password alterada com sucesso!";
+
+            } catch(Exception $e) {
+                $informacao = "Password não alterada...";
+            }
+        }elseif ($type == 4) {
+            try {
+                DB::table('funcionario')->where('reset_token', '=', $token)->update(['password' => $validatedData['password']]);
+                DB::table('funcionario')->where('reset_token', '=', $token)->update(['reset_token' => '']);
+                $informacao = "Password alterada com sucesso!";
+
+            } catch(Exception $e) {
+                $informacao = "Password não alterada...";
+            }
+        }else{
+            $informacao = "Ocorreu um erro...";
+        }
+
+        $request->session()->flash($informacao);
+
+        return view('auth.login');
     }
 
 

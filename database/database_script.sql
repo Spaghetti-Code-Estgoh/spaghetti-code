@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `admins` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reset_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `unique_email` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -32,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `funcionario` (
   `morada` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `fotoperfil` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `remember_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reset_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `funcionario_email_unique` (`email`),
   UNIQUE KEY `funcionario_nif_unique` (`nif`)
@@ -50,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `medicos` (
   `fotoPerfil` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `nif` int(11) NOT NULL,
   `remember_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reset_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `medicos_unique` (`email`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -72,6 +75,7 @@ CREATE TABLE IF NOT EXISTS `utentes` (
   `tokenConfirm` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `confirmed` int(1) NOT NULL DEFAULT 0,
   `remember_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `reset_token` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `utentes_email_unique` (`email`),
   UNIQUE KEY `utentes_nif_unique` (`nif`),

@@ -73,6 +73,8 @@ Route::post('/eliminaFuncionario', [App\Http\Controllers\RegistoController::clas
 //Routes de Reset de Password
 //Autor: Afonso Vitório
 Route::post('/criaTokenMandaEmailResetPassword', [App\Http\Controllers\RegistoController::class, 'criaTokenMandaEmailResetPassword'])->name('resetPasswordEmail');
+Route::get('/auth/passwords/reset/{type}/{token}', [App\Http\Controllers\RegistoController::class, 'resetPassword']);
+Route::post('/resetPasswordDo/{type}/{token}', [App\Http\Controllers\RegistoController::class, 'resetPasswordDo'])->name('resetPasswordDo');
 
 
 //Routes de alterar definições de conta
@@ -174,6 +176,3 @@ Route::get('/pc/printpdf/{id}', [App\Http\Controllers\PDFController::class, 'pri
 //Autor: Alexandre Lopes
 Route::get('/gerirfuncionarios', "App\Http\Controllers\RegistoController@listarFuncionarios");
 Route::get('/editarfuncionario/{id}', "App\Http\Controllers\RegistoController@verInformaçãoFuncionarios");
-
-//Reset password
-Route::get('auth/password/reset/{type}/{token}', );
