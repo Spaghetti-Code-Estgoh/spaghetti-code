@@ -126,7 +126,8 @@ Route::view('/consultas', 'medicos.dashboard');
 Route::view('/terminarconsulta', 'medicos.terminarconsulta');
 Route::view('/medico/perfil', 'medicos.perfil');
 //Route::view('/agenda', 'medicos.agenda');
-
+Route::view('/historicoConsultaMedico', 'medicos.historicoConsultaMedico');
+Route::get('/historicoConsultaMedico',[App\Http\Controllers\GereConsultaProfissional::class,'GetConsultaHistoricoMedico']);
 
 
 

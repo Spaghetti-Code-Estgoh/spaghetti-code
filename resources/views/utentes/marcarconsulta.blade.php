@@ -81,10 +81,20 @@
   </div>
   <div class="row">
     <div class="col-md-3">
-      <h3 class="titulo">Data / Hora </h3>
+      <h3 class="titulo">Data </h3>
     </div>
     <div class="card card-dashboard col-md-6">
-      <input type="datetime-local" id="dataHoraConsulta" name="dataHoraConsulta" required>
+      <input type="date" id="dataConsulta" name="dataConsulta" required>
+      
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      <h3 class="titulo">Hora </h3>
+    </div>
+    <div class="card card-dashboard col-md-6">
+      <input type="time" id="horaConsulta" name="horaConsulta" required>
+      
     </div>
   </div>
   <div class="row">

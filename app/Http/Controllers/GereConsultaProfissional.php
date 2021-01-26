@@ -363,4 +363,17 @@ class GereConsultaProfissional extends Controller
         return view('medicos.agenda',  ['calendar'=>$calendar]);
 
     }
+
+    function GetConsultaHistoricoMedico(){
+
+        $ut=session('id');
+        $consultaHistorico=DB::table('medicos')
+            ->join('consulta','consulta.medico_id','=','medicos.id')
+            ->where('estado','=','terminada')
+            ->where('medico_id','=',$ut)
+            ->get();
+
+            return view('/medicos/historicoConsultaMedico')->with("consultaHistorico",$consultaHistorico);
+      
+    }
 }
