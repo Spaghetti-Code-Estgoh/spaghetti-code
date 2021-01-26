@@ -520,6 +520,8 @@ class RegistoController extends Controller
         if ($validatedData['worker'] == 1) {
             try {
                 DB::table('utentes')->where('email', '=', $validatedData['email'])->update(['reset_token' => $token]);
+                DB::table('utentes')->where('email', '=', $validatedData['email'])->update(['reset_token_date' => \Carbon\Carbon::now()]);
+                
                 $informacao = "Email de recuperação de conta enviado com sucesso!";
                 $reset = '1/'.$token;
             } catch(Exception $e) {
@@ -529,6 +531,8 @@ class RegistoController extends Controller
         }elseif ($validatedData['worker'] == 2) {
             try {
                 DB::table('admins')->where('email', '=', $validatedData['email'])->update(['reset_token' => $token]);
+                DB::table('admins')->where('email', '=', $validatedData['email'])->update(['reset_token_date' => \Carbon\Carbon::now()]);
+                
                 $informacao = "Email de recuperação de conta enviado com sucesso!";
                 $reset = '2/'.$token;
             } catch(Exception $e) {
@@ -538,6 +542,8 @@ class RegistoController extends Controller
         }elseif ($validatedData['worker'] == 3) {
             try {
                 DB::table('medicos')->where('email', '=', $validatedData['email'])->update(['reset_token' => $token]);
+                DB::table('medicos')->where('email', '=', $validatedData['email'])->update(['reset_token_date' => \Carbon\Carbon::now()]);
+                
                 $informacao = "Email de recuperação de conta enviado com sucesso!";
                 $reset = '3/'.$token;
             } catch(Exception $e) {
@@ -547,6 +553,8 @@ class RegistoController extends Controller
         }elseif ($validatedData['worker'] == 4) {
             try {
                 DB::table('funcionario')->where('email', '=', $validatedData['email'])->update(['reset_token' => $token]);
+                DB::table('funcionario')->where('email', '=', $validatedData['email'])->update(['reset_token_date' => \Carbon\Carbon::now()]);
+                
                 $informacao = "Email de recuperação de conta enviado com sucesso!";
                 $reset = '4/'.$token;
             } catch(Exception $e) {
