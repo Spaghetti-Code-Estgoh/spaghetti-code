@@ -15,7 +15,7 @@
                     <td> Médico </td>
                     <td>{{ $m->email }}</td>
                     <td><a href="/eliminarfuncionario"><i class="fa fa-times fa-2x" style="color: black"></i></a></td>
-                    <td><a href="{{ url('editarfuncionario/'.$m->id) }}"><i class="fas fa-chevron-right fa-2x" style="color: black"></i></a></td>
+                    <td><a href="{{ url('editarmedico/'.$m->id) }}"><i class="fas fa-chevron-right fa-2x" style="color: black"></i></a></td>
                 </tr>
                  @endforeach
 

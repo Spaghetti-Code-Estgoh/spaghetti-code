@@ -7,26 +7,26 @@
         <div class="card card-dashboard infoFun">
             <table class="table-hover">
 
-                @foreach ($funcionarios as $f)
+                @foreach ($medicos as $m)
                 <tr>
                     <td><b>Nome</b></td>
-                    <td>{{ $f->nome }}</td>
+                    <td>{{ $m->nome }}</td>
                 </tr>
                 <tr>
                     <td><b>Email</b></td>
-                    <td>{{ $f->email }}</td>
-                </tr>
-                  <tr>
-                    <td><b>Morada</b></td>
-                    <td>{{$f->morada}}</td>
+                    <td>{{ $m->email }}</td>
                 </tr>
                 <tr>
-                    <td><b>Contacto</b></td>
-                    <td>{{$f->contacto}}</td>
+                    <td><b>Especialidade</b></td>
+                    <td>{{ $m->especialidae }}</td>
                 </tr>
                 <tr>
                     <td><b>NIF</b></td>
-                    <td>{{ $f->nif }}</td>
+                    <td>{{ $m->nif }}</td>
+                </tr>
+                  <tr>
+                    <td><b>Nº de Celuta</b></td>
+                    <td>{{ $m->numeroCeluta }}</td>
                 </tr>
             </table>
         </div>
