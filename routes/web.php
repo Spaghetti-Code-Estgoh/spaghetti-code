@@ -70,6 +70,10 @@ Route::post('/registofuncionario', [App\Http\Controllers\RegistoController::clas
 Route::post('/registomedico', [App\Http\Controllers\RegistoController::class, 'storeMedico'])->name('storeMedico');
 Route::post('/eliminaFuncionario', [App\Http\Controllers\RegistoController::class, 'eliminaFuncionario'])->name('eliminaFuncionario');
 
+//Routes de Reset de Password
+//Autor: Afonso Vitório
+Route::post('/criaTokenMandaEmailResetPassword', [App\Http\Controllers\RegistoController::class, 'criaTokenMandaEmailResetPassword'])->name('resetPasswordEmail');
+
 
 //Routes de alterar definições de conta
 //Autor: Afonso Vitório

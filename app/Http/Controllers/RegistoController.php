@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Cookie;
 use App\Requests\StoreFuncionarioRegisto;
 use App\Requests\StoreMedicoRegisto;
 use App\Requests\EliminarFuncionarioRequest;
+use App\Requests\EmailPasswordResetRequest;
+use App\Requests\ResetPassword;
 use Exception;
 
 class RegistoController extends Controller
@@ -439,8 +441,8 @@ class RegistoController extends Controller
 
     }
 
-     //Função que mostra a informção detalhada acerca de um médico/funcionário
-     //Autor: Alexandre Lopes
+    //Função que mostra a informção detalhada acerca de um médico/funcionário
+    //Autor: Alexandre Lopes
     function verInformaçãoFuncionarios ($id_funcionario)
     {
 
@@ -494,6 +496,45 @@ class RegistoController extends Controller
 
     }
 
+    function criaTokenMandaEmailResetPassword(EmailPasswordResetRequest $request)
+    {
+        $validatedData = $request->validated();
+
+        $token = bin2hex(random_bytes(20));
+
+        if ($validatedData['worker'] == 1) {
+            try {
+                DB::table('utentes')->where('email', '=', $validatedData['email'])->update(['reset_token' => $token]);
+                $informacao = "Email de recuperação de conta enviado com sucesso!";
+
+            } catch(Exception $e) {
+                $informacao = "Conta não existente...";
+            }
+
+        }elseif ($validatedData['worker'] == 2) {
+            # code...
+        }elseif ($validatedData['worker'] == 3) {
+            # code...
+        }elseif ($validatedData['worker'] == 4) {
+            # code...
+        }
+
+        //TODO: Manda email de recuperação
+
+        //Mail::to($validatedData['email'])->send(new WelcomeMail($confLink));
+
+        $request->session()->flash($informacao);
+
+        return view('home');
+
+    }
+
+    function resetPassword(ResetPassword $request)
+    {
+        //Verificar se o código de reset é válido
+        //Na função que dá reset à pw remover o que estiver no campo reset_token
+
+    }
 
 
 }
