@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Requests\AlteraUtenteRequest;
 use App\Requests\AlteraFuncionarioRequest;
 use App\Requests\AlteraMedicoRequest;
+use App\Requests\AlteraAdminRequest;
 use Illuminate\Support\Facades\DB;
 use Exception;
 
@@ -21,7 +22,7 @@ class AlterarPerfilController extends Controller
         $this->middleware('guest');
     }
 
-
+    //TODO: Fazer upload de imagem do utente
     /**
      * Função para alterar dados do Utente
      *  Autor: Afonso Vitório
@@ -63,9 +64,47 @@ class AlterarPerfilController extends Controller
         session(['nome' => $validatedData['nome'], 'email' => $validatedData['email'], 'nif' => $validatedData['nif'], 'nss' => $validatedData['nss'], 'contacto' => $validatedData['contacto']]);
             
         //Envio de informação para o frontend
-        $request->session()->flash("Informação alterada com sucesso!");
+        $request->session()->flash($informacao);
 
         return view('utentes.dashboard');
+    }
+
+    /**
+     * Função para alterar dados do Admin
+     *  Autor: Afonso Vitório
+     */
+    protected function alterarAdmin(AlteraAdminRequest $request)
+    {
+        $validatedData = $request->validated();
+
+        //Hash da password
+        $validatedData['password'] = Hash::make($validatedData['password']);
+
+        //Alteração dos dados na base de dados
+        try {
+            DB::update('update admins set nome = ?,
+                email = ?,
+                password = ?
+                where email = ?', [
+                $validatedData['nome'],
+                $validatedData['email'],
+                $validatedData['password'],
+                session('email')]
+            );
+
+            $informacao = "Informação alterada com sucesso!";
+
+        } catch(Exception $e) {
+            $informacao = "Informação não alterada...";
+        }
+
+        //Alteração das variavéis de sessão
+        session(['nome' => $validatedData['nome'], 'email' => $validatedData['email']]);
+            
+        //Envio de informação para o frontend
+        $request->session()->flash($informacao);
+
+        return view('admin.dashboard');
     }
 
     /**
