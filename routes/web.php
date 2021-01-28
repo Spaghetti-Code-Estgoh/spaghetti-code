@@ -108,6 +108,7 @@ Route::view('/inserirmedico', 'admin.inserirmedico');
 Route::view('/gerirfuncionarios', 'admin.gerirfuncionarios');
 Route::view('/editarfuncionario', 'admin.editarfuncionario');
 Route::view('/eliminarfuncionario', 'admin.eliminarfuncionario');
+Route::view('/editarAdmin', 'admin.perfil');
 
 //Rota teste para dashboard funcionário
 Route::view('/dashboardfuncionario', 'funcionarios.dashboard');

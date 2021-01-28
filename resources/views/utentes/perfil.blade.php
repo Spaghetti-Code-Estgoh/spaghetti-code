@@ -2,7 +2,7 @@
 {{-- //Author: Rafael Pais--}}
 @section('content')
 <div class="section-registo" >
-  <div class="container" >
+  <div class="" >
     <div class="row justify-content-center">
       <div class="col-md-12">
           @if ($errors->any())
