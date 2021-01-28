@@ -22,18 +22,21 @@
                     @endif
                     <div class="card card-registo middle">
                         <div class="card-body" style="padding-top: 2rem">
-                            <form method="POST" action="{{ route('alterarFuncionario') }}">
+                            <form method="POST" action="{{ route('alterarFuncionario') }}" enctype="multipart/form-data">
                                 @csrf
+
                                 <div class="form-group row">
                                     <div class="col-md-12">
+
                                         <img class="imagem" src="{{url('images/') . "/" . session('imagePath')}}" alt="Imagem de perfil" id="imagem">
                                         <input type="file" name="fotografia"  class="custom-file-input" id="escolherFotografia" aria-describedby="inputGroupFileAddon01" onchange="mudarFotografia(event)">
                                         <label class="custom-file-label input_fotografia" for="escolherFotografia"  data-browse="Pesquisar" >{{ __('Escolha uma Fotografia') }}</label>
                                         @error('fotografia')
                                         <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
+                                            <strong>{{ $message }}</strong>
                                         </span>
                                         @enderror
+                                        
                                     </div>
                                     <div class="col-md-6">
                                         {{-- Nome--}}<br>
@@ -113,4 +116,17 @@
             </div>
         </div>
     </div>
+
+    <script>
+
+        //Author: Guilherme Jafar
+        function mudarFotografia(event) {
+    
+                let imagem = document.getElementById("imagem");
+                imagem.src = URL.createObjectURL(event.target.files[0]);
+    
+        }
+    
+    </script>
+
 @endsection

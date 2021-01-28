@@ -375,14 +375,17 @@ class RegistoController extends Controller
             $campos = ['id', 'nome', 'especialidae', 'fotoPerfil'];
 
             $resultados = DB::table('medicos')->select($campos)->where('email', '=', $email)->first();
-            session(['id' => $resultados->id, 'nome' => $resultados->nome, 'especialidade' => $resultados->especialidae, 'imagePath' => $resultados->fotoPerfil]);
+            session(['id' => $resultados->id,
+                'nome' => $resultados->nome,
+                'especialidade' => $resultados->especialidae,
+                'imagePath' => $resultados->fotoPerfil]);
 
         //Funcionario
         }else if($tipoConta == 4){
-            $campos = ['id', 'nome', 'fotoPerfil'];
+            $campos = ['id', 'nome', 'fotoPerfil', 'email', 'nif'];
 
             $resultados = DB::table('funcionario')->select($campos)->where('email', '=', $email)->first();
-            session(['id' => $resultados->id, 'nome' => $resultados->nome, 'imagePath' => $resultados->fotoPerfil]);
+            session(['id' => $resultados->id, 'nome' => $resultados->nome, 'imagePath' => $resultados->fotoPerfil, 'email' => $resultados->email, 'nif' => $resultados->nif]);
 
         }
 
