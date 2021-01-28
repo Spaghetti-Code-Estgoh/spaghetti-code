@@ -6,7 +6,7 @@
       <table style="width:100%">
         @if ($consultaHistorico->isEmpty())
             <p>Ainda não existem consultas.</p>
-        @else 
+        @else
             @foreach ($consultaHistorico as $cons)
                 <tr>
                     <td>{{$cons->nome}}</td>
@@ -52,14 +52,15 @@
 
          @if ($consultaHistoricoCanceladas->isEmpty())
             <p>Ainda não existem consultas.</p>
-        @else 
+        @else
             @foreach ($consultaHistoricoCanceladas as $consCan)
                 <tr>
                     <td>{{$consCan->nome}}</td>
                     <td>{{$consCan->especialidae}}</td>
                     <td>{{$consCan->DataHora}}</td>
                     <td><a href="#" class="btn" data-toggle="modal" data-target="#{{ $consCan->id }}">Saber Mais</a></td>
-                   
+                    <td><a href="/cancelada/printpdf/{{$consCan->id}}" class="btn btn-down">Download <i class="fas fa-download"></i></a></td>
+
                     <div class="modal fade" id="{{ $consCan->id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
@@ -74,9 +75,8 @@
                                     <p>Médico: {{$consCan->nome}} </p>
                                     <p>Especialidade: {{$consCan->especialidae}} </p>
                                     <p>Data/Hora: {{$consCan->DataHora}} </p>
-                                    <p>Observações: {{$consCan->observacoesmedicas}} </p>
+                                    <p>Motivo: {{$consCan->observacoesadmin}} </p>
                                     <p>Estado: {{$consCan->estado}} </p>
-                                    <p>Preço: {{$consCan->preco}} </p>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" data-dismiss="modal" aria-label="Close" class="btn btn-primary">Fechar</button>
@@ -89,5 +89,5 @@
             @endforeach
         @endif
     </table>
-</div>   
+</div>
 @endsection

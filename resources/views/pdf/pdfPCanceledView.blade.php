@@ -37,7 +37,7 @@
             <td class="desc"><h3>Drº {{$medico}}</h3></td>
         </tr>
         <tr>
-            <td class="no">Observações</td>
+            <td class="no">Motivo</td>
             <td class="desc"><h3>{{$obs}}</h3></td>
         </tr>
         </tbody>

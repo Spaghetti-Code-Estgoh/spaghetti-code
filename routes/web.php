@@ -172,7 +172,7 @@ Route::get('/agenda',[\App\Http\Controllers\GereConsultaProfissional::class,'age
 //Test PDF
 Route::get('/recibo/printpdf/{id}', [App\Http\Controllers\PDFController::class, 'printPDF']);
 Route::get('/pc/printpdf/{id}', [App\Http\Controllers\PDFController::class, 'printPDFPC']);
-
+Route::get('/cancelada/printpdf/{id}', [App\Http\Controllers\PDFController::class, 'printPDFCan']);
 
 //Route: admin
 //Autor: Alexandre Lopes
