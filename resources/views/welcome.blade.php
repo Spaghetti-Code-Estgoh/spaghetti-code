@@ -8,7 +8,7 @@
 @elseif (session('tipo_conta') == 2 && Cookie::get('rememberMe') != null)
     <script> setTimeout(function(){window.location='/inserirfuncionario'}); </script>
 
-@elseif (session('tipo_conta') == 3 && Cookie::get('rememberMe') != null)
+@elseif (session('tipo_conta') == 3)
     <script> setTimeout(function(){window.location='/consultas'}); </script>
 
 @elseif (session('tipo_conta') == 4 && Cookie::get('rememberMe') != null)

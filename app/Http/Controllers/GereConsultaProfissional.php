@@ -69,7 +69,8 @@ class GereConsultaProfissional extends Controller
 
     /**
      *  autor: Alexandre Lopes
-     * Fabian Nunes
+     *  Fabian Nunes
+     *  Afonso Vitório
      */
     function terminarConsulta(Request $request, $id){
 
@@ -90,8 +91,9 @@ class GereConsultaProfissional extends Controller
         foreach ($con as $c) {
             Mail::to($c->email)->send(new ConcludedMail($pdf));
         }
-        return redirect('/');
+        return view('/welcome');
     }
+
     function remarcar(){
 
         try {
