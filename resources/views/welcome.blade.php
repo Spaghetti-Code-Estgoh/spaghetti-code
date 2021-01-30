@@ -1,3 +1,24 @@
+<!-- 
+    Redirect para conta e verificação do remember me
+    Autor: Afonso Vitório
+-->
+@if (session('tipo_conta') == 1 && Cookie::get('rememberMe') != null)
+    <script> setTimeout(function(){window.location='/dashboardutente'}); </script>
+
+@elseif (session('tipo_conta') == 2 && Cookie::get('rememberMe') != null)
+    <script> setTimeout(function(){window.location='/inserirfuncionario'}); </script>
+
+@elseif (session('tipo_conta') == 3)
+    <script> setTimeout(function(){window.location='/consultas'}); </script>
+
+@elseif (session('tipo_conta') == 4 && Cookie::get('rememberMe') != null)
+    <script> setTimeout(function(){window.location='/dashboardfuncionario'}); </script>
+
+@elseif(session()->get('tipo_conta') != null)
+    <script> setTimeout(function(){window.location='/logout'}); </script>
+
+@endif
+
 <!DOCTYPE html>
 <html lang="en">
 

@@ -14,19 +14,20 @@ class GereConsultaUtente extends Controller
 
         $idUser = $req->session()->get('id');
 
-        $date = strtotime($req->dataHoraConsulta) + 3600;
+        $date = strtotime("$req->dataConsulta $req->horaConsulta") + 3600;
 
         try {
 
      $consulta = new consulta;
         $consulta->estado = "marcar";
-        $consulta->DataHora = $req->dataHoraConsulta;
+        $consulta->DataHora = "$req->dataConsulta $req->horaConsulta";
         $consulta->DataHoraFim = date("Y-m-d H:i:s", $date);
         $consulta->observacoesmedicas = null;
         $consulta->observacoesadmin = null;
         $consulta->medico_id = $req->medicoSelect;
         $consulta->funcionario_id = null;
         $consulta->utente_id = $idUser;
+        $consulta->preco = null;
         $consulta->save();
         return redirect('/dashboardutente');
 
@@ -88,7 +89,14 @@ class GereConsultaUtente extends Controller
             ->where('utente_id','=',$ut)
             ->get();
 
-            return view('/utentes/historicoconsultas')->with("consultaHistorico",$consultaHistorico);
+        $consultaHistoricoCanceladas=DB::table('medicos')
+        ->join('consulta','consulta.medico_id','=','medicos.id')
+        ->where('estado','=','cancelada')
+        ->where('utente_id','=',$ut)
+        ->get();    
+
+
+            return view('/utentes/historicoconsultas')->with("consultaHistorico",$consultaHistorico)->with("consultaHistoricoCanceladas",$consultaHistoricoCanceladas);
       
     }
 

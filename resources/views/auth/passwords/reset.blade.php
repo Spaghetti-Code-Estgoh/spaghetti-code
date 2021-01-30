@@ -16,7 +16,7 @@
                 <br>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('password.update') }}">
+                    <form method="POST" action="{{ route('resetPasswordDo', ['type' => $type, 'token' => $token]) }}">
                         @csrf
 
                         <input type="hidden" name="token" value="">

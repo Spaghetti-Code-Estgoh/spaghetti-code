@@ -1,3 +1,13 @@
+<!--
+Redirect para homepage caso não seja o admin
+Autor: Afonso Vitório
+-->
+@if (session('tipo_conta') != 2)
+<script> setTimeout(function(){window.location='/home'}); </script>
+
+@endif
+
+
 {{-- //Author: Guilherme Jafar--}}
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -39,8 +49,8 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-                    <a class="navbar-brand" href="/"><img src="{{ asset('img/logo2.png') }}" class="img-responsive "></a>
+                <ul class="navbar-nav mr-auto mt-4">
+                    <a class="navbar-brand" href="/inserirfuncionario"><img src="{{ asset('img/logo2.png') }}" class="img-responsive "></a>
                 </ul>
 
                 @if(Request::is('loginWorker'))
@@ -57,16 +67,16 @@
                         <li class="nav-item avatar dropdown d-flex align-items-center">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                <img src="{{asset('img/imagemtesteDashboard.png')}}" class="rounded-circle z-depth-0"
+                                <img src="{{url('images/') . "/" . session('imagePath')}}" class="rounded-circle z-depth-0"
                                      alt="avatar image">
-                                Maria Santos
+                                {{ session('nome') }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink-55">
-                                <a class="dropdown-item" href="#!">
+                                <a class="dropdown-item" href="/editarAdmin">
                                     <span>Editar Perfil</span>
                                 </a>
-                                <a class="dropdown-item" href="#!">
+                                <a class="dropdown-item" href="/logout">
                                     <span>Log Out</span>
                                 </a>
 
@@ -118,12 +128,13 @@
                         <div class="menu">
                             <ul>
                                 <li><a href="/inserirfuncionario"  class="@if(strpos(Request::url() , 'inserirfuncionario')){{ 'active' }}@endif" ><i class="fa fa-user-plus"></i>&nbsp;Inserir Funcionário</a></li>
+                                <li><a href="/inserirmedico"  class="@if(strpos(Request::url() , 'inserirmedico')){{ 'active' }}@endif" ><i class="fas fa-user-md"></i>&nbsp;Inserir Médicos</a></li>
                                 <li><a href="/gerirfuncionarios" class="@if (strpos(Request::url() , 'gerirfuncionarios')){{ 'active' }} @elseif(strpos(Request::url() , 'editarfuncionario')){{ 'active' }}  @endif" >
                                         <i class="fa fa-list"></i>&nbsp;Gerir Funcionários</a></li>
                                 <li><a href="/eliminarfuncionario" class="@if(strpos(Request::url() , 'eliminarfuncionario')) {{ 'active' }} @endif" >
                                     <i class="fas fa-user-times"></i>&nbsp;Eliminar Funcionários</a></li>
                                 <li class="logout text-center">
-                                    <a href="#">Log Out</a>
+                                    <a href="/logout">Log Out</a>
                                 </li>
                             </ul>
                         </div>
@@ -144,46 +155,6 @@
 
 
     <footer id="footer">
-{{--            <div class="top-footer">--}}
-{{--                <div class="container">--}}
-{{--                    <div class="row">--}}
-{{--                        <div class="col-md-4 col-sm-4 marb20">--}}
-{{--                            <div class="ftr-tle">--}}
-{{--                                <h4 class="white no-padding">Sobre Nós</h4>--}}
-{{--                            </div>--}}
-{{--                            <div class="info-sec">--}}
-{{--                                <p>Somos uma equipa de estudantes de engenharia informática da ESTGOH 3ºano!</p>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-md-4 col-sm-4 marb20">--}}
-{{--                            <div class="ftr-tle">--}}
-{{--                                <h4 class="white no-padding">Quick Links</h4>--}}
-{{--                            </div>--}}
-{{--                            <div class="info-sec">--}}
-{{--                                <ul class="quick-info">--}}
-{{--                                    <li><a href="#banner"><i class="fa fa-circle"></i>Home</a></li>--}}
-{{--                                    <li><a href="#service"><i class="fa fa-circle"></i>Service</a></li>--}}
-{{--                                    <li><a href="#"><i class="fa fa-circle"></i>Registo</a></li>--}}
-{{--                                    <li><a href="#"><i class="fa fa-circle"></i>Login</a></li>--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                        <div class="col-md-4 col-sm-4 marb20">--}}
-{{--                            <div class="ftr-tle">--}}
-{{--                                <h4 class="white no-padding">Sigam nos</h4>--}}
-{{--                            </div>--}}
-{{--                            <div class="info-sec">--}}
-{{--                                <ul class="social-icon">--}}
-{{--                                    <li class="bglight-blue"><i class="fa fa-facebook"></i></li>--}}
-{{--                                    <li class="bgred"><i class="fa fa-google-plus"></i></li>--}}
-{{--                                    <li class="bgdark-blue"><i class="fa fa-linkedin"></i></li>--}}
-{{--                                    <li class="bglight-blue"><i class="fa fa-twitter"></i></li>--}}
-{{--                                </ul>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
         <div class="footer-line">
             <div class="container">
                 <div class="row">

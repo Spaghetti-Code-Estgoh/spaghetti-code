@@ -1,3 +1,13 @@
+<!--
+Redirect para homepage caso não seja o admin
+Autor: Afonso Vitório
+-->
+@if (session('tipo_conta') != 1)
+<script> setTimeout(function(){window.location='/home'}); </script>
+
+@endif
+
+
 {{-- //Author: Guilherme Jafar--}}
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
@@ -40,8 +50,8 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <!-- Left Side Of Navbar -->
-                <ul class="navbar-nav mr-auto">
-                    <a class="navbar-brand" href="/"><img src="{{ asset('img/logo2.png') }}" class="img-responsive " ></a>
+                <ul class="navbar-nav mr-auto mt-4">
+                    <a class="navbar-brand" href="/dashboardutente"><img src="{{ asset('img/logo2.png') }}" class="img-responsive " ></a>
                 </ul>
 
                 @if(Request::is('loginWorker'))
@@ -58,16 +68,16 @@
                         <li class="nav-item avatar dropdown d-flex align-items-center">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                <img src="{{asset('img/imagemtesteDashboard.png')}}" class="rounded-circle z-depth-0"
+                                <img src="{{url('images/') . "/" . session('imagePath')}}" class="rounded-circle z-depth-0"
                                      alt="avatar image">
-                                Maria Santos
+                                {{ session('nome') }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink-55">
                                 <a class="dropdown-item" href="/perfil">
                                     <span>Editar Perfil</span>
                                 </a>
-                                <a class="dropdown-item" href="#!">
+                                <a class="dropdown-item" href="/logout">
                                     <span>Log Out</span>
                                 </a>
 
@@ -123,7 +133,7 @@
                                 <li><a href="/historicoconsulta" class="@if (strpos(Request::url() , 'historicoconsulta')){{ 'active' }}@endif " ><i class="fa fa-list"></i> Histórico Consultas</a></li>
                                 <li><a href="/desmarcarConsultaUtente" class="@if (strpos(Request::url() , 'desmarcarConsultaUtente')){{ 'active' }}@endif " ><i class="fa fa-minus-circle"></i> Desmarcar Consulta</a></li>
                                 <li class="logout text-center">
-                                    <a href="#">Log Out</a>
+                                    <a href="/logout">Log Out</a>
                                 </li>
                             </ul>
                         </div>
@@ -143,7 +153,7 @@
 
 
 
-    <footer id="footer">
+    <footer id="footer" class="medFoo">
 {{--            <div class="top-footer">--}}
 {{--                <div class="container">--}}
 {{--                    <div class="row">--}}

@@ -30,6 +30,10 @@ Route::get('/home', function () {
 
 Route::view('/', 'welcome');
 
+Route::get('/logout', function () {
+    return view('logout');
+});
+
 
 //Route::get('/post/{id}/{welcome?}', [PostController::class, 'show']);
 
@@ -56,12 +60,30 @@ Route::view('/testView', 'auth\passwords\reset');
 
 //testar mail
 Route::get('/email', function () {
-    //Mail::to('binogamer12@gmail.com')->send(new WelcomeMailAdm());
     return new WelcomeMailAdm();
 });
-//Routes do Registo
+
+//Routes do Registo e Eliminação
+//Autor: Afonso Vitório
 Route::resource('/registo', 'App\Http\Controllers\RegistoController')->only('store', 'create');
-Route::resource('/registofuncionario', 'App\Http\Controllers\RegistoWController')->only('store', 'create');
+Route::post('/registofuncionario', [App\Http\Controllers\RegistoController::class, 'storeFuncionario'])->name('storeFuncionario');
+Route::post('/registomedico', [App\Http\Controllers\RegistoController::class, 'storeMedico'])->name('storeMedico');
+Route::post('/eliminaFuncionario', [App\Http\Controllers\RegistoController::class, 'eliminaFuncionario'])->name('eliminaFuncionario');
+
+//Routes de Reset de Password
+//Autor: Afonso Vitório
+Route::post('/criaTokenMandaEmailResetPassword', [App\Http\Controllers\RegistoController::class, 'criaTokenMandaEmailResetPassword'])->name('resetPasswordEmail');
+Route::get('/auth/passwords/reset/{type}/{token}', [App\Http\Controllers\RegistoController::class, 'resetPassword']);
+Route::post('/resetPasswordDo/{type}/{token}', [App\Http\Controllers\RegistoController::class, 'resetPasswordDo'])->name('resetPasswordDo');
+
+
+//Routes de alterar definições de conta
+//Autor: Afonso Vitório
+Route::post('/alterarPerfilUtente', [App\Http\Controllers\AlterarPerfilController::class, 'alterarUtente'])->name('alterarUtente');
+Route::post('/alterarPerfilAdmin', [App\Http\Controllers\AlterarPerfilController::class, 'alterarAdmin'])->name('alterarAdmin');
+Route::post('/alterarPerfilMedico', [App\Http\Controllers\AlterarPerfilController::class, 'alterarMedico'])->name('alterarMedico');
+Route::post('/alterarPerfilFuncionario', [App\Http\Controllers\AlterarPerfilController::class, 'alterarFuncionario'])->name('alterarFuncionario');
+
 
 //Rota teste para dashboard utente
 //Author: Guilherme Jafar
@@ -82,106 +104,33 @@ Route::get('/historicoconsulta',[App\Http\Controllers\GereConsultaUtente::class,
 
 //Rota teste para dashboard admin
 Route::view('/inserirfuncionario', 'admin.dashboard');
+Route::view('/inserirmedico', 'admin.inserirmedico');
 Route::view('/gerirfuncionarios', 'admin.gerirfuncionarios');
 Route::view('/editarfuncionario', 'admin.editarfuncionario');
 Route::view('/eliminarfuncionario', 'admin.eliminarfuncionario');
+Route::view('/editarAdmin', 'admin.perfil');
 
 //Rota teste para dashboard funcionário
 Route::view('/dashboardfuncionario', 'funcionarios.dashboard');
 
-Route::get('/agendamedica', function (){
-    $events = [];
+Route::view('/agendamedica','medicos.agenda');
+Route::view('/agendamedicaFunc','funcionarios.agendamedica');
 
-    $events[] = \Acaronlex\LaravelCalendar\Calendar::event(
-        'Consulta de clinica geral', //event title
-        false, //full day event?
-        '2021-01-11T08:30:00', //start time (you can also use Carbon instead of DateTime)
-        '2021-01-11T09:30:00', //end time (you can also use Carbon instead of DateTime)
-        0 //optionally, you can specify an event ID
-    );
-
-    $events[] = \Acaronlex\LaravelCalendar\Calendar::event(
-        "Valentine's Day", //event title
-        false, //full day event?
-        new \DateTime('2021-01-10 14:30:00'), //start time (you can also use Carbon instead of DateTime)
-        new \DateTime('2021-01-10 16:30:00'), //end time (you can also use Carbon instead of DateTime)
-        'stringEventId' //optionally, you can specify an event ID
-    );
-
-    $calendar = new Calendar();
-    $calendar->addEvents($events)
-        ->setOptions([
-            'locale' => 'pt',
-            'firstDay' => 0,
-            'displayEventTime' => true,
-            'selectable' => true,
-            'initialView' => 'timeGridWeek',
-            'headerToolbar' => [
-                'end' => 'today prev,next dayGridMonth timeGridWeek timeGridDay'
-            ],
-            'startTime'=> '08:00', // 8am
-            'endTime'=> '18:00', // 6pm
-        ]);
-    $calendar->setId('1');
-    $calendar->setCallbacks([
-        'select' => 'function(selectionInfo){}',
-        'eventClick' => 'function(event){}'
-    ]);
-
-    return view('funcionarios.agendamedica',  ['calendar'=>$calendar]);
-});
 
 Route::view('/aprovarconsulta', 'funcionarios.aprovarconsulta');
 Route::view('/inserirutente', 'funcionarios.inserirutente');
 Route::view('/desmarcarconsulta', 'funcionarios.desmarcarconsulta');
+Route::view('/func/perfil', 'funcionarios.perfil');
 
 //Rota teste para dashboard médico
 Route::view('/consultas', 'medicos.dashboard');
 Route::view('/terminarconsulta', 'medicos.terminarconsulta');
+Route::view('/medico/perfil', 'medicos.perfil');
 //Route::view('/agenda', 'medicos.agenda');
+Route::view('/historicoConsultaMedico', 'medicos.historicoConsultaMedico');
+Route::get('/historicoConsultaMedico',[App\Http\Controllers\GereConsultaProfissional::class,'GetConsultaHistoricoMedico']);
 
 
-Route::get('/agenda', function (){
-    $events = [];
-
-    $events[] = \Acaronlex\LaravelCalendar\Calendar::event(
-        'Consulta de clinica geral', //event title
-        false, //full day event?
-        '2021-01-11T08:30:00', //start time (you can also use Carbon instead of DateTime)
-        '2021-01-11T09:30:00', //end time (you can also use Carbon instead of DateTime)
-        0 //optionally, you can specify an event ID
-    );
-
-    $events[] = \Acaronlex\LaravelCalendar\Calendar::event(
-        "Valentine's Day", //event title
-        false, //full day event?
-        new \DateTime('2021-01-10T14:30:00'), //start time (you can also use Carbon instead of DateTime)
-        new \DateTime('2021-01-10T16:30:00'), //end time (you can also use Carbon instead of DateTime)
-        'stringEventId' //optionally, you can specify an event ID
-    );
-
-    $calendar = new Calendar();
-    $calendar->addEvents($events)
-        ->setOptions([
-            'locale' => 'pt',
-            'firstDay' => 0,
-            'displayEventTime' => true,
-            'selectable' => true,
-            'initialView' => 'timeGridWeek',
-            'headerToolbar' => [
-                'end' => 'today prev,next dayGridMonth timeGridWeek timeGridDay'
-            ],
-            'startTime'=> '08:00', // 8am
-            'endTime'=> '18:00', // 6pm
-        ]);
-    $calendar->setId('1');
-    $calendar->setCallbacks([
-        'select' => 'function(selectionInfo){}',
-        'eventClick' => 'function(event){}'
-    ]);
-
-    return view('medicos.agenda',  ['calendar'=>$calendar]);
-});
 
 Route::get('confirmaRegisto/{token}',  [App\Http\Controllers\RegistoController::class, 'confirm']);
 Route::view('/erroRegisto', 'errors.registerFail');
@@ -204,15 +153,29 @@ Route::post('/GetConsulta',[App\Http\Controllers\GereConsultaProfissional::class
 Route::post('/ChgConsulta',[App\Http\Controllers\GereConsultaProfissional::class,'ChgangeConsulta']);
 Route::post('/GetConsultaCancelar',[App\Http\Controllers\GereConsultaProfissional::class,'GetConsultaCancelar']);
 Route::post('/cancelarConsulta',[App\Http\Controllers\GereConsultaProfissional::class,'CancelarConsulta']);
+Route::post('/RemarcarConsulta',[App\Http\Controllers\GereConsultaProfissional::class,'remarcar']);
+Route::get('/agendamedicaFunc',[\App\Http\Controllers\GereConsultaProfissional::class,'agendaMedicaEmpty']);
+Route::get('/agendamedicaFuncionario',[\App\Http\Controllers\GereConsultaProfissional::class,'agendaMedicaFunc']);
 //Route::view('/loading', 'loading');
 
 
 //Route: medico
 //Autor: Alexandre Lopes
 Route::get('/consultas', "App\Http\Controllers\GereConsultaProfissional@listarConsultasMedicos");
-//Route::get('/terminarconsulta', "App\Http\Controllers\GereConsultaProfissional@mostrarHoraObsConsulta");
 Route::get('/terminarconsulta/{id}', "App\Http\Controllers\GereConsultaProfissional@comecarConsulta");
+Route::get('/consultas/{id}', "App\Http\Controllers\GereConsultaProfissional@terminarConsulta");
+//Route: medico
+//Autor: DiogoPinto
+Route::get('/agenda',[\App\Http\Controllers\GereConsultaProfissional::class,'agendaMedica']);
 
 
 //Test PDF
-Route::get('/test/printpdf', [App\Http\Controllers\PDFController::class, 'printPDF']);
+Route::get('/recibo/printpdf/{id}', [App\Http\Controllers\PDFController::class, 'printPDF']);
+Route::get('/pc/printpdf/{id}', [App\Http\Controllers\PDFController::class, 'printPDFPC']);
+Route::get('/cancelada/printpdf/{id}', [App\Http\Controllers\PDFController::class, 'printPDFCan']);
+
+//Route: admin
+//Autor: Alexandre Lopes
+Route::get('/gerirfuncionarios', "App\Http\Controllers\RegistoController@listarFuncionarios");
+Route::get('/editarfuncionario/{id}', "App\Http\Controllers\RegistoController@verInformaçãoFuncionarios");
+Route::get('/editarmedico/{id}', "App\Http\Controllers\RegistoController@verInformaçãoMedicos");

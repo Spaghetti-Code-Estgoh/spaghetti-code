@@ -3,13 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="f70d0a76-8c18-4c7d-bffe-4f5b20c9e93e" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/GereConsultaUtente.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/GereConsultaUtente.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_12_16_161803_utentes.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_12_16_161803_utentes.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/utentes/desmarcarConsultaUtente.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/utentes/desmarcarConsultaUtente.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/utentes/marcarconsulta.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/utentes/marcarconsulta.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/funcionarios/perfil.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/funcionarios/perfil.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/utentes/perfil.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/utentes/perfil.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/storage/logs/laravel.log" beforeDir="false" afterPath="$PROJECT_DIR$/storage/logs/laravel.log" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,6 +135,11 @@
       <path value="$PROJECT_DIR$/vendor/laravel/ui" />
       <path value="$PROJECT_DIR$/vendor/league/mime-type-detection" />
       <path value="$PROJECT_DIR$/vendor/acaronlex/laravel-calendar" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-font-lib" />
+      <path value="$PROJECT_DIR$/vendor/phenx/php-svg-lib" />
+      <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-dompdf" />
+      <path value="$PROJECT_DIR$/vendor/dompdf/dompdf" />
+      <path value="$PROJECT_DIR$/vendor/sabberworm/php-css-parser" />
     </include_path>
   </component>
   <component name="ProjectId" id="1mFM9zJfMo9SxdQey2iPerKlEZX" />
@@ -212,6 +213,8 @@
       <workItem from="1610013402002" duration="4334000" />
       <workItem from="1610279535665" duration="6381000" />
       <workItem from="1610996757493" duration="1079000" />
+      <workItem from="1611487217123" duration="7875000" />
+      <workItem from="1611829448610" duration="2268000" />
     </task>
     <servers />
   </component>
@@ -223,21 +226,21 @@
       <screen x="0" y="0" width="1536" height="834" />
     </state>
     <state x="506" y="208" key="#com.intellij.fileTypes.FileTypeChooser/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610993394713" />
-    <state width="1493" height="192" key="GridCell.Tab.0.bottom" timestamp="1610994590517">
+    <state width="1493" height="191" key="GridCell.Tab.0.bottom" timestamp="1611495103803">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="192" key="GridCell.Tab.0.bottom/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610994590517" />
-    <state width="1493" height="192" key="GridCell.Tab.0.center" timestamp="1610994590508">
+    <state width="1493" height="191" key="GridCell.Tab.0.bottom/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1611495103803" />
+    <state width="1493" height="191" key="GridCell.Tab.0.center" timestamp="1611495103803">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="192" key="GridCell.Tab.0.center/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610994590508" />
-    <state width="1493" height="192" key="GridCell.Tab.0.left" timestamp="1610994590508">
+    <state width="1493" height="191" key="GridCell.Tab.0.center/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1611495103803" />
+    <state width="1493" height="191" key="GridCell.Tab.0.left" timestamp="1611495103802">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="192" key="GridCell.Tab.0.left/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610994590508" />
-    <state width="1493" height="192" key="GridCell.Tab.0.right" timestamp="1610994590508">
+    <state width="1493" height="191" key="GridCell.Tab.0.left/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1611495103802" />
+    <state width="1493" height="191" key="GridCell.Tab.0.right" timestamp="1611495103803">
       <screen x="0" y="0" width="1536" height="834" />
     </state>
-    <state width="1493" height="192" key="GridCell.Tab.0.right/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1610994590508" />
+    <state width="1493" height="191" key="GridCell.Tab.0.right/-1024.304.1024.730/0.0.1536.834@0.0.1536.834" timestamp="1611495103803" />
   </component>
 </project>

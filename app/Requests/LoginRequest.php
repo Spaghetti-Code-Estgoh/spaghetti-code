@@ -20,7 +20,9 @@ class LoginRequest extends FormRequest
     {
         return [
             'email' => 'required|string|max:255',
-            'password' => 'required|string'
+            'password' => 'required|string',
+            'remember' => '',
+            'worker' => ''
         ];
     }
 }

@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AprovedMail;
+use App\Mail\ConcludedMail;
+use App\Mail\NotAprovedMail;
 use App\Models\consulta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Acaronlex\LaravelCalendar\Calendar;
+use Illuminate\Support\Facades\Mail;
 
 class GereConsultaProfissional extends Controller
 {
@@ -14,78 +19,100 @@ class GereConsultaProfissional extends Controller
      * metodo usado para apresentar a lista de consultas
      * de um determinado médico
      */
-     function listarConsultasMedicos (){
+    function listarConsultasMedicos (){
 
         $id_med=session('id');
 
-        $consultas=DB::table('medicos')
-        ->join('consulta','consulta.medico_id','=','medicos.id')
-        ->join('utentes', 'consulta.utente_id', '=', 'utentes.id' )
-        ->where('medico_id','=',$id_med)
-        ->where('DataHora', '>', now())
-        ->get();
-       
-        
-        //$consultas = DB::table('consulta')->where('medico_id', $id_med)->get();
+        $consultas=DB::table('consulta')
+            ->join('utentes', 'consulta.utente_id', '=', 'utentes.id' )
+            ->join('medicos','medicos.id','=','consulta.medico_id')
+            ->select('consulta.id', 'medicos.especialidae', 'utentes.nome', 'consulta.DataHora' )
+            ->where('medico_id','=',$id_med)
+            ->where('estado', '=', 'agendada')
+            ->get();
 
-        return view('medicos/dashboard', ['consulta'=> $consultas]);
+        $iniciadas = DB::table('consulta')
+            ->join('utentes', 'consulta.utente_id', '=', 'utentes.id' )
+            ->join('medicos','medicos.id','=','consulta.medico_id')
+            ->select('consulta.id', 'medicos.especialidae', 'utentes.nome', 'consulta.DataHora' )
+            ->where('medico_id','=',$id_med)
+            ->where('estado', '=', 'Comecar')
+            ->get();
+
+
+        return view('medicos/dashboard', ['consulta'=> $consultas, 'iniciadas'=> $iniciadas]);
 
     }
 
-
-
-    function comecarConsulta (Request $request, $dataHoraConsulta){
-
-        $consultas = DB::table('consulta')
-        ->where('DataHora', '=', $dataHoraConsulta)
-        ->update(['estado' => 'Comecar']);
-
-        return view('medicos/terminarconsulta');
-    }
-
-
-    
-    function mostrarHoraObsConsulta (){
-
-    
-        $id_med=session('id');
-
-        $consultas=DB::table('medicos')
-        ->join('consulta','consulta.medico_id','=','medicos.id')
-        ->join('utentes', 'consulta.utente_id', '=', 'utentes.id' )
-        ->where('medico_id','=',$id_med)
-        ->where('DataHora', '>', now())
-        ->get();
-       
-
-        return view('medicos/terminarconsulta', ['consulta' => $consultas]);
-    }
-
-
-    /*
-     * autor:Diogo pinto
-     * Descricao:
-     * metodo usado para terminar consulta
-     * Parametros de entrada:
-     * id: consiste no id da consulta
-     * observações :variavel que contem as observacoes do medico
-     * retorno:
-     * rederecionamento de pagina
+    /**
+     *  autor: Alexandre Lopes
      */
-    function terminarConsulta(){
+    function comecarConsulta ($idConsulta){
+
+        $id_med=session('id');
+
+        DB::table('consulta')
+            ->where('id', '=', $idConsulta)
+            ->update(['estado' => 'Comecar']);
+
+        $cons=DB::table('consulta')
+            ->join('utentes', 'consulta.utente_id', '=', 'utentes.id' )
+            ->join('medicos','medicos.id','=','consulta.medico_id')
+            ->select('consulta.id', 'medicos.especialidae', 'utentes.nome', 'consulta.DataHora' )
+            ->where('medico_id','=',$id_med)
+            ->where('consulta.id', '=', $idConsulta)
+            ->get();
+
+        return view('medicos/terminarconsulta', ['cons'=> $cons]);
+    }
+
+
+    /**
+     *  autor: Alexandre Lopes
+     *  Fabian Nunes
+     *  Afonso Vitório
+     */
+    function terminarConsulta(Request $request, $id){
+
+        $consulta = consulta::find($id);
+        $consulta->estado = 'Terminada';
+        $consulta->observacoesmedicas = $request->input('observacoes');
+        $consulta->preco = $request->input('preco');
+        $consulta->save();
+        $pdf = (new PDFController)->printPDFEmail($id);
+
+        $ut=session('id');
+        $con=DB::table('utentes')
+            ->join('consulta','consulta.utente_id','=','utentes.id')
+            ->where('estado','=','terminada')
+            ->where('medico_id','=',$ut)
+            ->where('consulta.id', '=', $id)
+            ->get();
+        foreach ($con as $c) {
+            Mail::to($c->email)->send(new ConcludedMail($pdf));
+        }
+        return view('/welcome');
+    }
+
+    function remarcar(){
 
         try {
-
+            $func=session('id');
             $id=\request('id');
-            $observacoesMedicas=\request('observaçoes');
-            $consulta = consulta::find($id);
+            $obs=\request('obs');
+            $time=\request('time');
+            $date = strtotime($time) + 3600;
+
+            $consulta = DB::table('consulta')
+                ->where('id','=',$id)
+                ->get();
 
             if ($consulta) {
-                $consulta->estado = 'terminar';
-                $consulta->observacoesMedicas= $observacoesMedicas;
-                $consulta->save();
+                $consulta2= DB::table('consulta')
+                    ->where('id', $id)
+                    ->update(['estado' =>'agendada','observacoesadmin'=>$obs,'funcionario_id'=>$func,'DataHora'=>$time,"DataHoraFim"=>date("Y-m-d H:i:s", $date)]);
             }
-            return view('/teste');
+            //return view('/testet');
 
         }catch (Exception $e){
             echo '<script>console.log('.$e->getMessage().')</script>';
@@ -97,7 +124,7 @@ class GereConsultaProfissional extends Controller
     /*
      *author Diogo Pinto
      */
-function GetConsultaAgendada(){
+    function GetConsultaAgendada(){
 
 
         $consulta=DB::table('medicos')
@@ -105,9 +132,9 @@ function GetConsultaAgendada(){
             ->where('estado','=','marcar')
             ->get();
 
-echo json_encode($consulta);
-exit;
-}
+        echo json_encode($consulta);
+        exit;
+    }
 
     /*
        *author Diogo Pinto
@@ -147,6 +174,7 @@ exit;
                 $consulta2= DB::table('consulta')
                     ->where('id', $id)
                     ->update(['estado' =>'cancelada','observacoesadmin'=>$observacoesAdmin,'funcionario_id'=>$func]);
+                $this->sendPDFU(1, $id);
             }
             //return view('/testet');
 
@@ -170,18 +198,184 @@ exit;
     function ChgangeConsulta()
     {
 
-            $id = \request('id');
-            $estado=\request('estado');
+        $id = \request('id');
+        $estado=\request('estado');
 
-            $consulta = DB::table('consulta')
-                ->where('id','=',$id)
-                ->get();
-            if ($consulta) {
-                $consulta2= DB::table('consulta')
-                    ->where('id', $id)
-                    ->update(['estado' =>$estado]);
+        $consulta = DB::table('consulta')
+            ->where('id','=',$id)
+            ->get();
+        if ($consulta) {
+            $consulta2= DB::table('consulta')
+                ->where('id', $id)
+                ->update(['estado' =>$estado]);
+            $this->sendPDFU(0, $id);
+        }
+        return redirect('/GetConsulta');
+    }
+
+    function agendaMedicaEmpty(){
+
+        $consultas=DB::table('consulta')
+            ->join('medicos','medicos.id','=','consulta.medico_id')
+            ->select('consulta.id', 'medicos.especialidae', 'medicos.nome', 'consulta.DataHora','consulta.DataHoraFim' )
+            ->where('estado', '=', 'Agendada')
+            ->get();
+        $events = [];
+        foreach ($consultas as $c){
+            $events[] = \Acaronlex\LaravelCalendar\Calendar::event(
+                $c->nome."-".$c->especialidae, //event title
+                false, //full day event?
+                new \DateTime($c->DataHora), //start time (you can also use Carbon instead of DateTime)
+                new \DateTime($c->DataHoraFim), //end time (you can also use Carbon instead of DateTime)
+                'stringEventId' //optionally, you can specify an event ID
+            );
+
+
+        }
+
+        $calendar = new Calendar();
+        $calendar->addEvents($events)
+            ->setOptions([
+                'locale' => 'pt',
+                'firstDay' => 0,
+                'displayEventTime' => true,
+                'selectable' => true,
+                'initialView' => 'timeGridWeek',
+                'headerToolbar' => [
+                    'end' => 'today prev,next dayGridMonth timeGridWeek timeGridDay'
+                ],
+                'startTime'=> '08:00', // 8am
+                'endTime'=> '18:00', // 6pm
+            ]);
+        $calendar->setId('1');
+        $calendar->setCallbacks([
+            'select' => 'function(selectionInfo){}',
+            'eventClick' => 'function(event){}'
+        ]);
+
+        return view('funcionarios.agendamedica',  ['calendar'=>$calendar]);
+
+    }
+
+    function sendPDFU($estado, $id) {
+        $con=DB::table('utentes')
+            ->join('consulta','consulta.utente_id','=','utentes.id')
+            ->where('consulta.id', '=', $id)
+            ->get();
+        foreach ($con as $c) {
+            if ($estado == 0) {
+                $pdf = (new PDFController)->printPDFPCEmail($id);
+                Mail::to($c->email)->send(new AprovedMail($pdf));
+            } else if ($estado == 1) {
+                $pdf = (new PDFController)->printPDFPCanceledEmail($id);
+                Mail::to($c->email)->send(new NotAprovedMail($pdf));
             }
-            return redirect('/GetConsulta');
+        }
+    }
 
+
+    function agendaMedicaFunc(){
+        $id=\request('nome');
+        $consultas=DB::table('consulta')
+            ->join('medicos','medicos.id','=','consulta.medico_id')
+            ->select('consulta.id', 'medicos.especialidae', 'medicos.nome', 'consulta.DataHora','consulta.DataHoraFim' )
+            ->where('estado', '=', 'Agendada')
+            ->where('medicos.nome','like','%'.$id.'%')
+            ->get();
+        $events = [];
+        foreach ($consultas as $c){
+            $events[] = \Acaronlex\LaravelCalendar\Calendar::event(
+                $c->nome."-".$c->especialidae, //event title
+                false, //full day event?
+                new \DateTime($c->DataHora), //start time (you can also use Carbon instead of DateTime)
+                new \DateTime($c->DataHoraFim), //end time (you can also use Carbon instead of DateTime)
+                'stringEventId' //optionally, you can specify an event ID
+            );
+
+
+        }
+
+
+        $calendar = new Calendar();
+        $calendar->addEvents($events)
+            ->setOptions([
+                'locale' => 'pt',
+                'firstDay' => 0,
+                'displayEventTime' => true,
+                'selectable' => true,
+                'initialView' => 'timeGridWeek',
+                'headerToolbar' => [
+                    'end' => 'today prev,next dayGridMonth timeGridWeek timeGridDay'
+                ],
+                'startTime'=> '08:00', // 8am
+                'endTime'=> '18:00', // 6pm
+            ]);
+        $calendar->setId('1');
+        $calendar->setCallbacks([
+            'select' => 'function(selectionInfo){}',
+            'eventClick' => 'function(event){}'
+        ]);
+
+        return view('funcionarios.agendamedica',  ['calendar'=>$calendar]);
+
+    }
+
+    function agendaMedica(){
+        $id=session('id');
+        $consultas=DB::table('consulta')
+            ->join('medicos','medicos.id','=','consulta.medico_id')
+            ->select('consulta.id', 'medicos.especialidae', 'medicos.nome', 'consulta.DataHora','consulta.DataHoraFim' )
+            ->where('estado', '=', 'agendada')
+            ->where('medicos.id','=',$id)
+            ->get();
+        $events = [];
+        foreach ($consultas as $c){
+            $events[] = \Acaronlex\LaravelCalendar\Calendar::event(
+                $c->nome."-".$c->especialidae, //event title
+                false, //full day event?
+                new \DateTime($c->DataHora), //start time (you can also use Carbon instead of DateTime)
+                new \DateTime($c->DataHoraFim), //end time (you can also use Carbon instead of DateTime)
+                'stringEventId' //optionally, you can specify an event ID
+            );
+
+
+        }
+
+
+        $calendar = new Calendar();
+        $calendar->addEvents($events)
+            ->setOptions([
+                'locale' => 'pt',
+                'firstDay' => 0,
+                'displayEventTime' => true,
+                'selectable' => true,
+                'initialView' => 'timeGridWeek',
+                'headerToolbar' => [
+                    'end' => 'today prev,next dayGridMonth timeGridWeek timeGridDay'
+                ],
+                'startTime'=> '08:00', // 8am
+                'endTime'=> '18:00', // 6pm
+            ]);
+        $calendar->setId('1');
+        $calendar->setCallbacks([
+            'select' => 'function(selectionInfo){}',
+            'eventClick' => 'function(event){}'
+        ]);
+
+        return view('medicos.agenda',  ['calendar'=>$calendar]);
+
+    }
+
+    function GetConsultaHistoricoMedico(){
+
+        $ut=session('id');
+        $consultaHistorico=DB::table('medicos')
+            ->join('consulta','consulta.medico_id','=','medicos.id')
+            ->where('estado','=','terminada')
+            ->where('medico_id','=',$ut)
+            ->get();
+
+            return view('/medicos/historicoConsultaMedico')->with("consultaHistorico",$consultaHistorico);
+      
     }
 }

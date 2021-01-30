@@ -21,7 +21,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    <form method="POST" action="{{ route('password.email') }}">
+                    <form method="POST" action="{{ route('resetPasswordEmail') }}">
                         @csrf
 
                         <div class="form-group row" style="justify-content: center">
@@ -34,8 +34,21 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+
+                                <br>
+
+                                <select name="worker" id="worker" class="form-control">
+                                    <option value="0" selected disabled>Indique o tipo de utilizador que é</option>
+                                    <option value="1">Utente</option>
+                                    <option value="2">Adminstrador</option>
+                                    <option value="3">Médico</option>
+                                    <option value="4">Funcionário</option>
+                                </select>
+
                             </div>
                         </div>
+
+                        
 
                         <div class="form-group row mb-0" style="justify-content: center">
                             <div class="col-md-6">

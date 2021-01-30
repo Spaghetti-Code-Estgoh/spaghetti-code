@@ -697,7 +697,7 @@ main {
 .main .menu ul .logout {
   margin-top: 15rem;
   position: absolute;
-  bottom: 0;
+  bottom: 100px;
 }
 
 .main .menu ul .logout a {
@@ -706,9 +706,20 @@ main {
   border-radius: 2rem;
 }
 
+.btn-down {
+  background-color: #00bf00;
+  color: white;
+  border: #00bf00;
+}
+
+.btn-down:hover {
+  background-color: white;
+  color: #00bf00;
+  border: white;
+}
+
 .dashboard {
-  margin-top: 5rem;
-  margin-left: 3rem;
+  margin-top: 2rem;
 }
 
 .dashboard .titulo {
@@ -754,5 +765,19 @@ textarea {
 .infoFun {
   width: 50%;
   margin: 0 auto;
+}
+
+.md-dash:hover {
+  border-radius: 25px;
+  background-color: #EEEEEE;
+  color: black;
+}
+
+.medFoo {
+  margin-top: 2rem;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
 }
 

@@ -17,7 +17,7 @@
 
                     <div class="card-body">
                         <h4 class="white">Enviamos lhe um email de confirmação para o email inserido <br> caso em 48 horas não aceda ao link enviado
-                        a sua conta será eliminada e terá dw realizar o registo novamente</h4>
+                        a sua conta será eliminada e terá de realizar o registo novamente</h4>
                     </div>
 
                     <a class="btn submitInput" href="/">
