@@ -214,3 +214,35 @@ CREATE DEFINER=`root`@`%` EVENT `clean_user`
 	COMMENT ''
 	DO DELETE FROM utentes WHERE created_at<NOW() - INTERVAL 2 DAY
 AND confirmed=0
+
+CREATE DEFINER=`root`@`%` EVENT `clear_pass_token`
+	ON SCHEDULE
+		EVERY 1 HOUR STARTS '2021-01-26 15:00:13'
+	ON COMPLETION NOT PRESERVE
+	ENABLE
+	COMMENT 'limpa o rest password token'
+	DO UPDATE utentes SET reset_token=NULL WHERE reset_token_date<NOW() - INTERVAL 2 DAY
+
+	CREATE DEFINER=`root`@`%` EVENT `clear_pass_token_admins`
+	ON SCHEDULE
+		EVERY 1 HOUR STARTS '2021-01-26 15:00:13'
+	ON COMPLETION NOT PRESERVE
+	ENABLE
+	COMMENT 'limpa o rest password token para o admins'
+	DO UPDATE admins SET reset_token=NULL WHERE reset_token_date<NOW() - INTERVAL 2 DAY
+
+	CREATE DEFINER=`root`@`%` EVENT `clear_pass_token_func`
+	ON SCHEDULE
+		EVERY 1 HOUR STARTS '2021-01-26 15:00:13'
+	ON COMPLETION NOT PRESERVE
+	ENABLE
+	COMMENT 'limpa o rest password token para o funcionario'
+	DO UPDATE funcionario SET reset_token=NULL WHERE reset_token_date<NOW() - INTERVAL 2 DAY
+
+	CREATE DEFINER=`root`@`%` EVENT `clear_pass_token_med`
+	ON SCHEDULE
+		EVERY 1 HOUR STARTS '2021-01-26 15:00:13'
+	ON COMPLETION NOT PRESERVE
+	ENABLE
+	COMMENT 'limpa o rest password token para os medicos'
+	DO UPDATE medicos SET reset_token=NULL WHERE reset_token_date<NOW() - INTERVAL 2 DAY
