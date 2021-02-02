@@ -133,7 +133,9 @@ class RegistoController extends Controller
 
         $request->session()->flash("Registo criado com sucesso!");
 
-        return view('home');
+        Mail::to($validatedData['email'])->send(new WelcomeMailAdm());
+
+        return view('admin.dashboard');
     }
 
     /*
@@ -180,7 +182,9 @@ class RegistoController extends Controller
 
         $request->session()->flash("Registo criado com sucesso!");
 
-        return view('home');
+        Mail::to($validatedData['email'])->send(new WelcomeMailAdm());
+
+        return view('admin.inserirmedico');
     }
 
 
@@ -205,8 +209,6 @@ class RegistoController extends Controller
         }
 
         $request->session()->flash("Registo criado com sucesso!");
-
-
 
         Mail::to($validatedData['email'])->send(new WelcomeMailAdm());
 
@@ -470,7 +472,7 @@ class RegistoController extends Controller
         return view('admin/editarmedico', ['medicos'=> $medicos]);
 
     }
-    
+
 
     //Função que permite eliminar um funcionário
     //Autor Afonso Vitório
@@ -524,7 +526,7 @@ class RegistoController extends Controller
             try {
                 DB::table('utentes')->where('email', '=', $validatedData['email'])->update(['reset_token' => $token]);
                 DB::table('utentes')->where('email', '=', $validatedData['email'])->update(['reset_token_date' => \Carbon\Carbon::now()]);
-                
+
                 $informacao = "Email de recuperação de conta enviado com sucesso!";
                 $reset = '1/'.$token;
             } catch(Exception $e) {
@@ -535,7 +537,7 @@ class RegistoController extends Controller
             try {
                 DB::table('admins')->where('email', '=', $validatedData['email'])->update(['reset_token' => $token]);
                 DB::table('admins')->where('email', '=', $validatedData['email'])->update(['reset_token_date' => \Carbon\Carbon::now()]);
-                
+
                 $informacao = "Email de recuperação de conta enviado com sucesso!";
                 $reset = '2/'.$token;
             } catch(Exception $e) {
@@ -546,7 +548,7 @@ class RegistoController extends Controller
             try {
                 DB::table('medicos')->where('email', '=', $validatedData['email'])->update(['reset_token' => $token]);
                 DB::table('medicos')->where('email', '=', $validatedData['email'])->update(['reset_token_date' => \Carbon\Carbon::now()]);
-                
+
                 $informacao = "Email de recuperação de conta enviado com sucesso!";
                 $reset = '3/'.$token;
             } catch(Exception $e) {
@@ -557,7 +559,7 @@ class RegistoController extends Controller
             try {
                 DB::table('funcionario')->where('email', '=', $validatedData['email'])->update(['reset_token' => $token]);
                 DB::table('funcionario')->where('email', '=', $validatedData['email'])->update(['reset_token_date' => \Carbon\Carbon::now()]);
-                
+
                 $informacao = "Email de recuperação de conta enviado com sucesso!";
                 $reset = '4/'.$token;
             } catch(Exception $e) {

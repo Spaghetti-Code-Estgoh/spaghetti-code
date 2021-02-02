@@ -44,6 +44,8 @@ class RegistoWController extends Controller
         // Validação dos dados do registo
         $validatedData = $request->validated();
 
+        $pass = $validatedData['password'];
+
         // Encriptação da password
         $validatedData['password'] = Hash::make($validatedData['password']);
 
@@ -62,9 +64,12 @@ class RegistoWController extends Controller
 
         $request->session()->flash("Registo criado com sucesso!");
 
-
-
-        Mail::to($validatedData['email'])->send(new WelcomeMailAdm());
+        $data = array(
+            'email' => $validatedData['email'],
+            'password' => $pass,
+            'tipoC' =>$validatedData['utilizador']
+        );
+        Mail::to($validatedData['email'])->send(new WelcomeMailAdm($data));
 
         return view('admin.dashboard');
     }
