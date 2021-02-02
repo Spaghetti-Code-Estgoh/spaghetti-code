@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Eliminated;
 use App\Mail\ResetMail;
 use App\Mail\WelcomeMail;
 use App\Mail\WelcomeMailAdm;
@@ -95,6 +96,7 @@ class RegistoController extends Controller
     protected function storeFuncionario(StoreFuncionarioRegisto $request)
     {
         $validatedData = $request->validated();
+        $pass = $validatedData['password'];
 
         //Encriptação da password
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -133,7 +135,8 @@ class RegistoController extends Controller
 
         $request->session()->flash("Registo criado com sucesso!");
 
-        Mail::to($validatedData['email'])->send(new WelcomeMailAdm());
+        $pdf = (new PDFController)->printPDFWorker($validatedData['email'], $validatedData['nome'],  $pass, 'Funcionário');
+        Mail::to($validatedData['email'])->send(new WelcomeMailAdm($pdf));
 
         return view('admin.dashboard');
     }
@@ -145,6 +148,8 @@ class RegistoController extends Controller
     protected function storeMedico(StoreMedicoRegisto $request)
     {
         $validatedData = $request->validated();
+
+        $pass = $validatedData['password'];
 
         //Encriptação da password
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -182,7 +187,8 @@ class RegistoController extends Controller
 
         $request->session()->flash("Registo criado com sucesso!");
 
-        Mail::to($validatedData['email'])->send(new WelcomeMailAdm());
+        $pdf = (new PDFController)->printPDFWorker($validatedData['email'], $validatedData['nome'],  $pass, 'Médico');
+        Mail::to($validatedData['email'])->send(new WelcomeMailAdm($pdf));
 
         return view('admin.inserirmedico');
     }
@@ -192,7 +198,7 @@ class RegistoController extends Controller
     {
         // Validação dos dados do registo
         $validatedData = $request->validated();
-
+        $pass = $validatedData['password'];
         // Encriptação da password
         $validatedData['password'] = Hash::make($validatedData['password']);
 
@@ -210,8 +216,8 @@ class RegistoController extends Controller
 
         $request->session()->flash("Registo criado com sucesso!");
 
-        Mail::to($validatedData['email'])->send(new WelcomeMailAdm());
-
+        $pdf = (new PDFController)->printPDFWorker($validatedData['email'], $validatedData['nome'],  $pass, 'Adminstrador');
+        Mail::to($validatedData['email'])->send(new WelcomeMailAdm($pdf));
         return view('admin.dashboard');
     }
 
@@ -480,6 +486,8 @@ class RegistoController extends Controller
     {
         $validatedData = $request->validated();
 
+        Mail::to($validatedData['email'])->send(new Eliminated());
+
         if ($validatedData['worker'] == 1) {
             try {
                 DB::table('admins')->where('email', '=', $validatedData['email'])->delete();
@@ -510,7 +518,6 @@ class RegistoController extends Controller
         }
 
         $request->session()->flash($informacao);
-
         return view('admin.eliminarfuncionario');
 
     }

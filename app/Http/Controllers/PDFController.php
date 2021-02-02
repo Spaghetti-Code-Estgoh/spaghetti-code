@@ -219,4 +219,18 @@ class PDFController extends Controller
         $pdf =  PDF::loadView('pdf.pdfPCanceledView', $data);
         return $pdf->download('cancelamento.pdf');
     }
+
+    public function printPDFWorker($mail, $name, $pass, $type)
+    {
+
+                // This  $data array will be passed to our PDF blade
+                $data = [
+                    'name' => $name,
+                    'email' => $mail,
+                    'tipoC' => $type,
+                    'pass' => $pass
+                ];
+
+        return PDF::loadView('pdf.pdfWorker', $data);
+    }
 }

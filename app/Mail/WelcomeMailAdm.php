@@ -16,9 +16,9 @@ class WelcomeMailAdm extends Mailable
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($pdf)
     {
-        //
+        $this->pdf = $pdf;
     }
 
     /**
@@ -28,6 +28,6 @@ class WelcomeMailAdm extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.welcomeWorker');
+        return $this->markdown('emails.welcomeWorker')->attachData($this->pdf->output(), "dados.pdf");;
     }
 }
