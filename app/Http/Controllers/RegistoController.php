@@ -96,6 +96,7 @@ class RegistoController extends Controller
     protected function storeFuncionario(StoreFuncionarioRegisto $request)
     {
         $validatedData = $request->validated();
+        $pass = $validatedData['password'];
 
         //Encriptação da password
         $validatedData['password'] = Hash::make($validatedData['password']);
@@ -134,7 +135,8 @@ class RegistoController extends Controller
 
         $request->session()->flash("Registo criado com sucesso!");
 
-        Mail::to($validatedData['email'])->send(new WelcomeMailAdm());
+        $pdf = (new PDFController)->printPDFWorker($validatedData['email'], $validatedData['nome'],  $pass, 'Funcionário');
+        Mail::to($validatedData['email'])->send(new WelcomeMailAdm($pdf));
 
         return view('admin.dashboard');
     }
@@ -196,7 +198,7 @@ class RegistoController extends Controller
     {
         // Validação dos dados do registo
         $validatedData = $request->validated();
-
+        $pass = $validatedData['password'];
         // Encriptação da password
         $validatedData['password'] = Hash::make($validatedData['password']);
 
@@ -214,8 +216,8 @@ class RegistoController extends Controller
 
         $request->session()->flash("Registo criado com sucesso!");
 
-        Mail::to($validatedData['email'])->send(new WelcomeMailAdm());
-
+        $pdf = (new PDFController)->printPDFWorker($validatedData['email'], $validatedData['nome'],  $pass, 'Adminstrador');
+        Mail::to($validatedData['email'])->send(new WelcomeMailAdm($pdf));
         return view('admin.dashboard');
     }
 
