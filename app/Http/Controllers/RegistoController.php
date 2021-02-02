@@ -82,7 +82,7 @@ class RegistoController extends Controller
             }
         }
 
-        $request->session()->flash("Registo criado com sucesso!");
+        $request->session()->flash('status',"Registo criado com sucesso!");
 
         Mail::to($validatedData['email'])->send(new WelcomeMail($confLink));
 
@@ -133,7 +133,7 @@ class RegistoController extends Controller
             }
         }
 
-        $request->session()->flash("Registo criado com sucesso!");
+        $request->session()->flash('status',"Registo criado com sucesso!");
 
         $pdf = (new PDFController)->printPDFWorker($validatedData['email'], $validatedData['nome'],  $pass, 'Funcionário');
         Mail::to($validatedData['email'])->send(new WelcomeMailAdm($pdf));
@@ -185,12 +185,14 @@ class RegistoController extends Controller
             }
         }
 
-        $request->session()->flash("Registo criado com sucesso!");
+        $request->session()->flash('status',"Registo criado com sucesso!");
 
         $pdf = (new PDFController)->printPDFWorker($validatedData['email'], $validatedData['nome'],  $pass, 'Médico');
         Mail::to($validatedData['email'])->send(new WelcomeMailAdm($pdf));
 
+
         return view('admin.inserirmedico');
+
     }
 
 
@@ -213,8 +215,8 @@ class RegistoController extends Controller
                 return redirect()->back()->withInput()->withErrors(['Registo já existente...']);
             }
         }
-
-        $request->session()->flash("Registo criado com sucesso!");
+        $request->session()->put('key', 'value');
+        $request->session()->flash('status',"Registo criado com sucesso!");
 
         $pdf = (new PDFController)->printPDFWorker($validatedData['email'], $validatedData['nome'],  $pass, 'Adminstrador');
         Mail::to($validatedData['email'])->send(new WelcomeMailAdm($pdf));
@@ -517,7 +519,7 @@ class RegistoController extends Controller
 
         }
 
-        $request->session()->flash($informacao);
+        $request->session()->flash('status',$informacao);
         return view('admin.eliminarfuncionario');
 
     }
@@ -577,7 +579,7 @@ class RegistoController extends Controller
 
         Mail::to($validatedData['email'])->send(new ResetMail($reset));
 
-        $request->session()->flash($informacao);
+        $request->session()->flash('status',$informacao);
 
         return view('welcome');
 
@@ -638,7 +640,7 @@ class RegistoController extends Controller
             $informacao = "Ocorreu um erro...";
         }
 
-        $request->session()->flash($informacao);
+        $request->session()->flash('status',$informacao);
 
         return view('auth.login');
     }

@@ -148,7 +148,7 @@ Autor: Afonso Vitório
                                     </div>
 
                                 </div>
-
+                                {{ __('Registar') }}
 
                                 <div class="form-group row mb-0">
                                     <div class="col-md-12 mx-auto text-center" >
@@ -164,6 +164,11 @@ Autor: Afonso Vitório
             </div>
         </div>
     </div>
+
+    @if(Session::has('status'))
+
+        <script >alert("Registo criado com sucesso!");</script>
+    @endif
 
     <script src="{{ asset('js/components/imageUpload.js')}}"></script>
 @endsection
