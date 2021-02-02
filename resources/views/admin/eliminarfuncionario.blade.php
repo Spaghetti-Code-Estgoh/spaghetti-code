@@ -1,6 +1,7 @@
 @extends('admin/layout')
 {{-- //Author: Fabian Nunes--}}
 @section('content')
+    {{session('flash')}}
     <div class="section-registo" >
         <div class="container" style="height: 100vh;">
             <div class="row justify-content-center">

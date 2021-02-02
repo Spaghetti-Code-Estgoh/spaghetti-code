@@ -23,7 +23,7 @@
             <div class="to">Consulta De:</div>
             <h2 class="name">{{$utente}}</h2>
             <div class="address">{{$morada}}</div>
-            <div class="email"><a href="chaminas@live.com">{{$email}}</a></div>
+            <div class="email"><a href="{{$email}}">{{$email}}</a></div>
         </div>
     </div>
     <table border="0" cellspacing="0" cellpadding="0">
