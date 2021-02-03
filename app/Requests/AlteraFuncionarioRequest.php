@@ -24,7 +24,6 @@ class AlteraFuncionarioRequest extends FormRequest
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'nif' => 'required|size:9',
-            'nss' => 'required|size:9',
             'dataNascimento' => 'required',
             'contacto' => 'required',
         ];

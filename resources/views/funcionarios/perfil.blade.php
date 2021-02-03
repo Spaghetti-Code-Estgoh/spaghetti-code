@@ -84,8 +84,7 @@
                                         {{-- Confirmar password--}}
                                         <label for="password-confirm" class=" col-form-label text-md-right">{{ __('Confirmar Password') }}</label>
                                         <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
-                                       mas
-                                        {{-- NIF--}}
+                                       {{-- NIF--}}
                                         <label for="nif" class=" col-form-label text-md-right">{{ __('NIF') }}</label>
                                         <input id="nif" type="text" pattern="[0-9]{9}" class="form-control @error('nif') is-invalid @enderror" name="nif" required autocomplete="nif" value="{{ old('nif') }}" placeholder="{{ session('nif') }}">
                                         @error('nif')
