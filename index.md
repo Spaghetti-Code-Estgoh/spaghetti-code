@@ -1,37 +1,41 @@
-## Welcome to GitHub Pages
+## SCMed from Spaghetti Code
 
-You can use the [editor on GitHub](https://github.com/fabian-nunes/spaghetti-code/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+A web-based application to manage medical institution schedules
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+### Features
 
-### Markdown
+A simple web design for users of all ages
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Allows Users to simply book a medical appointment
 
-```markdown
-Syntax highlighted code block
+The Medic have an agenda that can be managed by a functionary
 
-# Header 1
-## Header 2
-### Header 3
+Application Admins can manage the whole application
 
-- Bulleted
-- List
+It has Medics, Functionaries, Users and Admins
 
-1. Numbered
-2. List
+Laravel-Powered web-infastructure
 
-**Bold** and _Italic_ and `Code` text
+MySQL powered database
 
-[Link](url) and ![Image](src)
-```
+### Made by Computer Science Students of ESTGOH
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Afonso Vitório
 
-### Jekyll Themes
+Alexandre Lopes
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/fabian-nunes/spaghetti-code/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Diogo Martinho
 
-### Support or Contact
+Edgar Lima
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Fabian Nunes
+
+Fábio Dias
+
+Fábio Rodrigues
+
+Guilherme Jafar
+
+João Duarte
+
+Rafael Pais
